@@ -12,7 +12,7 @@ public class PlayerSetting : MonoBehaviour
     [SerializeField]
     private Setting setting;
 
-    private void Awake()
+    private void Start()
     {
         if (LoadSaveManager.Instance.LoadJson(ref setting, "setting"))
         {
@@ -23,8 +23,15 @@ public class PlayerSetting : MonoBehaviour
         else
         {
             //로드 실패
-            graphicSetting.Refresh();
+            graphicSetting.Apply(graphicSetting.Defalut, 60, FullScreenMode.FullScreenWindow, AntialiasingMode.None);
             soundSetting.Refresh();
+            setting.Resolution = graphicSetting.Defalut;
+            setting.FrameRate = 60;
+            setting.FullScreenMode = FullScreenMode.FullScreenWindow;
+            setting.Antialiasing = AntialiasingMode.None;
+            setting.FullSound = 0;
+            setting.BGM = 0;
+            setting.SoundEffect = 0;
         }
 
         graphicSetting.ResolutionHandler += ResolutionHandler;
@@ -34,6 +41,9 @@ public class PlayerSetting : MonoBehaviour
         soundSetting.masterHandler += FullSoundHandler;
         soundSetting.BGMHandler += BGMHandler;
         soundSetting.soundEffectHandler += SoundEffectHandler;
+
+        graphicSetting.gameObject.SetActive(false);
+        soundSetting.gameObject.SetActive(false);
     }
 
     private void OnApplicationQuit()
@@ -76,8 +86,13 @@ public class Setting
 {
     //행상도
     [SerializeField]
-    private Resolution resolution;
-    public Resolution Resolution { get { return resolution; } set { resolution = value; } }
+    private int width;
+    [SerializeField]
+    private int height;
+    [SerializeField]
+    private RefreshRate refreshRate;
+
+    public Resolution Resolution { get { return new Resolution() { width = width, height = height, refreshRateRatio = refreshRate }; } set { width = value.width; height = value.height; refreshRate = value.refreshRateRatio; } }
     //프레임
     [SerializeField]
     private int frameRate;

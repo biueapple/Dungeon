@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -10,10 +11,11 @@ public class GraphicSetting : MonoBehaviour
     //guideWindow의 설정
     [SerializeField]
     private Dropdown resolution;
-    private readonly List<Resolution> resolutions = new();
+    private List<Resolution> resolutions = new();
+    public Resolution Defalut;
     [SerializeField]
     private Dropdown frame;
-    private List<int> frameRate;
+    private List<int> frameRate = new();
     [SerializeField]
     private Dropdown screenMode;
     [SerializeField]
@@ -28,18 +30,44 @@ public class GraphicSetting : MonoBehaviour
     {
         //해상도 옵션 초기화
         resolution.options.Clear();
+        // 기존 해상도 리스트 가져오기
         resolutions.AddRange(Screen.resolutions);
+
+        // 중복을 제거하고 가장 높은 refresh rate만 저장할 Dictionary 생성
+        Dictionary<string, Resolution> resolutionDict = new();
+
+        foreach (var res in resolutions)
+        {
+            string key = res.width + "x" + res.height;
+
+            // 만약 같은 해상도가 있다면 refreshRateRatio가 더 높은 경우만 저장
+            if (!resolutionDict.ContainsKey(key) || resolutionDict[key].refreshRateRatio.value < res.refreshRateRatio.value)
+            {
+                resolutionDict[key] = res;
+            }
+        }
+
+        // Dictionary에서 중복 제거된 해상도 리스트로 변환
+        resolutions = resolutionDict.Values.ToList();
+
+        // Dropdown에 추가
+        resolution.options.Clear();
         for (int i = 0; i < resolutions.Count; i++)
         {
             Dropdown.OptionData optionData = new()
             {
-                text = resolutions[i].width + " X " + resolutions[i].height + " " + (int)resolutions[i].refreshRateRatio.value + "hz"
+                text = $"{resolutions[i].width} X {resolutions[i].height} {(int)resolutions[i].refreshRateRatio.value}hz"
             };
             resolution.options.Add(optionData);
 
+            // 현재 화면 해상도와 일치하면 기본 선택값 설정
             if (Screen.width == resolutions[i].width && Screen.height == resolutions[i].height)
             {
                 resolution.value = i;
+            }
+            if (resolutions[i].width == 1920 && resolutions[i].height == 1080)
+            {
+                Defalut = resolutions[i];
             }
         }
         resolution.RefreshShownValue();
@@ -137,15 +165,18 @@ public class GraphicSetting : MonoBehaviour
                 break;
             }
         }
+
         screenMode.value = (int)Screen.fullScreenMode;
 
-        UniversalAdditionalCameraData cameraData = Camera.main.GetComponent<UniversalAdditionalCameraData>();
-        for (int i = 0; i <= 4; i++)
+        if (Camera.main.TryGetComponent(out UniversalAdditionalCameraData cameraData))
         {
-            if (cameraData.antialiasing == (AntialiasingMode)i)
+            for (int i = 0; i <= 4; i++)
             {
-                anti_Aliasing.value = i;
-                break;
+                if (cameraData.antialiasing == (AntialiasingMode)i)
+                {
+                    anti_Aliasing.value = i;
+                    break;
+                }
             }
         }
     }
@@ -156,8 +187,8 @@ public class GraphicSetting : MonoBehaviour
 
         Application.targetFrameRate = frame;
 
-        UniversalAdditionalCameraData cameraData = Camera.main.GetComponent<UniversalAdditionalCameraData>();
-        cameraData.antialiasing = antialiasingMode;
+        if(Camera.main.TryGetComponent(out UniversalAdditionalCameraData cameraData))
+            cameraData.antialiasing = antialiasingMode;
 
         Refresh();
     }

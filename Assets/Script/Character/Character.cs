@@ -36,7 +36,6 @@ public class Character : MonoBehaviour
     { get { return hp; }
         set
         {
-            Debug.Log(value);
             if (value < hp)
             {
                 if (value <= 0)

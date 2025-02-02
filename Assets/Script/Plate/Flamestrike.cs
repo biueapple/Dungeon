@@ -40,7 +40,7 @@ public class Flamestrike : Plate
         //대미지가 0이면 공격을 수행한것이 아님
         if (damage == 0)
             return;
-        Debug.Log("불기둥 적중");
+
         List<AttackInfo> list = new();
 
         //남아있는 적의 수

@@ -33,7 +33,7 @@ public class Designated_Attack : Plate
         if (index < foe.Count)
         {
             //대미지 설정
-            float damage = keywords[0].Word;
+            float damage = keywords[1].Word;
             //대미지가 0이면 공격을 수행한것이 아님
             if (damage == 0)
                 return;

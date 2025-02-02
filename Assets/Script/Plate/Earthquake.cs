@@ -45,18 +45,18 @@ public class Earthquake : Plate
                 break;
             case 2:
                 {
-                    list.Add(new AttackInfo(foe[0], damage * 0.7f));
+                    list.Add(new AttackInfo(foe[0], damage));
 
-                    list.Add(new AttackInfo(foe[1], damage * 0.3f));
+                    list.Add(new AttackInfo(foe[1], damage));
                 }
                 break;
             case 3:
                 {
-                    list.Add(new AttackInfo(foe[0], damage * 0.6f));
+                    list.Add(new AttackInfo(foe[0], damage));
 
-                    list.Add(new AttackInfo(foe[1], damage * 0.3f));
+                    list.Add(new AttackInfo(foe[1], damage));
 
-                    list.Add(new AttackInfo(foe[2], damage * 0.1f));
+                    list.Add(new AttackInfo(foe[2], damage));
                 }
                 break;
             default:
