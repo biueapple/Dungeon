@@ -26,7 +26,7 @@ public class GraphicSetting : MonoBehaviour
     public Action<FullScreenMode> ScreenModeHandler;
     public Action<AntialiasingMode> Anti_AliasingHandler;
 
-    private void Awake()
+    public void Init()
     {
         //해상도 옵션 초기화
         resolution.options.Clear();
@@ -76,7 +76,7 @@ public class GraphicSetting : MonoBehaviour
         frame.options.Clear();
         if (Application.targetFrameRate > 240)
             Application.targetFrameRate = 240;
-        frameRate = new() 
+        frameRate = new()
         {
             240,
             120,

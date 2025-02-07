@@ -210,7 +210,6 @@ MonoBehaviour:
   - {fileID: 3730955064960150831}
   - {fileID: 872909241704454760}
   - {fileID: 5378635665442050172}
-  dummy: {fileID: 0}
 --- !u!1 &514459499623243568
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +674,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tool:
   - {fileID: 6303378782188759232}
-  dummy: {fileID: 0}
 --- !u!1 &2070293157231528392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1093,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tool:
   - {fileID: 1680803689616692207}
-  dummy: {fileID: 0}
 --- !u!1 &4343182061332844177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,9 +1268,9 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -250}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -710, y: 290}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584555972677813209
@@ -1299,6 +1296,7 @@ MonoBehaviour:
   hp: 0
   hpMax: 10
   shield: 0
+  money: 0
 --- !u!1 &4562898388796055998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,8 +1467,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

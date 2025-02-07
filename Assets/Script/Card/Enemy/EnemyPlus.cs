@@ -5,7 +5,7 @@ public class EnemyPlus : Card
     {
         value = 1;
         friendly = false;
-        Description = "적의 수치 하나를 1 증가시킨다.";
+        Description = "몬스터의 수치 하나를 1 증가시킨다.";
     }
 
     public override void UpPlate(Plate plate)

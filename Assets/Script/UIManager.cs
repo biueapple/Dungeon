@@ -239,7 +239,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < results.Count; i++)
             {
-                for(Transform tf = results[i].gameObject.transform.parent; tf != null;  tf = tf.parent)
+                for(Transform tf = results[i].gameObject.transform; tf != null;  tf = tf.parent)
                 {
                     if (tf.GetComponent<T>() != null)
                     {

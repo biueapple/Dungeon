@@ -20,6 +20,9 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, I
     protected bool volatility = false;
     public bool Volatility { get { return volatility; } }
 
+    //카드의 백그라운드
+    [SerializeField] 
+    protected Image back;
     //카드의 아이콘
     [SerializeField]
     protected Image icon;
@@ -28,6 +31,8 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, I
     [SerializeField]
     protected TextMeshProUGUI textComponent;
     public string Description { get { return textComponent.text; } set { textComponent.text = value; } }
+
+    public bool Raycast { get { return back.raycastTarget; } set { back.raycastTarget = value; } }
 
     //카드가 어떤 상황에 어떻게 반응해야 하는지 경우가 많아져서 state로 나누기로 함
     //지금 카드가 무슨 상황인지 어떻게 반응해야 하는지

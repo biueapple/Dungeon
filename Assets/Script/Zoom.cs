@@ -20,6 +20,8 @@ public class Zoom : MonoBehaviour
     [SerializeField]
     private Card volatilityCard;
     [SerializeField]
+    private Card evolatilityCard;
+    [SerializeField]
     private TextMeshProUGUI  textMeshPro;
 
     //true라면 ViewON 했을때 보여주고 false라면 ViewON해도 보여주지 않음
@@ -36,45 +38,64 @@ public class Zoom : MonoBehaviour
     }
 
     //카드를 크게 보여주려고
+    //4가지 경우 
     public void ViewON(Card card)
     {
         if(active)
         {
             if(card.Volatility)
             {
-                //위치 옮겨주고
-                volatilityCard.transform.position = card.transform.position;
-                //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
-                canvasRect.InSide(volatilityCard.GetComponent<RectTransform>());
-                //정보 복사해서 보여주려고
-                volatilityCard.Icon = card.Icon;
-                volatilityCard.Description = card.Description;
-                //활성화
-                volatilityCard.gameObject.SetActive(true);
+                if (card.Friendly)
+                {
+                    //위치 옮겨주고
+                    volatilityCard.transform.position = card.transform.position;
+                    //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
+                    canvasRect.InSide(volatilityCard.GetComponent<RectTransform>());
+                    //정보 복사해서 보여주려고
+                    volatilityCard.Icon = card.Icon;
+                    volatilityCard.Description = card.Description;
+                    //활성화
+                    volatilityCard.gameObject.SetActive(true);
+                }
+                else
+                {
+                    //위치 옮겨주고
+                    evolatilityCard.transform.position = card.transform.position;
+                    //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
+                    canvasRect.InSide(evolatilityCard.GetComponent<RectTransform>());
+                    //정보 복사해서 보여주려고
+                    evolatilityCard.Icon = card.Icon;
+                    evolatilityCard.Description = card.Description;
+                    //활성화
+                    evolatilityCard.gameObject.SetActive(true);
+                }
             }
-            else if(card.Friendly)
+            else 
             {
-                //위치 옮겨주고
-                big.transform.position = card.transform.position;
-                //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
-                canvasRect.InSide(big.GetComponent<RectTransform>());
-                //정보 복사해서 보여주려고
-                big.Icon = card.Icon;
-                big.Description = card.Description;
-                //활성화
-                big.gameObject.SetActive(true);
-            }
-            else
-            {
-                //위치 옮겨주고
-                ebig.transform.position = card.transform.position;
-                //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
-                canvasRect.InSide(ebig.GetComponent<RectTransform>());
-                //정보 복사해서 보여주려고
-                ebig.Icon = card.Icon;
-                ebig.Description = card.Description;
-                //활성화
-                ebig.gameObject.SetActive(true);
+                if (card.Friendly)
+                {
+                    //위치 옮겨주고
+                    big.transform.position = card.transform.position;
+                    //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
+                    canvasRect.InSide(big.GetComponent<RectTransform>());
+                    //정보 복사해서 보여주려고
+                    big.Icon = card.Icon;
+                    big.Description = card.Description;
+                    //활성화
+                    big.gameObject.SetActive(true);
+                }
+                else
+                {
+                    //위치 옮겨주고
+                    ebig.transform.position = card.transform.position;
+                    //big이 card보다 커서 위치를 같도록 하면 캔버스 밖으로 나가는 경우가 있어서 다시 안으로 되돌리기 위해
+                    canvasRect.InSide(ebig.GetComponent<RectTransform>());
+                    //정보 복사해서 보여주려고
+                    ebig.Icon = card.Icon;
+                    ebig.Description = card.Description;
+                    //활성화
+                    ebig.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -85,6 +106,7 @@ public class Zoom : MonoBehaviour
         big.gameObject.SetActive(false);
         ebig.gameObject.SetActive(false);
         volatilityCard.gameObject.SetActive(false);
+        evolatilityCard.gameObject.SetActive(false);
     }
 
     Keyword ex;
@@ -101,7 +123,7 @@ public class Zoom : MonoBehaviour
         plate.Keyword[index].Tool.gameObject.SetActive(true);
         plate.Keyword[index].Space.ForEach(x => x.gameObject.SetActive(true));
         plate.Keyword[index].Tool.transform.position = position + new Vector3(0, 150, 0);
-        canvasRect.InSide(plate.Keyword[index].Tool.GetComponent<RectTransform>());
+        canvasRect.InSideChild(plate.Keyword[index].Tool.GetComponent<RectTransform>(), plate.Keyword[index].Tool.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>());
         ex = plate.Keyword[index];
     }
 

@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class RelicStore : IRelicState, IInstruction
 {
-    private readonly IRelic relic;
+    private readonly Relic relic;
     private readonly IInstruction instruction;
     //АЁАн
     private readonly int price;
 
-    public RelicStore(IRelic relic, IInstruction instruction, int price)
+    public RelicStore(Relic relic, IInstruction instruction, int price)
     {
         this.relic = relic;
         this.instruction = instruction;

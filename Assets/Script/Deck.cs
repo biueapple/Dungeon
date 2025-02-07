@@ -12,7 +12,7 @@ public class Deck : MonoBehaviour
     private CardBoxTwo prefab2;
     //카드가 3개 들어있는 카드박스 (현재까지 존재하지 않음)
     [SerializeField]
-    private CardBoxTwo prefab3;
+    private CardBoxThree prefab3;
 
     //카드팩을 정렬할 위치
     [SerializeField]
@@ -56,7 +56,16 @@ public class Deck : MonoBehaviour
                 cardBoxes.Add(two);
                 break;
             case 3:
-
+                //두개짜리 카드팩 박스를 만들고
+                CardBoxThree three = Instantiate(prefab3, contant);
+                //초기화 (무슨 카드를 가지고 있는지, 다시 빼기위해 deck도 참조해줘야 함)
+                three.Init(pack.Cards[0], pack.Cards[1], pack.Cards[2], this);
+                //위치 조정
+                three.transform.localPosition = new Vector3(0, y + contant.rect.yMax - three.Size, 0);
+                //정렬해야 하는 위치 다시 맞춰주고
+                y -= three.Size * 2;
+                //리스트에 추가
+                cardBoxes.Add(three);
                 break;
             default:
                 break;

@@ -4,32 +4,28 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //모든 모험가가 주는 쉴드량 증가
-public class DefenseRelic : MonoBehaviour, IRelic, IPCBG, IInstruction, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private IRelicState state;
-    public IRelicState State { get { return state; } set { state = value; } }
+    public override int Price => 20;
 
-    public Transform Transform { get { return transform; } }
-    public Vector3 Position { get => transform.position; set => transform.position = value; }
-
-    public void RelicCreate()
+    public override void RelicCreate()
     {                                                               
         DefenseRelic relic = Instantiate(Resources.Load<DefenseRelic>("DefenceRelic"), GameManager.Instance.Relic.transform);
         GameManager.Instance.PCB.Add(relic);
         GameManager.Instance.Relic.Add(relic.transform);
     }
 
-    public void RelicDestroy()
+    public override void RelicDestroy()
     {
         GameManager.Instance.PCB.Remove(this);
         GameManager.Instance.Relic.Remove(transform);
         Destroy(gameObject);
     }
 
-    public void Attack(PL_AttackNHit pl) { }
-    public void Broken() { }
-    public void Create() { }
-    public void Defence(PL_ShieldNHeal pl) 
+    public override void Attack(PL_AttackNHit pl) { }
+    public override void Broken() { }
+    public override void Create() { }
+    public override void Defence(PL_ShieldNHeal pl) 
     {
         for (int i = 0; i < pl.Victims.Count; i++)
         {
@@ -42,13 +38,13 @@ public class DefenseRelic : MonoBehaviour, IRelic, IPCBG, IInstruction, IPointer
             }
         }
     }
-    public void Draw() { }
-    public void Function() { }
-    public void Hit(PL_AttackNHit pl) { }
-    public void TurnEnd() { }
-    public void TurnStart() { }
+    public override void Draw() { }
+    public override void Function() { }
+    public override void Hit(PL_AttackNHit pl) { }
+    public override void TurnEnd() { }
+    public override void TurnStart() { }
 
-    public string Instruction()
+    public override string Instruction()
     {
         return new string($"모든 모험가가 보호막을 생성할때 1보호막 추가");
     }
@@ -66,4 +62,14 @@ public class DefenseRelic : MonoBehaviour, IRelic, IPCBG, IInstruction, IPointer
         state?.OnMouseClick();
     }
 
+    public override bool Buy()
+    {
+        if (GameManager.Instance.Money >= Price)
+        {
+            RelicCreate();
+            GameManager.Instance.Money -= Price;
+            return true;
+        }
+        return false;
+    }
 }

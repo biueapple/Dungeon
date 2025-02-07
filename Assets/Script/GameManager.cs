@@ -33,11 +33,11 @@ public class GameManager : MonoBehaviour
     public Transform EnemyParent { get { return enemyParent; } }
 
     [SerializeField]
-    private GameObject store;
-    [SerializeField]
-    private PowerRelic power;
-    [SerializeField]
-    private DefenseRelic defense;
+    private Store store;
+    //[SerializeField]
+    //private PowerRelic power;
+    //[SerializeField]
+    //private DefenseRelic defense;
 
     //덱
     [SerializeField]
@@ -164,6 +164,11 @@ public class GameManager : MonoBehaviour
     {
         GameInit();
     }
+    //닫기
+    public void OnButtonClose()
+    {
+        setting.SetActive(false);
+    }
     //게임종료
     public void OnButtonExit()
     {
@@ -235,8 +240,8 @@ public class GameManager : MonoBehaviour
     public CyclePipeLine CyclePipeLine { get { return cyclePipeLine; } }
     public void Cycle()
     {
-        cyclePipeLine ??= new(dummy, enemyResources, store, power, defense, gameClear, gameOver);
-        cyclePipeLine.Start();
+        cyclePipeLine ??= new(dummy, enemyResources, store, gameClear, gameOver);
+        cyclePipeLine.Play.TurnEndButtonPush();
     }
     
     public void GameInit()
@@ -278,7 +283,7 @@ public class GameManager : MonoBehaviour
         //모든 보석 삭제
         for(int i = relic.List.Count - 1; i >= 0; i--)
         {
-            IRelic r = relic.List[i].GetComponent<IRelic>();
+            Relic r = relic.List[i].GetComponent<Relic>();
             r.RelicDestroy();
         }
         //파이프 라인 초기화
@@ -332,22 +337,29 @@ public class CyclePipeLine
     private readonly DrawPipeLine draw;
     public DrawPipeLine Draw { get { return draw; } }
 
+    private readonly PlayPipeLine play;
+    public PlayPipeLine Play { get { return play; } }
+
     private readonly DungeonPipeLine dungeon;
     private readonly StorePipeLine store;
     private readonly GameClearPipeLine gameClearPipeLine;
-    public CyclePipeLine(Dummy dummy, Character[] enemys, GameObject store, PowerRelic powerRelic, DefenseRelic defenseRelic, GameObject clear, GameObject over)
+    public CyclePipeLine(Dummy dummy, Character[] enemys, Store store, GameObject clear, GameObject over)
     {
-        draw = new DrawPipeLine(null, dummy, 5);
+        //여기서 play에 defense의 값이 들어가지 않음 defence는 null인 상태라
+        play = new PlayPipeLine(defense);
+        draw = new DrawPipeLine(play, dummy, 5);
         create = new CreatePipeLine(draw);
 
-        dungeon = new DungeonPipeLine(create, enemys);
-        this.store = new StorePipeLine(dungeon, store, powerRelic, defenseRelic);
+        dungeon = new DungeonPipeLine(create, enemys, 1);
+        this.store = new StorePipeLine(dungeon, store);
         disposal = new DisposalPipeLine(create, new GameOverPipeLine(over), this.store, dungeon);
 
         broken = new BrokenPipeLine(disposal);
         funtion = new FuntionPipeLine(broken);
         attack = new AttackPipeLine(funtion);
         defense = new DefencePipeLine(attack);
+        //그래서 여기서 다시 넣어주기
+        play.Next = defense;
 
         gameClearPipeLine = new GameClearPipeLine(clear);
     }

@@ -19,18 +19,17 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
     protected Keyword[] keywords;
     public Keyword[] Keyword { get { return keywords; } }
 
-    //적군
-    protected List<Character> foe;
-    public List<Character> Foe { get {  return foe; } set {  foe = value; } }
-    //아군
-    protected List<Character> ally;
-    public List<Character> Ally { get { return ally; } set { ally = value; } }
+    ////적군
+    //protected List<Character> foe;
+    //public List<Character> Foe { get {  return foe; } set {  foe = value; } }
+    ////아군
+    //protected List<Character> ally;
+    //public List<Character> Ally { get { return ally; } set { ally = value; } }
     //자신
     protected Character self;
     public Character Self { get { return self; } set {  self = value; } }
 
     //덱
-    [SerializeField]
     protected Dummy dummy;
     public Dummy Dummy { get { return dummy; } }
 
@@ -120,10 +119,14 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
             //모험가인경우에만 적용
             if(card.Friendly && GameManager.Instance.Adventurer.Contains(self))
             {
+                //키워드에 추가
                 if (keywords[index].Add(card))
                 {
+                    //키워드에 들어가 있는 카드들 보여주기
                     Zoom.Insatnce.ViewTool(this, index, position);
+                    //정렬
                     keywords[index].Tool.Sorting.Sort(null);
+                    //키워드가 변화 했을테니까 다시 텍스트 로드
                     Texting();
                     return true;
                 }

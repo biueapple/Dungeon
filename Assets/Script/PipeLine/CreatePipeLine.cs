@@ -20,11 +20,6 @@ public class CreatePipeLine : IPipeLine
 
     public void Start()
     {
-        //일단 턴 시작 콜백도 여기서 호출해주자
-        for (int i = GameManager.Instance.PCB.Count - 1; i >= 0; i--)
-        {
-            GameManager.Instance.PCB[i].TurnStart();
-        }
         //몇개를 해야하는지 입력
         listCount = GameManager.Instance.Characters.Count;
         //생성

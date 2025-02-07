@@ -35,4 +35,25 @@ public class CanvasRect : MonoBehaviour
             rectTransform.position += new Vector3(0, -(rectTransform.position.y + rectTransform.rect.yMax * rectTransform.localScale.y - rect.height), 0);
         }
     }
+    //입력한 recttransfrom이 캔버스의 범위를 넘어섰다면 다시 안으로 되돌림
+    public void InSideChild(RectTransform rectTransform, RectTransform child)
+    {
+        //rectTransform를 rect안으로 옮기기
+        if (child.position.x + child.rect.xMin * child.localScale.x < rect.xMin)
+        {
+            rectTransform.position += new Vector3(-(child.position.x + child.rect.xMin * child.localScale.x), 0, 0);
+        }
+        else if (child.position.x + child.rect.xMax * child.localScale.x > rect.xMax)
+        {
+            rectTransform.position += new Vector3(-(child.position.x + child.rect.xMax * child.localScale.x - rect.width), 0, 0);
+        }
+        else if (child.position.y + child.rect.yMin * child.localScale.y < rect.yMin)
+        {
+            rectTransform.position += new Vector3(0, -(child.position.y + child.rect.yMin * child.localScale.y), 0);
+        }
+        else if (child.position.y + child.rect.yMax * child.localScale.y > rect.yMax)
+        {
+            rectTransform.position += new Vector3(0, -(child.position.y + child.rect.yMax * child.localScale.y - rect.height), 0);
+        }
+    }
 }

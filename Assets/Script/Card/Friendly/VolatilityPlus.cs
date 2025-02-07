@@ -9,7 +9,7 @@ public class VolatilityPlus : Card
         value = 1;
         friendly = true;
         volatility = true;
-        Description = "아군의 수치 하나를 1 증가시킨다.";
+        Description = "모험가의 수치 하나를 1 증가시킨다.";
     }
 
     public override void UpPlate(Plate plate)

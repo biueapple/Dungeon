@@ -39,6 +39,8 @@ public class HandState_Card : IState_Card
         //카드를 줌한 오브젝트를 꺼두기
         Zoom.Insatnce.ViewOFF();
         Zoom.Insatnce.Active = false;
+        //raycast 받지 않도록
+        card.Raycast = false;
     }
 
     //마우스 up
@@ -53,12 +55,9 @@ public class HandState_Card : IState_Card
         {
             card.UpPlate(plate);
         }
-        if(UIManager.Instance.TryGetGraphicRayFindParent(out Card c))
+        if (UIManager.Instance.TryGetGraphicRayFindParent(out Card c))
         {
-            if (c == card)
-                c = null;
-            else
-                card.UpCard(c);
+            card.UpCard(c);
         }
         if (UIManager.Instance.TryGetGraphicRayFindParent(out PlayAnimation animation))
         {
@@ -68,6 +67,7 @@ public class HandState_Card : IState_Card
         {
             card.UpEmpty();
         }
+        card.Raycast = true;
     }
 
     //마우스를 따라다니게 하는 코루틴

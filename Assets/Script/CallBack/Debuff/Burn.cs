@@ -28,7 +28,7 @@ public class BurnCreator : IPCBC
 
     public void Hit(PL_AttackNHit pl)
     {
-        Burn bleeding = Object.Instantiate(Resources.Load<Burn>("Burn"), victim.StatusEffect.transform);
+        Burn bleeding = Object.Instantiate(Resources.Load<Burn>("Debuff/Burn"), victim.StatusEffect.transform);
         bleeding.Init(victim, damage, count);
         victim.PCB.Add(bleeding);
         victim.PCB.Remove(this);

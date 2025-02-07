@@ -57,11 +57,21 @@ public class DisposalPipeLine : IPipeLine
         //일단 모험가가 모두 죽었다면 게임오버
         if (GameManager.Instance.Adventurer.Count <= 0)
         {
+            for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
+            {
+                GameManager.Instance.Dummy.AfterCard(GameManager.Instance.Hand.Cards[i]);
+                GameManager.Instance.Hand.RemoveCard(GameManager.Instance.Hand.Cards[i]);
+            }
             GameManager.Instance.PipeLine = end;
         }
         //모든 적이 죽었다면 다음단계
         else if (GameManager.Instance.Enemys.Count <= 0)
         {
+            for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
+            {
+                GameManager.Instance.Dummy.AfterCard(GameManager.Instance.Hand.Cards[i]);
+                GameManager.Instance.Hand.RemoveCard(GameManager.Instance.Hand.Cards[i]);
+            }
             GameManager.Instance.PipeLine = next;
             if (next == store)
                 next = dungeon;

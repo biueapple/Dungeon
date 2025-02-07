@@ -14,6 +14,8 @@ public class PlayerSetting : MonoBehaviour
 
     private void Start()
     {
+        graphicSetting.Init();
+
         if (LoadSaveManager.Instance.LoadJson(ref setting, "setting"))
         {
             //로드 성공

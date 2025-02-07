@@ -27,7 +27,7 @@ public class BleedingCreator : IPCBC
 
     public void Hit(PL_AttackNHit pl)
     {
-        Bleeding bleeding = Object.Instantiate(Resources.Load<Bleeding>("Bleeding"), victim.StatusEffect.transform);
+        Bleeding bleeding = Object.Instantiate(Resources.Load<Bleeding>("Debuff/Bleeding"), victim.StatusEffect.transform);
         bleeding.Init(victim, damage, count);
         victim.PCB.Add(bleeding);
         victim.PCB.Remove(this);
