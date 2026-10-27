@@ -4,9 +4,10 @@ public class DungeonPipeLine : IPipeLine
 {
     private IPipeLine next;
     public IPipeLine Next { get => next; set => next = value; }
-    //몇번 던전에 왔는가
-    private int count = 0;
-    public int Count { get { return count; } }
+    //어떤 몬스터 구성으로 할지 (맵에서 고른 스테이지에 따라 정해짐)
+    //0 ~ 2 : 일반 전투, 3 : 보스
+    private int level = 0;
+    public int Level { get { return level; } set { level = value; } }
 
     private readonly Character[] candidate;
  
@@ -15,24 +16,15 @@ public class DungeonPipeLine : IPipeLine
         this.next = next;
         this.candidate = candidate;
     }
-    public DungeonPipeLine(IPipeLine next, Character[] candidate, int count)
-    {
-        this.next = next;
-        this.candidate = candidate;
-        this.count = count;
-    }
 
-    public void End()
-    {
-        count++;
-    }
+    public void End() { }
 
     public void Start()
     {
         Character character;
         //몬스터 스폰 후 다음 단계로
         // x-150 -450 -750, y-250
-        switch (count)
+        switch (level)
         {
             case 0:
                 //2명만

@@ -98,12 +98,6 @@ public class GameManager : MonoBehaviour
     public List<IPCBG> PCB { get { return pcb; } }
 
     [SerializeField]
-    private TextMeshProUGUI textMoney;
-    [SerializeField]
-    private int money;
-    public int Money { get { return money; } set { money = value; textMoney.text = money.ToString(); } }
-
-    [SerializeField]
     private GameObject gameClear;
     [SerializeField]
     private GameObject gameOver;
@@ -119,7 +113,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         relic.Size = 100;
-        Money = 100;
     }
 
     private void Update()
@@ -128,8 +121,9 @@ public class GameManager : MonoBehaviour
         pipeLine?.Update();
 
         //플레이어가 모든 카드를 썻는지 확인해야 함
-        //다 썻다면 그리고 진행중인 pipeLine 또한 없다면 턴 종료가 가능함
-        if (hand.Cards.Count == 0 && pipeLine == null)
+        //다 썻다면 그리고 카드를 내는 단계라면 턴 종료가 가능함
+        //(첫 턴은 드로우 후 pipeLine이 null, 두번째 턴부터는 PlayPipeLine이 진행중)
+        if (hand.Cards.Count == 0 && (pipeLine == null || pipeLine is PlayPipeLine))
         {
             turnEndButton.raycastTarget = true;
             turnEndButton.sprite = buttonSprite[0];
@@ -194,8 +188,6 @@ public class GameManager : MonoBehaviour
     //이거 하기 전에 캐릭터와 적을 생성해야 함
     public void GameStart()
     {
-        //돈이 얼마 있는지 보여주는 텍스트
-        textMoney.gameObject.SetActive(true);
         //book 자신 startbutton 끄기
         //책 끄고
         book.SetActive(false);
@@ -219,10 +211,14 @@ public class GameManager : MonoBehaviour
         }
 
         turnEndButton.gameObject.SetActive(true);
-        //시작 파이프라인 진행
+        //맵을 만들고 첫 스테이지 고르기 (첫 전투는 시작 파이프라인으로 진행)
         StartPipeLine startPipeLine = new (dummy, enemyResources);
-        startPipeLine.Start();
+        map = new MapPipeLine(startPipeLine.Dungeon);
+        PipeLine = map;
     }
+
+    //스테이지를 고르는 맵
+    private MapPipeLine map;
 
     //어떤 콜백들이 만들어 졌는지
     //턴시작
@@ -240,17 +236,13 @@ public class GameManager : MonoBehaviour
     public CyclePipeLine CyclePipeLine { get { return cyclePipeLine; } }
     public void Cycle()
     {
-        cyclePipeLine ??= new(dummy, enemyResources, store, gameClear, gameOver);
+        cyclePipeLine ??= new(dummy, enemyResources, store, gameClear, gameOver, map);
         cyclePipeLine.Play.TurnEndButtonPush();
     }
     
     public void GameInit()
     {
         //게임 초기화 (초기 상태로 돌아가기)
-        //돈 초기화
-        Money = 0;
-        //돈 얼마인지 텍스트 끄기
-        textMoney.gameObject.SetActive (false);
         //캐릭터 선택창 초기화 후 보이게
         manager.Init();
         sel.SetActive(true);
@@ -288,6 +280,10 @@ public class GameManager : MonoBehaviour
         }
         //파이프 라인 초기화
         cyclePipeLine = null;
+        pipeLine = null;
+        //맵 삭제
+        map?.Destroy();
+        map = null;
     }
 }
 
@@ -297,6 +293,7 @@ public class GameManager : MonoBehaviour
 public class StartPipeLine
 {
     private readonly DungeonPipeLine dungeon;
+    public DungeonPipeLine Dungeon { get { return dungeon; } }
     private readonly CreatePipeLine plate;
     private readonly DrawPipeLine draw;
     //모든 캐릭터의 plate를 세팅하고 전부 되었다면 드로우
@@ -343,16 +340,21 @@ public class CyclePipeLine
     private readonly DungeonPipeLine dungeon;
     private readonly StorePipeLine store;
     private readonly GameClearPipeLine gameClearPipeLine;
-    public CyclePipeLine(Dummy dummy, Character[] enemys, Store store, GameObject clear, GameObject over)
+    public CyclePipeLine(Dummy dummy, Character[] enemys, Store store, GameObject clear, GameObject over, MapPipeLine map)
     {
         //여기서 play에 defense의 값이 들어가지 않음 defence는 null인 상태라
         play = new PlayPipeLine(defense);
         draw = new DrawPipeLine(play, dummy, 5);
         create = new CreatePipeLine(draw);
 
-        dungeon = new DungeonPipeLine(create, enemys, 1);
-        this.store = new StorePipeLine(dungeon, store);
-        disposal = new DisposalPipeLine(create, new GameOverPipeLine(over), this.store, dungeon);
+        dungeon = new DungeonPipeLine(create, enemys);
+        //상점에서 나가면 맵으로
+        this.store = new StorePipeLine(map, store);
+        gameClearPipeLine = new GameClearPipeLine(clear);
+        disposal = new DisposalPipeLine(create, new GameOverPipeLine(over), map, new RewardPipeLine(map), gameClearPipeLine);
+        //두번째 전투부터는 이 사이클로 전투를 진행
+        map.Dungeon = dungeon;
+        map.Store = this.store;
 
         broken = new BrokenPipeLine(disposal);
         funtion = new FuntionPipeLine(broken);
@@ -360,17 +362,10 @@ public class CyclePipeLine
         defense = new DefencePipeLine(attack);
         //그래서 여기서 다시 넣어주기
         play.Next = defense;
-
-        gameClearPipeLine = new GameClearPipeLine(clear);
     }
 
     public void Start()
     {
         GameManager.Instance.PipeLine = defense;
-        if(dungeon.Count >= 1)
-        {
-            //게임 클리어
-            disposal.Next = gameClearPipeLine;
-        }
     }
 }

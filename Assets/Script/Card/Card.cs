@@ -31,8 +31,11 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, I
     [SerializeField]
     protected TextMeshProUGUI textComponent;
     public string Description { get { return textComponent.text; } set { textComponent.text = value; } }
+    public TMP_FontAsset Font { get { return textComponent.font; } }
 
     public bool Raycast { get { return back.raycastTarget; } set { back.raycastTarget = value; } }
+    //카드 백그라운드 색 (상점에서 비용으로 선택됐는지 표시할때 사용)
+    public Color BackColor { get { return back.color; } set { back.color = value; } }
 
     //카드가 어떤 상황에 어떻게 반응해야 하는지 경우가 많아져서 state로 나누기로 함
     //지금 카드가 무슨 상황인지 어떻게 반응해야 하는지

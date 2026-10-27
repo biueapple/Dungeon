@@ -25,7 +25,9 @@ public class Store : MonoBehaviour
         for(int i = relic.List.Count - 1; i >= 0; i--)
         {
             Transform transform = relic.List[i];
-            Destroy(transform.gameObject);
+            //이미 구매해서 사라진 렐릭은 건너뛰기
+            if (transform != null)
+                Destroy(transform.gameObject);
             relic.Remove(transform);
         }
 
@@ -42,11 +44,11 @@ public class Store : MonoBehaviour
         relic.Size = 100;
 
         Relic r = Instantiate(relicResources[Random.Range(0, relicResources.Length)], relic.transform);
-        r.State = new RelicStore(r, r, 10);
+        r.State = new RelicStore(r, r);
         relic.Add(r.transform);
 
         r = Instantiate(relicResources[Random.Range(0, relicResources.Length)], relic.transform);
-        r.State = new RelicStore(r, r, 10);
+        r.State = new RelicStore(r, r);
         relic.Add(r.transform);
     }
 

@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
         {
             if(_instance == null)
             {
-                Transform can = FindObjectOfType<Canvas>().transform;
+                Transform can = FindFirstObjectByType<Canvas>().transform;
                 if (can == null)
                 {
                     Debug.Log("캔버스가 없음");

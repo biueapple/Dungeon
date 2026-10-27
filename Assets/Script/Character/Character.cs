@@ -84,10 +84,6 @@ public class Character : MonoBehaviour
     private readonly List<IPCBC> pcb = new();
     public List<IPCBC> PCB { get { return pcb; } }
 
-    [SerializeField]
-    private int money;
-    public int Money { get { return money; } }
-
     void Awake()
     {
         //체력조정

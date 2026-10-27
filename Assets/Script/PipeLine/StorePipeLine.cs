@@ -14,7 +14,6 @@ public class StorePipeLine : IPipeLine
     {
         this.next = next;
         this.store = store;
-        store.Display();
     }
 
     public void End()
@@ -25,6 +24,8 @@ public class StorePipeLine : IPipeLine
     public void Start()
     {
         //상점 만들고 기존의 파이프라인과는 다른 길을 걸어야 함
+        //맵에서 상점에 들어올때마다 물건을 새로 진열
+        store.Display();
         store.gameObject.SetActive(true);
     }
 

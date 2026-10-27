@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IProduct
 {
+    //비용으로 내야 하는 카드 장수
     public int Price { get; }
-    public bool Buy();
 }

@@ -6,22 +6,26 @@ public class DisposalPipeLine : IPipeLine
 {
     //아직 살아있는 적이 있다
     private readonly IPipeLine yet;
-    //적이 전부 죽음
-    private readonly StorePipeLine store;
-    private readonly DungeonPipeLine dungeon;
+    //적이 전부 죽음 (맵으로 돌아가서 다음 스테이지 고르기)
+    private readonly MapPipeLine map;
+    //적이 전부 죽음 (보상 카드를 고른 뒤 맵으로)
+    private readonly IPipeLine reward;
+    //보스를 잡음
+    private readonly IPipeLine clear;
     private IPipeLine next;
     //모험가가 전부 죽음
     private readonly IPipeLine end;
 
     public IPipeLine Next { get => next; set => next = value; }
 
-    public DisposalPipeLine(IPipeLine yet, IPipeLine end, StorePipeLine store, DungeonPipeLine dungeon)
+    public DisposalPipeLine(IPipeLine yet, IPipeLine end, MapPipeLine map, IPipeLine reward, IPipeLine clear)
     {
         this.yet = yet;
         this.end = end;
-        this.store = store;
-        this.dungeon = dungeon;
-        next = store;
+        this.map = map;
+        this.reward = reward;
+        this.clear = clear;
+        next = reward;
     }
 
     public void End()
@@ -47,7 +51,6 @@ public class DisposalPipeLine : IPipeLine
             if (GameManager.Instance.Enemys[i].HP <= 0)
             {
                 Character character = GameManager.Instance.Enemys[i];
-                GameManager.Instance.Money += character.Money;
                 GameManager.Instance.Enemys.RemoveAt(i);
                 SoundManager.Instance.Play(SoundManager.Instance.Skull);
                 Object.Destroy(character.gameObject);
@@ -72,11 +75,8 @@ public class DisposalPipeLine : IPipeLine
                 GameManager.Instance.Dummy.AfterCard(GameManager.Instance.Hand.Cards[i]);
                 GameManager.Instance.Hand.RemoveCard(GameManager.Instance.Hand.Cards[i]);
             }
-            GameManager.Instance.PipeLine = next;
-            if (next == store)
-                next = dungeon;
-            else if(next == dungeon)
-                next = store;
+            //보스를 잡았다면 게임 클리어, 아니라면 보상을 고르고 맵으로
+            GameManager.Instance.PipeLine = map.IsBoss ? clear : reward;
         }
         //아직 전투중
         else

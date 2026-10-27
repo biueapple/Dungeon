@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 //모든 모험가가 하는 공격에 1 대미지 추가
 public class PowerRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public override int Price => 20;
+    //상점 가격 (카드 장수)
+    public override int Price => 3;
 
     public override void RelicCreate()
     {
@@ -61,16 +62,5 @@ public class PowerRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPoi
     public void OnPointerClick(PointerEventData eventData)
     {
         state?.OnMouseClick();
-    }
-
-    public override bool Buy()
-    {
-        if(GameManager.Instance.Money >= Price)
-        {
-            RelicCreate();
-            GameManager.Instance.Money -= Price;
-            return true;
-        }
-        return false;
     }
 }

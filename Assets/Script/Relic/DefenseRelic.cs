@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 //모든 모험가가 주는 쉴드량 증가
 public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public override int Price => 20;
+    //상점 가격 (카드 장수)
+    public override int Price => 2;
 
     public override void RelicCreate()
     {                                                               
@@ -60,16 +61,5 @@ public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IP
      public void OnPointerClick(PointerEventData eventData)
     {
         state?.OnMouseClick();
-    }
-
-    public override bool Buy()
-    {
-        if (GameManager.Instance.Money >= Price)
-        {
-            RelicCreate();
-            GameManager.Instance.Money -= Price;
-            return true;
-        }
-        return false;
     }
 }

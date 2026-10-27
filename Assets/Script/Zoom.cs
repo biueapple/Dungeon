@@ -100,6 +100,15 @@ public class Zoom : MonoBehaviour
         }
     }
 
+    //코드로 만든 창(카드 선택창 등) 위에서도 확대 카드가 보이도록 맨 앞으로
+    public void BringToFront()
+    {
+        big.transform.SetAsLastSibling();
+        ebig.transform.SetAsLastSibling();
+        volatilityCard.transform.SetAsLastSibling();
+        evolatilityCard.transform.SetAsLastSibling();
+    }
+
     //비활성화
     public void ViewOFF()
     {

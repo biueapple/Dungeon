@@ -9,6 +9,7 @@ public abstract class Relic : MonoBehaviour, IPCBG, IInstruction, IProduct
     public Transform Transform { get { return transform; } }
     public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
 
+    //상점 가격 (비용으로 내야 하는 카드 장수)
     public abstract int Price { get; }
 
     public abstract void RelicCreate();
@@ -25,6 +26,4 @@ public abstract class Relic : MonoBehaviour, IPCBG, IInstruction, IProduct
     public abstract void TurnStart();
 
     public abstract string Instruction();
-
-    public abstract bool Buy();
 }
