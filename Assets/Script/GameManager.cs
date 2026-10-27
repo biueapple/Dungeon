@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,7 +7,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    //½Ì±ÛÅÏ
+    //ì‹±ê¸€í„´
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
@@ -39,17 +39,17 @@ public class GameManager : MonoBehaviour
     //[SerializeField]
     //private DefenseRelic defense;
 
-    //µ¦
+    //ë±
     [SerializeField]
     private Dummy dummy;
     public Dummy Dummy { get { return dummy; } }
-    //Ä«µåÆÑÀÌ ¸ğ¿©ÀÖ´Â Ã¥
+    //ì¹´ë“œíŒ©ì´ ëª¨ì—¬ìˆëŠ” ì±…
     [SerializeField]
     private GameObject book;
-    //°ÔÀÓÀ» ½ÃÀÛÇÏ°Ô ÇØÁÖ´Â ¹öÆ°
+    //ê²Œì„ì„ ì‹œì‘í•˜ê²Œ í•´ì£¼ëŠ” ë²„íŠ¼
     [SerializeField]
     private GameObject startButton;
-    //°ÔÀÓÀ» ¾î¶² Ä«µåÆÑµé·Î ÇÒ°ÇÁö Á¤ÇÏ´Â °ø°£
+    //ê²Œì„ì„ ì–´ë–¤ ì¹´ë“œíŒ©ë“¤ë¡œ í• ê±´ì§€ ì •í•˜ëŠ” ê³µê°„
     [SerializeField]
     private Deck deck;
 
@@ -57,25 +57,25 @@ public class GameManager : MonoBehaviour
     private Character[] enemyResources;
     public Character[] EnemyResources { get { return enemyResources; } }
 
-    //¸ğÇè°¡µé x : 850 550 250, y :-250
+    //ëª¨í—˜ê°€ë“¤ x : 850 550 250, y :-250
     [SerializeField]
     private List<Character> adventurer;
     public List<Character> Adventurer { get { return adventurer; } }
-    //Àûµé
+    //ì ë“¤
     [SerializeField]
     private List<Character> enemys;
     public List<Character> Enemys { get {  return enemys; } }
-    //¸ğµç Ä³¸¯ÅÍµé
+    //ëª¨ë“  ìºë¦­í„°ë“¤
     public List<Character> Characters { get { return adventurer.Concat(enemys).ToList(); } }
 
-    //¼Õ
+    //ì†
     [SerializeField]
     private Hand hand;
     public Hand Hand { get { return hand; } }
     [SerializeField]
-    //ÅÏ Á¾·á ¹öÆ°
+    //í„´ ì¢…ë£Œ ë²„íŠ¼
     private Image turnEndButton;
-    //¹öÆ°ÀÌ È°¼ºÈ­ »óÅÂ¸é [0] ºñÈ°¼ºÈ­ »óÅÂ¸é [1]
+    //ë²„íŠ¼ì´ í™œì„±í™” ìƒíƒœë©´ [0] ë¹„í™œì„±í™” ìƒíƒœë©´ [1]
     [SerializeField]
     private Sprite[] buttonSprite;
 
@@ -124,17 +124,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //ÁøÇàÁßÀÎ ÆÄÀÌÇÁ ¶óÀÎ
+        //ì§„í–‰ì¤‘ì¸ íŒŒì´í”„ ë¼ì¸
         pipeLine?.Update();
 
-        //ÇÃ·¹ÀÌ¾î°¡ ¸ğµç Ä«µå¸¦ ›§´ÂÁö È®ÀÎÇØ¾ß ÇÔ
-        //´Ù ›§´Ù¸é ±×¸®°í ÁøÇàÁßÀÎ pipeLine ¶ÇÇÑ ¾ø´Ù¸é ÅÏ Á¾·á°¡ °¡´ÉÇÔ
+        //í”Œë ˆì´ì–´ê°€ ëª¨ë“  ì¹´ë“œë¥¼ ì»ëŠ”ì§€ í™•ì¸í•´ì•¼ í•¨
+        //ë‹¤ ì»ë‹¤ë©´ ê·¸ë¦¬ê³  ì§„í–‰ì¤‘ì¸ pipeLine ë˜í•œ ì—†ë‹¤ë©´ í„´ ì¢…ë£Œê°€ ê°€ëŠ¥í•¨
         if (hand.Cards.Count == 0 && pipeLine == null)
         {
             turnEndButton.raycastTarget = true;
             turnEndButton.sprite = buttonSprite[0];
         }
-        //¾ÆÁ÷ ¼ÕÆĞ°¡ ³²¾ÆÀÖ°Å³ª ÁøÇàÁßÀÎ pipeLine ÀÖ´Ù¸é ÅÏ Á¾·á ºÒ°¡´É
+        //ì•„ì§ ì†íŒ¨ê°€ ë‚¨ì•„ìˆê±°ë‚˜ ì§„í–‰ì¤‘ì¸ pipeLine ìˆë‹¤ë©´ í„´ ì¢…ë£Œ ë¶ˆê°€ëŠ¥
         else
         {
             turnEndButton.raycastTarget = false;
@@ -142,40 +142,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //¼³Á¤Ã¢ Å°±â
+    //ì„¤ì •ì°½ í‚¤ê¸°
     public void OnButtonSetting()
     {
         setting.SetActive(true);
     }
-    //±×·¡ÇÈ¼³Á¤Ã¢ Å°±â
+    //ê·¸ë˜í”½ì„¤ì •ì°½ í‚¤ê¸°
     public void OnButtonGraphic()
     {
         setting.SetActive(false);
         graphic.SetActive(true);
     }
-    //¼Ò¸®¼³Á¤Ã¢ Å°±â
+    //ì†Œë¦¬ì„¤ì •ì°½ í‚¤ê¸°
     public void OnButtonSound()
     {
         setting.SetActive(false);
         sound.SetActive(true);
     }
-    //¸ŞÀÎ¸Ş´º·Î µ¹¾Æ°¡±â
+    //ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°
     public void OnButtonMenu()
     {
         GameInit();
     }
-    //´İ±â
+    //ë‹«ê¸°
     public void OnButtonClose()
     {
         setting.SetActive(false);
     }
-    //°ÔÀÓÁ¾·á
+    //ê²Œì„ì¢…ë£Œ
     public void OnButtonExit()
     {
         Application.Quit();
     }
 
-    //¾ÆÁ÷ Ä³¸¯ÅÍ »ı¼ºÀº ¾ÈÇÔ
+    //ì•„ì§ ìºë¦­í„° ìƒì„±ì€ ì•ˆí•¨
     public void CharacterSelectFinish(CharacterSelect[] characters)
     {
         for (int i = 0; i < selectStep.Length; i++)
@@ -186,23 +186,23 @@ public class GameManager : MonoBehaviour
         {
             adventurer.Add(characters[i].Character);
         }
-        //Ã¥ ¿­°í
+        //ì±… ì—´ê³ 
         book.SetActive(true);
         deck.gameObject.SetActive(true);
     }
 
-    //ÀÌ°Å ÇÏ±â Àü¿¡ Ä³¸¯ÅÍ¿Í ÀûÀ» »ı¼ºÇØ¾ß ÇÔ
+    //ì´ê±° í•˜ê¸° ì „ì— ìºë¦­í„°ì™€ ì ì„ ìƒì„±í•´ì•¼ í•¨
     public void GameStart()
     {
-        //µ·ÀÌ ¾ó¸¶ ÀÖ´ÂÁö º¸¿©ÁÖ´Â ÅØ½ºÆ®
+        //ëˆì´ ì–¼ë§ˆ ìˆëŠ”ì§€ ë³´ì—¬ì£¼ëŠ” í…ìŠ¤íŠ¸
         textMoney.gameObject.SetActive(true);
-        //book ÀÚ½Å startbutton ²ô±â
-        //Ã¥ ²ô°í
+        //book ìì‹  startbutton ë„ê¸°
+        //ì±… ë„ê³ 
         book.SetActive(false);
         deck.gameObject.SetActive(false);
-        //½ÃÀÛ¹öÆ° ²ô°í
+        //ì‹œì‘ë²„íŠ¼ ë„ê³ 
         startButton.SetActive(false);
-        //°ñ¶ó´ø Ä«µåÆÑµéÀ» µ¦¿¡ ³Ö¾îÁÖ°í
+        //ê³¨ë¼ë˜ ì¹´ë“œíŒ©ë“¤ì„ ë±ì— ë„£ì–´ì£¼ê³ 
         List<Card> list = new();
         for (int i = 0; i < deck.CardBoxes.Count; i++)
         {
@@ -210,8 +210,8 @@ public class GameManager : MonoBehaviour
         }
         dummy.Init(list);
 
-        //¸ğµç Ä³¸¯ÅÍµéÀ» È°¼ºÈ­
-        //¸ğÇè°¡µé x : 850 550 250, y :-250
+        //ëª¨ë“  ìºë¦­í„°ë“¤ì„ í™œì„±í™”
+        //ëª¨í—˜ê°€ë“¤ x : 850 550 250, y :-250
         for (int i = 0; i < adventurer.Count; i++)
         {
             adventurer[i] = Instantiate(adventurer[i], adventurerParent);
@@ -219,23 +219,23 @@ public class GameManager : MonoBehaviour
         }
 
         turnEndButton.gameObject.SetActive(true);
-        //½ÃÀÛ ÆÄÀÌÇÁ¶óÀÎ ÁøÇà
+        //ì‹œì‘ íŒŒì´í”„ë¼ì¸ ì§„í–‰
         StartPipeLine startPipeLine = new (dummy, enemyResources);
         startPipeLine.Start();
     }
 
-    //¾î¶² Äİ¹éµéÀÌ ¸¸µé¾î Á³´ÂÁö
-    //ÅÏ½ÃÀÛ
-    //µå·Î¿ì o
-    //»õ ÆÇÀ¸·Î ±³Ã¼ÇÒ¶§ create o
-    //ÆÇºÎ¼ÅÁú‹š broken o
-    //¼öºñÇÒ¶§ defence o
-    //°ø°İÇÒ¶§ attack o
-    //ÇÇÇØ¹ŞÀ»¶§ attack
-    //ÃÊ±âÈ­ÇÒ¶§ funtion o
-    //ÅÏÁ¾·á
+    //ì–´ë–¤ ì½œë°±ë“¤ì´ ë§Œë“¤ì–´ ì¡ŒëŠ”ì§€
+    //í„´ì‹œì‘
+    //ë“œë¡œìš° o
+    //ìƒˆ íŒìœ¼ë¡œ êµì²´í• ë•Œ create o
+    //íŒë¶€ì…”ì§ˆë–„ broken o
+    //ìˆ˜ë¹„í• ë•Œ defence o
+    //ê³µê²©í• ë•Œ attack o
+    //í”¼í•´ë°›ì„ë•Œ attack
+    //ì´ˆê¸°í™”í• ë•Œ funtion o
+    //í„´ì¢…ë£Œ
 
-    //ÀüÅõ ´Ü°èÀÇ »çÀÌÅ¬ ÆÄÀÌÇÁ¶óÀÎ
+    //ì „íˆ¬ ë‹¨ê³„ì˜ ì‚¬ì´í´ íŒŒì´í”„ë¼ì¸
     CyclePipeLine cyclePipeLine;
     public CyclePipeLine CyclePipeLine { get { return cyclePipeLine; } }
     public void Cycle()
@@ -246,16 +246,16 @@ public class GameManager : MonoBehaviour
     
     public void GameInit()
     {
-        //°ÔÀÓ ÃÊ±âÈ­ (ÃÊ±â »óÅÂ·Î µ¹¾Æ°¡±â)
-        //µ· ÃÊ±âÈ­
+        //ê²Œì„ ì´ˆê¸°í™” (ì´ˆê¸° ìƒíƒœë¡œ ëŒì•„ê°€ê¸°)
+        //ëˆ ì´ˆê¸°í™”
         Money = 0;
-        //µ· ¾ó¸¶ÀÎÁö ÅØ½ºÆ® ²ô±â
+        //ëˆ ì–¼ë§ˆì¸ì§€ í…ìŠ¤íŠ¸ ë„ê¸°
         textMoney.gameObject.SetActive (false);
-        //Ä³¸¯ÅÍ ¼±ÅÃÃ¢ ÃÊ±âÈ­ ÈÄ º¸ÀÌ°Ô
+        //ìºë¦­í„° ì„ íƒì°½ ì´ˆê¸°í™” í›„ ë³´ì´ê²Œ
         manager.Init();
         sel.SetActive(true);
         can.SetActive (true);
-        //¸ğµç ¼ÕÆĞ »èÁ¦
+        //ëª¨ë“  ì†íŒ¨ ì‚­ì œ
         for(int i = 0; i < dummy.Before.Count; i++)
         {
             Destroy(dummy.Before[i].gameObject);
@@ -267,7 +267,7 @@ public class GameManager : MonoBehaviour
         }
         dummy.After.Clear();
         hand.Cards.Clear();
-        //¸ğµç Ä³¸¯ÅÍ »èÁ¦
+        //ëª¨ë“  ìºë¦­í„° ì‚­ì œ
         for(int i = 0; i < adventurer.Count; i++)
         {
             Destroy(adventurer[i].gameObject);
@@ -278,28 +278,28 @@ public class GameManager : MonoBehaviour
             Destroy(enemys[i].gameObject);
         }
         enemys.Clear();
-        //µ¦ ÃÊ±âÈ­
+        //ë± ì´ˆê¸°í™”
         deck.InitDeck();
-        //¸ğµç º¸¼® »èÁ¦
+        //ëª¨ë“  ë³´ì„ ì‚­ì œ
         for(int i = relic.List.Count - 1; i >= 0; i--)
         {
             Relic r = relic.List[i].GetComponent<Relic>();
             r.RelicDestroy();
         }
-        //ÆÄÀÌÇÁ ¶óÀÎ ÃÊ±âÈ­
+        //íŒŒì´í”„ ë¼ì¸ ì´ˆê¸°í™”
         cyclePipeLine = null;
     }
 }
 
 /// <summary>
-/// °ÔÀÓ ½ÃÀÛ½ÃÀÇ ´Ü°è¸¦ °¡Áö°í ÀÖ´Â ÅëÇÕ ÆÄÀÌÇÁ¶óÀÎ
+/// ê²Œì„ ì‹œì‘ì‹œì˜ ë‹¨ê³„ë¥¼ ê°€ì§€ê³  ìˆëŠ” í†µí•© íŒŒì´í”„ë¼ì¸
 /// </summary>
 public class StartPipeLine
 {
     private readonly DungeonPipeLine dungeon;
     private readonly CreatePipeLine plate;
     private readonly DrawPipeLine draw;
-    //¸ğµç Ä³¸¯ÅÍÀÇ plate¸¦ ¼¼ÆÃÇÏ°í ÀüºÎ µÇ¾ú´Ù¸é µå·Î¿ì
+    //ëª¨ë“  ìºë¦­í„°ì˜ plateë¥¼ ì„¸íŒ…í•˜ê³  ì „ë¶€ ë˜ì—ˆë‹¤ë©´ ë“œë¡œìš°
 
     public StartPipeLine(Dummy dummy, Character[] enemys)
     {
@@ -315,7 +315,7 @@ public class StartPipeLine
 }
 
 /// <summary>
-/// ÀüÅõ ´Ü°è¸¦ ÀüºÎ °¡Áö°í ÀÖ´Â ÅëÇÕ ÆÄÀÌÇÁ¶óÀÎ
+/// ì „íˆ¬ ë‹¨ê³„ë¥¼ ì „ë¶€ ê°€ì§€ê³  ìˆëŠ” í†µí•© íŒŒì´í”„ë¼ì¸
 /// </summary>
 public class CyclePipeLine
 {
@@ -328,7 +328,7 @@ public class CyclePipeLine
     private readonly BrokenPipeLine broken;
     public BrokenPipeLine Broken { get { return broken; } }
 
-    //»ç¸ÁÇÑ Ä³¸¯ÅÍ°¡ ÀÖ´ÂÁö ¸¸¾à ÀûÀÌ¶ó¸é ´ÙÀ½ ½ºÅ×ÀÌÁö·Î
+    //ì‚¬ë§í•œ ìºë¦­í„°ê°€ ìˆëŠ”ì§€ ë§Œì•½ ì ì´ë¼ë©´ ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ
     private readonly DisposalPipeLine disposal;
     public DisposalPipeLine DisposalPipeLine { get { return disposal; } }
 
@@ -345,7 +345,7 @@ public class CyclePipeLine
     private readonly GameClearPipeLine gameClearPipeLine;
     public CyclePipeLine(Dummy dummy, Character[] enemys, Store store, GameObject clear, GameObject over)
     {
-        //¿©±â¼­ play¿¡ defenseÀÇ °ªÀÌ µé¾î°¡Áö ¾ÊÀ½ defence´Â nullÀÎ »óÅÂ¶ó
+        //ì—¬ê¸°ì„œ playì— defenseì˜ ê°’ì´ ë“¤ì–´ê°€ì§€ ì•ŠìŒ defenceëŠ” nullì¸ ìƒíƒœë¼
         play = new PlayPipeLine(defense);
         draw = new DrawPipeLine(play, dummy, 5);
         create = new CreatePipeLine(draw);
@@ -358,7 +358,7 @@ public class CyclePipeLine
         funtion = new FuntionPipeLine(broken);
         attack = new AttackPipeLine(funtion);
         defense = new DefencePipeLine(attack);
-        //±×·¡¼­ ¿©±â¼­ ´Ù½Ã ³Ö¾îÁÖ±â
+        //ê·¸ë˜ì„œ ì—¬ê¸°ì„œ ë‹¤ì‹œ ë„£ì–´ì£¼ê¸°
         play.Next = defense;
 
         gameClearPipeLine = new GameClearPipeLine(clear);
@@ -369,7 +369,7 @@ public class CyclePipeLine
         GameManager.Instance.PipeLine = defense;
         if(dungeon.Count >= 1)
         {
-            //°ÔÀÓ Å¬¸®¾î
+            //ê²Œì„ í´ë¦¬ì–´
             disposal.Next = gameClearPipeLine;
         }
     }

@@ -1,15 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BurnCreator : IPCBC
 {
-    //ÇÇÇØ¸¦ ¹ŞÀ» ÇÇÇØÀÚ
+    //í”¼í•´ë¥¼ ë°›ì„ í”¼í•´ì
     private readonly Character victim;
-    //´ë¹ÌÁö
+    //ëŒ€ë¯¸ì§€
     private readonly float damage;
-    //¾ó¸¶³ª Áö¼ÓÇÒÁö
+    //ì–¼ë§ˆë‚˜ ì§€ì†í• ì§€
     private readonly int count;
 
     public BurnCreator(Character victim, float damage, int count)
@@ -19,7 +19,7 @@ public class BurnCreator : IPCBC
         this.count = count;
     }
 
-    //°ø°İ½Ã¿¡ ´ë¹ÌÁö¸¦ ÁØ´Ù
+    //ê³µê²©ì‹œì— ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤
     public void Attack(PL_AttackNHit pl) { }
     public void Broken() { }
     public void Create() { }
@@ -38,20 +38,20 @@ public class BurnCreator : IPCBC
 
 public class Burn : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnterHandler, IPointerExitHandler
 {
-    //ÇÇÇØ¸¦ ¹ŞÀ» ÇÇÇØÀÚ
+    //í”¼í•´ë¥¼ ë°›ì„ í”¼í•´ì
     private Character victim;
     public Character Victim { get { return victim; } set { victim = value; } }
-    //´ë¹ÌÁö
+    //ëŒ€ë¯¸ì§€
     private float damage;
     public float Damage { get { return damage; } set { damage = value; } }
-    //¾ó¸¶³ª Áö¼ÓÇÒÁö
+    //ì–¼ë§ˆë‚˜ ì§€ì†í• ì§€
     private int count;
     public int Count { get { return count; } set { count = value; } }
     public Vector3 Position { get => transform.position; set => transform.position = value; }
 
     public void Init(Character victim, float damage, int count)
     {
-        //È½¼ö°¡ 0È¸¸é ¹Ù·Î »ç¶óÁöµµ·Ï
+        //íšŸìˆ˜ê°€ 0íšŒë©´ ë°”ë¡œ ì‚¬ë¼ì§€ë„ë¡
         if (count == 0)
         {
             Delete();
@@ -62,7 +62,7 @@ public class Burn : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnterHa
         this.count = count;
     }
 
-    //°ø°İ½Ã¿¡ ´ë¹ÌÁö¸¦ ÁØ´Ù
+    //ê³µê²©ì‹œì— ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤
     public void Attack(PL_AttackNHit pl) { }
     public void Broken() { }
     public void Create()
@@ -75,12 +75,12 @@ public class Burn : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnterHa
 
     public void Invocation()
     {
-        Debug.Log($"{victim} È­»ó {damage} ´ë¹ÌÁö");
-        //´ë¹ÌÁö
+        Debug.Log($"{victim} í™”ìƒ {damage} ëŒ€ë¯¸ì§€");
+        //ëŒ€ë¯¸ì§€
         victim.HP -= damage;
-        //È½¼ö Â÷°¨
+        //íšŸìˆ˜ ì°¨ê°
         count--;
-        //È½¼ö°¡ 0ÀÌ¸é »èÁ¦
+        //íšŸìˆ˜ê°€ 0ì´ë©´ ì‚­ì œ
         if (count <= 0)
         {
             Delete();
@@ -95,7 +95,7 @@ public class Burn : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnterHa
 
     public string Instruction()
     {
-        return new string($"È­»ó {damage} ´ë¹ÌÁö, {count} ÅÏ ³²À½");
+        return new string($"í™”ìƒ {damage} ëŒ€ë¯¸ì§€, {count} í„´ ë‚¨ìŒ");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

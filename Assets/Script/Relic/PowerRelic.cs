@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//¸ğµç ¸ğÇè°¡°¡ ÇÏ´Â °ø°İ¿¡ 1 ´ë¹ÌÁö Ãß°¡
+//ëª¨ë“  ëª¨í—˜ê°€ê°€ í•˜ëŠ” ê³µê²©ì— 1 ëŒ€ë¯¸ì§€ ì¶”ê°€
 public class PowerRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public override int Price => 20;
@@ -28,7 +28,7 @@ public class PowerRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPoi
         {
             if(GameManager.Instance.Adventurer.Contains(pl.Perpetrator))
             {
-                Debug.Log($"´ë¹ÌÁö 1 Ãß°¡ Àü {pl.Victims[i].Damage}, ÈÄ {pl.Victims[i].Damage + 1}");
+                Debug.Log($"ëŒ€ë¯¸ì§€ 1 ì¶”ê°€ ì „ {pl.Victims[i].Damage}, í›„ {pl.Victims[i].Damage + 1}");
                 pl.Victims[i].Damage += 1;
             }
         }
@@ -45,7 +45,7 @@ public class PowerRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPoi
 
     public override string Instruction()
     {
-        return new string($"¸ğµç ¸ğÇè°¡ÀÇ °ø°İ¿¡ 1´ë¹ÌÁö Ãß°¡");
+        return new string($"ëª¨ë“  ëª¨í—˜ê°€ì˜ ê³µê²©ì— 1ëŒ€ë¯¸ì§€ ì¶”ê°€");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

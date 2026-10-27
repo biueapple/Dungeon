@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    //Å×½ºÆ®¿ëµé
+    //í…ŒìŠ¤íŠ¸ìš©ë“¤
     public Card[] card;
 
     public Dummy dummy;
@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
         //    GameManager.Instance.Adventurer.Add(character[i]);
         //}
 
-        ////ÆÇ ±ò¾ÆÁÖ°í
+        ////íŒ ê¹”ì•„ì£¼ê³ 
         //StartPipeLine startPipeLine = new(dummy, GameManager.Instance.EnemyResources);
         //startPipeLine.Start();
     }

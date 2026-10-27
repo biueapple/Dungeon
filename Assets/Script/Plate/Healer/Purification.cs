@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,18 +6,18 @@ public class Purification : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[0];
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ğµç ¸ğÇè°¡µéÀÇ »óÅÂÀÌ»óÀ» Á¦°ÅÇÑ´Ù.");
+            ("ëª¨ë“  ëª¨í—˜ê°€ë“¤ì˜ ìƒíƒœì´ìƒì„ ì œê±°í•œë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense()
     {
         List<DefenceInfo> defenceInfos = new();
@@ -34,11 +34,11 @@ public class Purification : Plate
             } 
         }
 
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         if (defenceInfos.Count > 0)
             GameManager.Instance.CyclePipeLine.Defence.Fulfillment.Add(new PL_ShieldNHeal(self, defenceInfos, SoundManager.Instance.Recovery));
     }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack() { }
 }

@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class DungeonPipeLine : IPipeLine
 {
     private IPipeLine next;
     public IPipeLine Next { get => next; set => next = value; }
-    //¸î¹ø ´øÀü¿¡ ¿Ô´Â°¡
+    //ëª‡ë²ˆ ë˜ì „ì— ì™”ëŠ”ê°€
     private int count = 0;
     public int Count { get { return count; } }
 
@@ -30,12 +30,12 @@ public class DungeonPipeLine : IPipeLine
     public void Start()
     {
         Character character;
-        //¸ó½ºÅÍ ½ºÆù ÈÄ ´ÙÀ½ ´Ü°è·Î
+        //ëª¬ìŠ¤í„° ìŠ¤í° í›„ ë‹¤ìŒ ë‹¨ê³„ë¡œ
         // x-150 -450 -750, y-250
         switch (count)
         {
             case 0:
-                //2¸í¸¸
+                //2ëª…ë§Œ
                 character = Object.Instantiate(candidate[0], GameManager.Instance.EnemyParent);
                 GameManager.Instance.Enemys.Add(character);
                 character.transform.localPosition = new Vector3(-450, -250, 0);
@@ -45,7 +45,7 @@ public class DungeonPipeLine : IPipeLine
                 character.transform.localPosition = new Vector3(-150, -250, 0);
                 break;
             case 1:
-                //3¸í
+                //3ëª…
                 character = Object.Instantiate(candidate[1], GameManager.Instance.EnemyParent);
                 GameManager.Instance.Enemys.Add(character);
                 character.transform.localPosition = new Vector3(-750, -250, 0);
@@ -59,7 +59,7 @@ public class DungeonPipeLine : IPipeLine
                 character.transform.localPosition = new Vector3(-150, -250, 0);
                 break;
             case 2:
-                //3¸í
+                //3ëª…
                 character = Object.Instantiate(candidate[1], GameManager.Instance.EnemyParent);
                 GameManager.Instance.Enemys.Add(character);
                 character.transform.localPosition = new Vector3(-750, -250, 0);
@@ -73,7 +73,7 @@ public class DungeonPipeLine : IPipeLine
                 character.transform.localPosition = new Vector3(-150, -250, 0);
                 break;
             case 3:
-                //3¸í
+                //3ëª…
                 character = Object.Instantiate(candidate[1], GameManager.Instance.EnemyParent);
                 GameManager.Instance.Enemys.Add(character);
                 character.transform.localPosition = new Vector3(-750, -250, 0);

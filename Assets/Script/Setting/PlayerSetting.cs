@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -18,13 +18,13 @@ public class PlayerSetting : MonoBehaviour
 
         if (LoadSaveManager.Instance.LoadJson(ref setting, "setting"))
         {
-            //·Îµå ¼º°ø
+            //ë¡œë“œ ì„±ê³µ
             graphicSetting.Apply(setting.Resolution, setting.FrameRate, setting.FullScreenMode, setting.Antialiasing);
             soundSetting.Apply(setting.FullSound, setting.BGM, setting.SoundEffect);
         }
         else
         {
-            //·Îµå ½ÇÆĞ
+            //ë¡œë“œ ì‹¤íŒ¨
             graphicSetting.Apply(graphicSetting.Defalut, 60, FullScreenMode.FullScreenWindow, AntialiasingMode.None);
             soundSetting.Refresh();
             setting.Resolution = graphicSetting.Defalut;
@@ -86,7 +86,7 @@ public class PlayerSetting : MonoBehaviour
 [System.Serializable]
 public class Setting
 {
-    //Çà»óµµ
+    //í–‰ìƒë„
     [SerializeField]
     private int width;
     [SerializeField]
@@ -95,20 +95,20 @@ public class Setting
     private RefreshRate refreshRate;
 
     public Resolution Resolution { get { return new Resolution() { width = width, height = height, refreshRateRatio = refreshRate }; } set { width = value.width; height = value.height; refreshRate = value.refreshRateRatio; } }
-    //ÇÁ·¹ÀÓ
+    //í”„ë ˆì„
     [SerializeField]
     private int frameRate;
     public int FrameRate { get { return frameRate; } set { frameRate = value; } }
-    //È­¸é¸ğµå
+    //í™”ë©´ëª¨ë“œ
     [SerializeField]
     private FullScreenMode fullScreenMode;
     public FullScreenMode FullScreenMode { get { return fullScreenMode; } set { fullScreenMode = value; } }
-    //¾ÈÆ¼¿¡ÀÏ¸®¾î½Ì
+    //ì•ˆí‹°ì—ì¼ë¦¬ì–´ì‹±
     [SerializeField]
     private AntialiasingMode antialiasing;
     public AntialiasingMode Antialiasing { get { return antialiasing; } set { antialiasing = value; } }
 
-    //ÀüÃ¼À½¼º
+    //ì „ì²´ìŒì„±
     [SerializeField]
     private float fullSound;
     public float FullSound { get { return fullSound; } set { fullSound = value; } }
@@ -116,7 +116,7 @@ public class Setting
     [SerializeField]
     private float bgm;
     public float BGM { get { return bgm; } set { bgm = value; } }
-    //È¿°úÀ½
+    //íš¨ê³¼ìŒ
     [SerializeField]
     private float soundEffect;
     public float SoundEffect { get { return soundEffect; } set { soundEffect = value; } }

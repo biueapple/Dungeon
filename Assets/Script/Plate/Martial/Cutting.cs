@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class Cutting : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[3];
         keywords[0] = new Keyword(0, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
@@ -16,34 +16,34 @@ public class Cutting : Plate
         keywords[2].Conditions.Add(new Limit_Keyword(keywords[2], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ó½ºÅÍµé¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ÀÇ ´ë¹ÌÁö¸¦ ÁÖ°í °¡Àå ¾ÕÀÇ ¸ó½ºÅÍ¿¡°Ô <color=#C54646><link=word>" + keywords[1].Word + "</link></color>" +
-            " ÀÇ ´ë¹ÌÁö¸¦ ÁÖ´Â ÃâÇ÷À» <color=#C54646><link=wow>" + keywords[2].Word + "</link></color>" + 
-            " ÅÏ ºÎ¿©ÇÑ´Ù.");
+            ("ëª¬ìŠ¤í„°ë“¤ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " ì˜ ëŒ€ë¯¸ì§€ë¥¼ ì£¼ê³  ê°€ì¥ ì•ì˜ ëª¬ìŠ¤í„°ì—ê²Œ <color=#C54646><link=word>" + keywords[1].Word + "</link></color>" +
+            " ì˜ ëŒ€ë¯¸ì§€ë¥¼ ì£¼ëŠ” ì¶œí˜ˆì„ <color=#C54646><link=wow>" + keywords[2].Word + "</link></color>" + 
+            " í„´ ë¶€ì—¬í•œë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense() { }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //´ë¹ÌÁö ¼³Á¤
+        //ëŒ€ë¯¸ì§€ ì„¤ì •
         float damage = keywords[0].Word;
-        //´ë¹ÌÁö°¡ 0ÀÌ¸é °ø°İÀ» ¼öÇàÇÑ°ÍÀÌ ¾Æ´Ô
+        //ëŒ€ë¯¸ì§€ê°€ 0ì´ë©´ ê³µê²©ì„ ìˆ˜í–‰í•œê²ƒì´ ì•„ë‹˜
         if (damage == 0)
             return;
 
         List<AttackInfo> list = new();
 
-        //³²¾ÆÀÖ´Â ÀûÀÇ ¼ö
+        //ë‚¨ì•„ìˆëŠ” ì ì˜ ìˆ˜
         switch (GameManager.Instance.Enemys.Count)
         {
-            //°ø°İÀ» ¼öÇà
+            //ê³µê²©ì„ ìˆ˜í–‰
             case 1:
                 {
                     list.Add(new AttackInfo(GameManager.Instance.Enemys[0], damage));
@@ -70,11 +70,11 @@ public class Cutting : Plate
         }
         if(GameManager.Instance.Enemys.Count > 0)
         {
-            //ÃâÇ÷ ºÎ¿©
+            //ì¶œí˜ˆ ë¶€ì—¬
             GameManager.Instance.Enemys[0].PCB.Add(new BleedingCreator(GameManager.Instance.Enemys[0], keywords[1].Word, keywords[2].Word));
         }
         
-        //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, list, SoundManager.Instance.Sword));
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class BowingDown : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[2];
         keywords[0] = new Keyword(2, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
@@ -14,16 +14,16 @@ public class BowingDown : Plate
         keywords[1].Conditions.Add(new Limit_Keyword(keywords[1], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("ÀÚ½Å¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ÀÇ º¸È£¸·À» ÁØ´Ù. ¸ğµç ¸ó½ºÅÍ¿¡°Ô <color=#C54646><link=word>" + keywords[1].Word + "</link></color>" +
-            " ÀÇ º¸È£¸·À» ÁØ´Ù.");
+            ("ìì‹ ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " ì˜ ë³´í˜¸ë§‰ì„ ì¤€ë‹¤. ëª¨ë“  ëª¬ìŠ¤í„°ì—ê²Œ <color=#C54646><link=word>" + keywords[1].Word + "</link></color>" +
+            " ì˜ ë³´í˜¸ë§‰ì„ ì¤€ë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense()
     {
         List<DefenceInfo> defenceInfos = new();
@@ -40,11 +40,11 @@ public class BowingDown : Plate
             }
         }
 
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         if (defenceInfos.Count > 0)
             GameManager.Instance.CyclePipeLine.Defence.Fulfillment.Add(new PL_ShieldNHeal(self, defenceInfos, null));
     }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack() { }
 }

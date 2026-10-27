@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Ä³¸¯ÅÍÀÇ ¹æ¾î¸¦ ¼öÇàÇÏ´Â ´Ü°è
+//ìºë¦­í„°ì˜ ë°©ì–´ë¥¼ ìˆ˜í–‰í•˜ëŠ” ë‹¨ê³„
 public class DefencePipeLine : IPipeLine
 {
-    //´ÙÀ½ ´Ü°è
+    //ë‹¤ìŒ ë‹¨ê³„
     private IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
-    //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍµé
+    //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ë“¤
     private readonly List<PL_ShieldNHeal> fulfillment;
     public List<PL_ShieldNHeal> Fulfillment { get { return fulfillment; } }
 
@@ -20,7 +20,7 @@ public class DefencePipeLine : IPipeLine
 
     public void Start()
     {
-        //¸ğµç Ä³¸¯ÅÍµéÀÌ ¹æ¾î¸¦ ¼öÇàÇÏµµ·Ï È£ÃâÇÏÁö¸¸ ÁøÂ¥ ¼öÇàÇÏ´Â Ä³¸¯ÅÍ´Â Characters¸®½ºÆ®¿¡ Ãß°¡
+        //ëª¨ë“  ìºë¦­í„°ë“¤ì´ ë°©ì–´ë¥¼ ìˆ˜í–‰í•˜ë„ë¡ í˜¸ì¶œí•˜ì§€ë§Œ ì§„ì§œ ìˆ˜í–‰í•˜ëŠ” ìºë¦­í„°ëŠ” Charactersë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
         List<Character> list = GameManager.Instance.Characters;
         for (int i = 0; i < list.Count; i++)
         {
@@ -40,7 +40,7 @@ public class DefencePipeLine : IPipeLine
 
     public void End()
     {
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¸¸ Äİ¹éÀ» È£Ãâ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ë§Œ ì½œë°±ì„ í˜¸ì¶œ
         for (int i = 0; i < fulfillment.Count ; i++)
         {
             for (int p = fulfillment[i].Perpetrator.PCB.Count - 1; p >= 0; p--)
@@ -63,7 +63,7 @@ public class DefencePipeLine : IPipeLine
 
     private IEnumerator Wait()
     {
-        //1ÃÊÀÇ ÅÒÀ» µÎ°í ´ÙÀ½ ´Ü°è ½ÃÀÛ
+        //1ì´ˆì˜ í…€ì„ ë‘ê³  ë‹¤ìŒ ë‹¨ê³„ ì‹œì‘
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.PipeLine = next;
     }
@@ -71,10 +71,10 @@ public class DefencePipeLine : IPipeLine
 
 public class PL_ShieldNHeal
 {
-    //´©°¡ ÇÏ´ÂÁö
+    //ëˆ„ê°€ í•˜ëŠ”ì§€
     private readonly Character perpetrator;
     public Character Perpetrator { get { return perpetrator; } }
-    //´©°¡ º¸È£¹Ş´ÂÁö
+    //ëˆ„ê°€ ë³´í˜¸ë°›ëŠ”ì§€
     private readonly List<DefenceInfo> victims;
     public List<DefenceInfo> Victims { get { return victims; } }
 
@@ -94,11 +94,11 @@ public class DefenceInfo
     private Character victim;
     public Character Victim { get { return victim; } set { victim = value; } }
 
-    //È¸º¹ ¼öÄ¡
+    //íšŒë³µ ìˆ˜ì¹˜
     private float hp;
     public float HP { get { return hp; } set { hp = value; } }
 
-    //º¸È£¸· ¼öÄ¡
+    //ë³´í˜¸ë§‰ ìˆ˜ì¹˜
     private float shield;
     public float Shield { get { return shield; } set { shield = value; } }
 

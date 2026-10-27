@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +12,11 @@ public class IndividualCard
     public void CreateCard(string str)
     {
         Card card = Object.Instantiate(Resources.Load<Card>("Card/" + str), GameManager.Instance.Dummy.transform);
-        //Ä«µå°¡ Áö±İ ¼ÕÆĞ¿¡ ÀÖ´Â »óÅÂÀÓÀ» ³Ö°í
+        //ì¹´ë“œê°€ ì§€ê¸ˆ ì†íŒ¨ì— ìˆëŠ” ìƒíƒœì„ì„ ë„£ê³ 
         card.State = new HandState_Card(card);
-        //È°¼ºÈ­
+        //í™œì„±í™”
         card.gameObject.SetActive(true);
-        //¼ÕÆĞ¿¡ Ãß°¡
+        //ì†íŒ¨ì— ì¶”ê°€
         GameManager.Instance.Hand.AddCard(card);
     }
 }

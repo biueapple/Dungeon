@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +11,10 @@ public class IndividualDraw
 
     private IEnumerator Draw(int count)
     {
-        //È½¼ö¸¸Å­
+        //íšŸìˆ˜ë§Œí¼
         for (int i = 0; i < count; i++)
         {
-            //µå·Î¿ì¸¦ ÇÒ¶§ ÇÑÀåÇÑÀå ¿Ï·áµÈ ÈÄ¿¡ ÀÛµ¿ÇÏµµ·Ï
+            //ë“œë¡œìš°ë¥¼ í• ë•Œ í•œì¥í•œì¥ ì™„ë£Œëœ í›„ì— ì‘ë™í•˜ë„ë¡
             yield return GameManager.Instance.Dummy.Draw();
         }
     }

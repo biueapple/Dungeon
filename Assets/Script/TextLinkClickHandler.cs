@@ -1,72 +1,72 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
 
 public class TextLinkClickHandler : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textComponent; // ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®
+    [SerializeField] private TextMeshProUGUI textComponent; // í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸
 
     public void Texting(string text)
     {
         textComponent.text = text;
     }
 
-    //¿ø·¡´Â Á÷Á¢ ÀÌº¥Æ®·Î È£ÃâµÇ´ø ÇÔ¼ö Áö±İÀº È£Ãâ Áï½Ã ¸¶¿ì½º À§Ä¡¸¦ Åä´ë·Î link text¸¦ Ã£¾Æ outÇØÁÜ
+    //ì›ë˜ëŠ” ì§ì ‘ ì´ë²¤íŠ¸ë¡œ í˜¸ì¶œë˜ë˜ í•¨ìˆ˜ ì§€ê¸ˆì€ í˜¸ì¶œ ì¦‰ì‹œ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ë¥¼ í† ëŒ€ë¡œ link textë¥¼ ì°¾ì•„ outí•´ì¤Œ
     public bool OnPointerClick(out string word, out Vector3 position)
     {
-        //¸¶¿ì½º À§Ä¡¿¡ µû¸¥ ¸µÅ©ÀÇ ÀÎµ¦½º¸¦ ¸®ÅÏ
+        //ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— ë”°ë¥¸ ë§í¬ì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(textComponent, Input.mousePosition, null);
 
-        //¸µÅ©°¡ ÀÖ¾ú´Ù¸é
+        //ë§í¬ê°€ ìˆì—ˆë‹¤ë©´
         if (linkIndex != -1)
         {
-            //¸µÅ©ÀÇ ÅØ½ºÆ®¸¦ °¡Á®¿Í
+            //ë§í¬ì˜ í…ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì™€
             TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[linkIndex];
             string linkText = linkInfo.GetLinkText();
-            //word¿¡ ÀÔ·ÂÇØ¼­ outÇØÁÜ
+            //wordì— ì…ë ¥í•´ì„œ outí•´ì¤Œ
             word = linkText;
-            //À§Ä¡µµ °¡Á®¿Í¼­ outÇØÁÜ
+            //ìœ„ì¹˜ë„ ê°€ì ¸ì™€ì„œ outí•´ì¤Œ
             Rect rect = GetLinkBounds(linkInfo);
             position = rect.center;
-            //¼º°øÀû
+            //ì„±ê³µì 
             return true;
         }
-        //¸¶¿ì½º À§Ä¡¿¡ ¾î¶² ¸µÅ©µµ ¾ø¾ú´Ù¸é
+        //ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— ì–´ë–¤ ë§í¬ë„ ì—†ì—ˆë‹¤ë©´
         else
         {
             word = null;
             position = Vector3.zero;
-            //½ÇÆĞ
+            //ì‹¤íŒ¨
             return false;
         }
     }
 
-    //¿ø·¡´Â Á÷Á¢ ÀÌº¥Æ®·Î È£ÃâµÇ´ø ÇÔ¼ö Áö±İÀº È£Ãâ Áï½Ã ¸¶¿ì½º À§Ä¡¸¦ Åä´ë·Î link index Ã£¾Æ outÇØÁÜ
+    //ì›ë˜ëŠ” ì§ì ‘ ì´ë²¤íŠ¸ë¡œ í˜¸ì¶œë˜ë˜ í•¨ìˆ˜ ì§€ê¸ˆì€ í˜¸ì¶œ ì¦‰ì‹œ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ë¥¼ í† ëŒ€ë¡œ link index ì°¾ì•„ outí•´ì¤Œ
     public bool OnPointerClick(out int index, out Vector3 position)
     {
-        //¸¶¿ì½º À§Ä¡¿¡ µû¸¥ ¸µÅ©ÀÇ ÀÎµ¦½º¸¦ ¸®ÅÏ
+        //ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— ë”°ë¥¸ ë§í¬ì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´
         index = TMP_TextUtilities.FindIntersectingLink(textComponent, Input.mousePosition, null);
 
-        //¸µÅ©°¡ ÀÖ¾ú´Ù¸é
+        //ë§í¬ê°€ ìˆì—ˆë‹¤ë©´
         if (index != -1)
         { 
-            //À§Ä¡µµ °¡Á®¿Í¼­ outÇØÁÜ
+            //ìœ„ì¹˜ë„ ê°€ì ¸ì™€ì„œ outí•´ì¤Œ
             TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[index];
             Rect rect = GetLinkBounds(linkInfo);
             position = rect.center;
-            //¼º°øÀû
+            //ì„±ê³µì 
             return true;
         }
         else
         {
             position = Vector3.zero;
-            //½ÇÆĞ
+            //ì‹¤íŒ¨
             return false;
         }
     }
 
-    //linkÀÇ À§Ä¡¸¦ ¸®ÅÏÇØÁÖ´Â ÇÔ¼ö
+    //linkì˜ ìœ„ì¹˜ë¥¼ ë¦¬í„´í•´ì£¼ëŠ” í•¨ìˆ˜
     private Rect GetLinkBounds(TMP_LinkInfo linkInfo)
     {
         TMP_CharacterInfo firstChar = textComponent.textInfo.characterInfo[linkInfo.linkTextfirstCharacterIndex];

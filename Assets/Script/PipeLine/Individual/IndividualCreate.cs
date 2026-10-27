@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class IndividualCreate
 
     public IEnumerator PlateCreate(Character character)
     {
-        //ÇÃ·¹ÀÌÆ® ¿Ï·á
+        //í”Œë ˆì´íŠ¸ ì™„ë£Œ
         yield return GameManager.Instance.StartCoroutine(character.CreateC());
         for (int i = character.PCB.Count - 1; i >= 0; i--)
         {

@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Á¤·ÄµÇ¾î ÀÖ´Â ¿ÀºêÁ§Æ®ÀÇ ¹è°æÀÇ Å©±â¸¦ Á¶ÀıÇØÁÖ´Â Å¬·¡½º
+//ì •ë ¬ë˜ì–´ ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì˜ ë°°ê²½ì˜ í¬ê¸°ë¥¼ ì¡°ì ˆí•´ì£¼ëŠ” í´ë˜ìŠ¤
 public class SortingGround : MonoBehaviour
 {
-    //Á¤·Ä Å¬·¡½º
+    //ì •ë ¬ í´ë˜ìŠ¤
     [SerializeField]
     private Sorting sorting;
-    //¹è°æ ¿ÀºêÁ§Æ®
+    //ë°°ê²½ ì˜¤ë¸Œì íŠ¸
     [SerializeField]
     private RectTransform ground;
-    //¿©¹é
+    //ì—¬ë°±
     [SerializeField]
     private float spacing;
-    //ÃÖ¼Ú°ª (Á¤·ÄÇÑ ¿ÀºêÁ§Æ®°¡ ÇÏ³ªµµ ¾ø¾îµµ ¹è°æÀÇ ÃÖ¼Ò Å©±â¸¦ º¸ÀåÇØÁÜ)
+    //ìµœì†Ÿê°’ (ì •ë ¬í•œ ì˜¤ë¸Œì íŠ¸ê°€ í•˜ë‚˜ë„ ì—†ì–´ë„ ë°°ê²½ì˜ ìµœì†Œ í¬ê¸°ë¥¼ ë³´ì¥í•´ì¤Œ)
     [SerializeField]
     private Vector2 min;
     public Vector2 Min { get { return min; } set {  min = value; } }
@@ -22,18 +22,18 @@ public class SortingGround : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Á¤·ÄÀ» ¼öÇàÇÒ¶§ ¹è°æÀÇ Å©±â Á¶Àıµµ ¼öÇàÇÏµµ·Ï
+        //ì •ë ¬ì„ ìˆ˜í–‰í• ë•Œ ë°°ê²½ì˜ í¬ê¸° ì¡°ì ˆë„ ìˆ˜í–‰í•˜ë„ë¡
         sorting.Action += Adjustment;
-        //¸¸¾à ¹è°æ ¿ÀºêÁ§Æ®°¡ ¼³Á¤µÇ¾î ÀÖÁö ¾Ê´Ù¸é ÀÌ ¿ÀºêÁ§Æ®°¡ µé¾î°¡ ÀÖ´Â ¿ÀºêÁ§Æ®¸¦ µğÆúµå·Î ¼³Á¤ÇÔ
+        //ë§Œì•½ ë°°ê²½ ì˜¤ë¸Œì íŠ¸ê°€ ì„¤ì •ë˜ì–´ ìˆì§€ ì•Šë‹¤ë©´ ì´ ì˜¤ë¸Œì íŠ¸ê°€ ë“¤ì–´ê°€ ìˆëŠ” ì˜¤ë¸Œì íŠ¸ë¥¼ ë””í´ë“œë¡œ ì„¤ì •í•¨
         if(ground == null)
             ground = GetComponent<RectTransform>();
     }
 
-    //¹è°æ Å©±â Á¶Àı
+    //ë°°ê²½ í¬ê¸° ì¡°ì ˆ
     public void Adjustment(Transform tf)
     {
-        //sorting ÀÇ »çÀÌÁî¿Í ÆĞµù¸¸Å­¿¡´Ù°¡ spacing¸¸Å­ÀÇ Å©±âÀÇ gorund Å©±âÁ¶Àı
-        //¸¸¾à gorund°¡ nullÀÌ¶ó¸é transformÀ¸·Î
+        //sorting ì˜ ì‚¬ì´ì¦ˆì™€ íŒ¨ë”©ë§Œí¼ì—ë‹¤ê°€ spacingë§Œí¼ì˜ í¬ê¸°ì˜ gorund í¬ê¸°ì¡°ì ˆ
+        //ë§Œì•½ gorundê°€ nullì´ë¼ë©´ transformìœ¼ë¡œ
         if (ground != null)
         {
             //tf.SetParent(ground);

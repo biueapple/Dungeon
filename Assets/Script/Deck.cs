@@ -1,33 +1,33 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
 
-//Ã¥¿¡ ÀÖ´ø Ä«µåÆÑµéÁß ÀÚ½ÅÀÇ µ¦À¸·Î »ç¿ëÇÒ °ÍµéÀ» º¸°üÇÏ´Â Àå¼Ò (ÇÏ½º½ºÅæÀÇ µ¦¸¸µé¶§ ¿À¸¥ÂÊ¿¡ ÀÖ´Â µ¦ ¸®½ºÆ®°°Àº°Å)
+//ì±…ì— ìˆë˜ ì¹´ë“œíŒ©ë“¤ì¤‘ ìì‹ ì˜ ë±ìœ¼ë¡œ ì‚¬ìš©í•  ê²ƒë“¤ì„ ë³´ê´€í•˜ëŠ” ì¥ì†Œ (í•˜ìŠ¤ìŠ¤í†¤ì˜ ë±ë§Œë“¤ë•Œ ì˜¤ë¥¸ìª½ì— ìˆëŠ” ë± ë¦¬ìŠ¤íŠ¸ê°™ì€ê±°)
 public class Deck : MonoBehaviour
 {
-    //Ä«µå°¡ 2°³ µé¾îÀÖ´Â Ä«µå¹Ú½º
+    //ì¹´ë“œê°€ 2ê°œ ë“¤ì–´ìˆëŠ” ì¹´ë“œë°•ìŠ¤
     [SerializeField]
     private CardBoxTwo prefab2;
-    //Ä«µå°¡ 3°³ µé¾îÀÖ´Â Ä«µå¹Ú½º (ÇöÀç±îÁö Á¸ÀçÇÏÁö ¾ÊÀ½)
+    //ì¹´ë“œê°€ 3ê°œ ë“¤ì–´ìˆëŠ” ì¹´ë“œë°•ìŠ¤ (í˜„ì¬ê¹Œì§€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ)
     [SerializeField]
     private CardBoxThree prefab3;
 
-    //Ä«µåÆÑÀ» Á¤·ÄÇÒ À§Ä¡
+    //ì¹´ë“œíŒ©ì„ ì •ë ¬í•  ìœ„ì¹˜
     [SerializeField]
     private RectTransform contant;
-    //°ÔÀÓ½ÃÀÛ¹öÆ° (È°¼ºÈ­ÀÇ Á¶°ÇÀÌ ÀÖÀ½)
+    //ê²Œì„ì‹œì‘ë²„íŠ¼ (í™œì„±í™”ì˜ ì¡°ê±´ì´ ìˆìŒ)
     [SerializeField]
     private GameObject startButton;
-    //Áö±İ ¸îÀå ³Ö¾ú´ÂÁö º¸¿©ÁÖ±â À§ÇÑ ÄÄÆ÷³ÍÆ®
+    //ì§€ê¸ˆ ëª‡ì¥ ë„£ì—ˆëŠ”ì§€ ë³´ì—¬ì£¼ê¸° ìœ„í•œ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private TextMeshProUGUI count;
 
-    //Á¤·ÄµÇ¾î ÀÖ´Â Ä«µå¹Ú½ºµé
+    //ì •ë ¬ë˜ì–´ ìˆëŠ” ì¹´ë“œë°•ìŠ¤ë“¤
     private List<CardBox> cardBoxes;
     public List<CardBox> CardBoxes { get { return cardBoxes; } }
-    //Á¤·ÄÀÇ À§Ä¡
+    //ì •ë ¬ì˜ ìœ„ì¹˜
     private float y;
 
     private void Start()
@@ -36,67 +36,67 @@ public class Deck : MonoBehaviour
         y = 0;
     }
 
-    //Ä«µåÆÑÀ» ³Ö±â
+    //ì¹´ë“œíŒ©ì„ ë„£ê¸°
     public bool InputCard(CardPack pack)
     {
-        //Ä«µåÆÑ¿¡ Ä«µå°¡ ¸î°³Â¥¸®ÀÎÁö
+        //ì¹´ë“œíŒ©ì— ì¹´ë“œê°€ ëª‡ê°œì§œë¦¬ì¸ì§€
         switch(pack.Cards.Count)
         {
-            //2°³Â¥¸®ÀÎ °æ¿ì
+            //2ê°œì§œë¦¬ì¸ ê²½ìš°
             case 2:
-                //µÎ°³Â¥¸® Ä«µåÆÑ ¹Ú½º¸¦ ¸¸µé°í
+                //ë‘ê°œì§œë¦¬ ì¹´ë“œíŒ© ë°•ìŠ¤ë¥¼ ë§Œë“¤ê³ 
                 CardBoxTwo two = Instantiate(prefab2, contant);
-                //ÃÊ±âÈ­ (¹«½¼ Ä«µå¸¦ °¡Áö°í ÀÖ´ÂÁö, ´Ù½Ã »©±âÀ§ÇØ deckµµ ÂüÁ¶ÇØÁà¾ß ÇÔ)
+                //ì´ˆê¸°í™” (ë¬´ìŠ¨ ì¹´ë“œë¥¼ ê°€ì§€ê³  ìˆëŠ”ì§€, ë‹¤ì‹œ ë¹¼ê¸°ìœ„í•´ deckë„ ì°¸ì¡°í•´ì¤˜ì•¼ í•¨)
                 two.Init(pack.Cards[0], pack.Cards[1], this);
-                //À§Ä¡ Á¶Á¤
+                //ìœ„ì¹˜ ì¡°ì •
                 two.transform.localPosition = new Vector3(0, y + contant.rect.yMax - two.Size, 0);
-                //Á¤·ÄÇØ¾ß ÇÏ´Â À§Ä¡ ´Ù½Ã ¸ÂÃçÁÖ°í
+                //ì •ë ¬í•´ì•¼ í•˜ëŠ” ìœ„ì¹˜ ë‹¤ì‹œ ë§ì¶°ì£¼ê³ 
                 y -= two.Size * 2;
-                //¸®½ºÆ®¿¡ Ãß°¡
+                //ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 cardBoxes.Add(two);
                 break;
             case 3:
-                //µÎ°³Â¥¸® Ä«µåÆÑ ¹Ú½º¸¦ ¸¸µé°í
+                //ë‘ê°œì§œë¦¬ ì¹´ë“œíŒ© ë°•ìŠ¤ë¥¼ ë§Œë“¤ê³ 
                 CardBoxThree three = Instantiate(prefab3, contant);
-                //ÃÊ±âÈ­ (¹«½¼ Ä«µå¸¦ °¡Áö°í ÀÖ´ÂÁö, ´Ù½Ã »©±âÀ§ÇØ deckµµ ÂüÁ¶ÇØÁà¾ß ÇÔ)
+                //ì´ˆê¸°í™” (ë¬´ìŠ¨ ì¹´ë“œë¥¼ ê°€ì§€ê³  ìˆëŠ”ì§€, ë‹¤ì‹œ ë¹¼ê¸°ìœ„í•´ deckë„ ì°¸ì¡°í•´ì¤˜ì•¼ í•¨)
                 three.Init(pack.Cards[0], pack.Cards[1], pack.Cards[2], this);
-                //À§Ä¡ Á¶Á¤
+                //ìœ„ì¹˜ ì¡°ì •
                 three.transform.localPosition = new Vector3(0, y + contant.rect.yMax - three.Size, 0);
-                //Á¤·ÄÇØ¾ß ÇÏ´Â À§Ä¡ ´Ù½Ã ¸ÂÃçÁÖ°í
+                //ì •ë ¬í•´ì•¼ í•˜ëŠ” ìœ„ì¹˜ ë‹¤ì‹œ ë§ì¶°ì£¼ê³ 
                 y -= three.Size * 2;
-                //¸®½ºÆ®¿¡ Ãß°¡
+                //ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 cardBoxes.Add(three);
                 break;
             default:
                 break;
         }
 
-        //°ÔÀÓ ½ÃÀÛ °¡´ÉÇÑÁö Ã¼Å©
+        //ê²Œì„ ì‹œì‘ ê°€ëŠ¥í•œì§€ ì²´í¬
         StartCheck();
         return true;
     }
 
-    //Ä«µå¹Ú½º¸¦ deck¿¡¼­ »©³»±â
+    //ì¹´ë“œë°•ìŠ¤ë¥¼ deckì—ì„œ ë¹¼ë‚´ê¸°
     public void OutputCard(CardBox box)
     {
-        //¸î¹øÂ° ¸®½ºÆ®ÀÎÁö
+        //ëª‡ë²ˆì§¸ ë¦¬ìŠ¤íŠ¸ì¸ì§€
         int index = cardBoxes.IndexOf(box);
-        //¹Ú½ºÀÇ Å©±â¸¸Å­ ´Ù½Ã Á¤·ÄÀ» ¾îµğ¼­ ºÎÅÍ ÇØ¾ßÇÏ´ÂÁö¿¡ ´ëÇÑ ³ôÀÌ¸¦ Á¶ÀıÇÏ°í
+        //ë°•ìŠ¤ì˜ í¬ê¸°ë§Œí¼ ë‹¤ì‹œ ì •ë ¬ì„ ì–´ë””ì„œ ë¶€í„° í•´ì•¼í•˜ëŠ”ì§€ì— ëŒ€í•œ ë†’ì´ë¥¼ ì¡°ì ˆí•˜ê³ 
         y += box.Size * 2;
-        //¸®½ºÆ®¿¡¼­ »©ÁÖ°í
+        //ë¦¬ìŠ¤íŠ¸ì—ì„œ ë¹¼ì£¼ê³ 
         cardBoxes.RemoveAt(index);
-        //¹Ú½º »èÁ¦
+        //ë°•ìŠ¤ ì‚­ì œ
         Destroy(box.gameObject);
-        //¸®½ºÆ® ¾ÈÀÇ ºó°ø°£À» Ã¤¿ì°í ´Ù½Ã Á¤·Ä
+        //ë¦¬ìŠ¤íŠ¸ ì•ˆì˜ ë¹ˆê³µê°„ì„ ì±„ìš°ê³  ë‹¤ì‹œ ì •ë ¬
         for(int i = index; i < cardBoxes.Count; i++)
         {
             cardBoxes[i].transform.position += new Vector3(0, box.Size * 2, 0);
         }
-        //½ÃÀÛ °¡´ÉÇÑÁö Ã¼Å©
+        //ì‹œì‘ ê°€ëŠ¥í•œì§€ ì²´í¬
         StartCheck();
     }
 
-    //¸ğµç Ä«µåÆÑ »©±â
+    //ëª¨ë“  ì¹´ë“œíŒ© ë¹¼ê¸°
     public void InitDeck()
     {
         for (int i = 0; i < cardBoxes.Count; ++i)
@@ -105,13 +105,13 @@ public class Deck : MonoBehaviour
         }
     }
 
-    //½ÃÀÛ °¡´ÉÇÑÁö È®ÀÎ
+    //ì‹œì‘ ê°€ëŠ¥í•œì§€ í™•ì¸
     private void StartCheck()
     {
-        //¸ğµç Ä«µå¹Ú½º ¾ÈÀÇ Ä«µåµéÀÇ ¼ıÀÚ¸¦ ÇÕÃÄ¼­
+        //ëª¨ë“  ì¹´ë“œë°•ìŠ¤ ì•ˆì˜ ì¹´ë“œë“¤ì˜ ìˆ«ìë¥¼ í•©ì³ì„œ
         int sum = cardBoxes.Sum(x => x.Card.Length);
         count.text = sum + " / 10";
-        //10º¸´Ù ³ô°Å³ª °°À¸¸é °ÔÀÓ½ÃÀÛ °¡´É
+        //10ë³´ë‹¤ ë†’ê±°ë‚˜ ê°™ìœ¼ë©´ ê²Œì„ì‹œì‘ ê°€ëŠ¥
         if (sum >= 10)
         {
             startButton.SetActive(true);

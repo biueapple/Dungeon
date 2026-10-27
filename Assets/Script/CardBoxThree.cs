@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class CardBoxThree : CardBox
 {
-    //Ä«µåÀÇ ÀÌ¸§À» º¸¿©ÁÙ ÄÄÆ÷³ÍÆ®
+    //ì¹´ë“œì˜ ì´ë¦„ì„ ë³´ì—¬ì¤„ ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     private TextMeshProUGUI text1;
     [SerializeField]
@@ -13,19 +13,19 @@ public class CardBoxThree : CardBox
     [SerializeField]
     private TextMeshProUGUI text3;
 
-    //ÃÊ±âÈ­
+    //ì´ˆê¸°í™”
     public void Init(Card card1, Card card2, Card card3, Deck deck)
     {
-        //µÇµ¹¸±¶§ ¾µ deck
+        //ë˜ëŒë¦´ë•Œ ì“¸ deck
         this.deck = deck;
-        //¹Ú½ºÀÇ Å©±â
+        //ë°•ìŠ¤ì˜ í¬ê¸°
         size = 80;
-        //ÀúÀåÁßÀÎ Ä«µåµéÀÇ Á¤º¸
+        //ì €ì¥ì¤‘ì¸ ì¹´ë“œë“¤ì˜ ì •ë³´
         cards = new Card[3];
         cards[0] = card1;
         cards[1] = card2;
         cards[2] = card3;
-        //ÀÌ¸§ º¸¿©ÁÖ±â
+        //ì´ë¦„ ë³´ì—¬ì£¼ê¸°
         text1.text = card1.name;
         text2.text = card2.name;
         text3.text = card3.name;

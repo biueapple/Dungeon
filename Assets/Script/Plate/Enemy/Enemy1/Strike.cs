@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,36 +6,36 @@ public class Strike : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[1];
         keywords[0] = new Keyword(6, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ğÇè°¡µé¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ÀÇ ´ë¹ÌÁö¸¦ ÁØ´Ù.");
+            ("ëª¨í—˜ê°€ë“¤ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " ì˜ ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense(){}
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //´ë¹ÌÁö ¼³Á¤
+        //ëŒ€ë¯¸ì§€ ì„¤ì •
         float damage = keywords[0].Word;
-        //´ë¹ÌÁö°¡ 0ÀÌ¸é °ø°İÀ» ¼öÇàÇÑ°ÍÀÌ ¾Æ´Ô
+        //ëŒ€ë¯¸ì§€ê°€ 0ì´ë©´ ê³µê²©ì„ ìˆ˜í–‰í•œê²ƒì´ ì•„ë‹˜
         if (damage == 0)
             return;
 
         List<AttackInfo> list = new();
-        //³²¾ÆÀÖ´Â ÀûÀÇ ¼ö
+        //ë‚¨ì•„ìˆëŠ” ì ì˜ ìˆ˜
         switch (GameManager.Instance.Adventurer.Count)
         {
-            //°ø°İÀ» ¼öÇà
+            //ê³µê²©ì„ ìˆ˜í–‰
             case 1:
                 {
                     list.Add(new AttackInfo(GameManager.Instance.Adventurer[0], damage));
@@ -61,7 +61,7 @@ public class Strike : Plate
                 return;
         }
 
-        //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, list, SoundManager.Instance.Sword));
     }
 }

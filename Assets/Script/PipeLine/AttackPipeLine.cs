@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-//¸ğµç Ä³¸¯ÅÍµéÀÌ °ø°İÀ» ÁøÇàÇÏ´Â ´Ü°è
+//ëª¨ë“  ìºë¦­í„°ë“¤ì´ ê³µê²©ì„ ì§„í–‰í•˜ëŠ” ë‹¨ê³„
 public class AttackPipeLine : IPipeLine
 {
-    //´ÙÀ½ ´Ü°è
+    //ë‹¤ìŒ ë‹¨ê³„
     private IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
-    //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍµé
+    //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ë“¤
     private readonly List<PL_AttackNHit> fulfillment;
     public List<PL_AttackNHit> Fulfillment { get { return fulfillment; } }
 
@@ -23,10 +23,10 @@ public class AttackPipeLine : IPipeLine
 
     public void Start()
     {
-        //¸ğµç Ä³¸¯ÅÍµéÀÌ
+        //ëª¨ë“  ìºë¦­í„°ë“¤ì´
         List<Character> list = GameManager.Instance.Characters;
-        //°ø°İÀ» ¼öÇàÇÏÁö¸¸ ½ÇÁ¦·Î °ø°İÀ» ÇÏ´Â ¾Öµé¸¸ÀÌ characters¸®½ºÆ®¿¡ Ãß°¡µÊ
-        //°ø°İÀ» Á÷Á¢ ÇÏ´Â°Ô ¾Æ´Ï¶ó °ø°İ¿¡ ´ëÇÑ Á¤º¸¸¦ characters¸®½ºÆ®¿¡ Ãß°¡ÇÏ´Â°Í
+        //ê³µê²©ì„ ìˆ˜í–‰í•˜ì§€ë§Œ ì‹¤ì œë¡œ ê³µê²©ì„ í•˜ëŠ” ì• ë“¤ë§Œì´ charactersë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€ë¨
+        //ê³µê²©ì„ ì§ì ‘ í•˜ëŠ”ê²Œ ì•„ë‹ˆë¼ ê³µê²©ì— ëŒ€í•œ ì •ë³´ë¥¼ charactersë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•˜ëŠ”ê²ƒ
         for (int i = 0; i < list.Count; i++)
         {
             if (list[i].Plate != null)
@@ -43,24 +43,24 @@ public class AttackPipeLine : IPipeLine
     
     public void End()
     {
-        //°ø°İÀ» ¼öÇàÇÑ ¸®½ºÆ® ÃÊ±âÈ­
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         fulfillment.Clear();
     }
 
     private IEnumerator NextPipe()
     {
-        //ÆÄÀÌÇÁ¶óÀÎ Äİ¹é¸®½ºÆ®¿¡ µé¾îÀÖ´Â ¸ğµç Äİ¹éÀ» °ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¸¦ ³Ö¾î ½ÇÇà
+        //íŒŒì´í”„ë¼ì¸ ì½œë°±ë¦¬ìŠ¤íŠ¸ì— ë“¤ì–´ìˆëŠ” ëª¨ë“  ì½œë°±ì„ ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ë¥¼ ë„£ì–´ ì‹¤í–‰
 
-        //°ø°İ ÆÄÀÌÇÁ¶óÀÎ
-        //¶§¸®±â (¾Ö´Ï¸ŞÀÌ¼Ç)
+        //ê³µê²© íŒŒì´í”„ë¼ì¸
+        //ë•Œë¦¬ê¸° (ì• ë‹ˆë©”ì´ì…˜)
         fulfillment.ForEach(f => f.Perpetrator.AttackAnimation());
-        //°ø°İ ¼Ò¸®
+        //ê³µê²© ì†Œë¦¬
         fulfillment.Select(f => f.Clip).Distinct().ToList()
         .ForEach(clip => SoundManager.Instance.Play(clip));
-        //»çÀÌ ÅÒ 1ÃÊ (°ø°İ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àç»ıÇÒ ½Ã°£)
+        //ì‚¬ì´ í…€ 1ì´ˆ (ê³µê²© ì• ë‹ˆë©”ì´ì…˜ì„ ì¬ìƒí•  ì‹œê°„)
 
-        //Äİ¹é
-        //°ø°İÀ» ¼öÇàÇÑ ¸ğµç ÀÎ¿øÀº ÀÚ½ÅÀÇ Äİ¹éÀ» È£ÃâÇÑ´Ù
+        //ì½œë°±
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ëª¨ë“  ì¸ì›ì€ ìì‹ ì˜ ì½œë°±ì„ í˜¸ì¶œí•œë‹¤
         for (int f = fulfillment.Count - 1; f >= 0; f--)
         {
             for (int p = fulfillment[f].Perpetrator.PCB.Count - 1; p >= 0; p--)
@@ -71,14 +71,14 @@ public class AttackPipeLine : IPipeLine
         
 
         yield return new WaitForSeconds(0.5f);
-        //¸Â±â
+        //ë§ê¸°
         fulfillment.ForEach(f => f.SC());
         fulfillment.ForEach(f => f.HC());
 
-        //¸Â´Â ¼Ò¸® (¾øÀ½)
+        //ë§ëŠ” ì†Œë¦¬ (ì—†ìŒ)
 
-        //Äİ¹é
-        //°ø°İÀ» ¼öÇàÇÑ ¸ğµç ÀÎ¿øÁß¿¡ °ø°İÀ» ´çÇÑ ¸ğµç ÀÎ¿øÀº ÀÚ½ÅÀÇ Äİ¹éÀ» È£ÃâÇÑ´Ù
+        //ì½œë°±
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ëª¨ë“  ì¸ì›ì¤‘ì— ê³µê²©ì„ ë‹¹í•œ ëª¨ë“  ì¸ì›ì€ ìì‹ ì˜ ì½œë°±ì„ í˜¸ì¶œí•œë‹¤
         for (int f = fulfillment.Count - 1; f >= 0; f--)
         {
             for (int v = fulfillment[f].Victims.Count - 1; v >= 0; v--)
@@ -90,52 +90,52 @@ public class AttackPipeLine : IPipeLine
             }
         }
 
-        //1ÃÊÀÇ ÅÒÀ» ÁÜ ³ªÁß¿¡ Âª¾ÆÁú ¼ö ÀÖÀ½
+        //1ì´ˆì˜ í…€ì„ ì¤Œ ë‚˜ì¤‘ì— ì§§ì•„ì§ˆ ìˆ˜ ìˆìŒ
         yield return new WaitForSeconds(0.5f);
-        //´ÙÀ½ ´Ü°è·Î ÀÌµ¿
+        //ë‹¤ìŒ ë‹¨ê³„ë¡œ ì´ë™
         GameManager.Instance.PipeLine = next;
     }
 }
 
-//attack°ú hit Äİ¹éÀº ¾î¶² ÀÎÀÚ¸¦ ÇÊ¿ä·Î ÇÒ±î
-// °ø°İÇÒ¶§¸¶´Ù Ãß°¡ 1´ë¹ÌÁö
-// °ø°İÇÏ´Â°Ô ´©±¸ÀÎ°¡
-// °ø°İÀÌ ¸î´ë¹ÌÁöÀÎ°¡
-// °ø°İÀÌ ¸îÈ¸ÀÎ°¡
+//attackê³¼ hit ì½œë°±ì€ ì–´ë–¤ ì¸ìë¥¼ í•„ìš”ë¡œ í• ê¹Œ
+// ê³µê²©í• ë•Œë§ˆë‹¤ ì¶”ê°€ 1ëŒ€ë¯¸ì§€
+// ê³µê²©í•˜ëŠ”ê²Œ ëˆ„êµ¬ì¸ê°€
+// ê³µê²©ì´ ëª‡ëŒ€ë¯¸ì§€ì¸ê°€
+// ê³µê²©ì´ ëª‡íšŒì¸ê°€
 
-//°³ÀÎ¿¡°Ô Àû¿ëµÇ´Â È¿°ú¿Í ÀüÃ¼¿¡°Ô Àû¿ëµÇ´Â È¿°ú
-//µÎ°³´Ù Äİ¹éÀÌ ÇÊ¿äÇÏÁö¸¸ ÆÄÀÌÇÁ¶óÀÎ Äİ¹é¿¡°Ô´Â ÀüÃ¼°¡ ¾î¿ï¸®´Âµ¥
-//ÀÏ´Ü Äİ¹éÀ» È£ÃâÇÏ´Â°Ç ÆÄÀÌÇÁ¶óÀÎÀÌ ¾Ë¸ÂÀ¸´Ï °³ÀÎÀûÀÎ È¿°ú´Â °³ÀÎÀÌ µû·Î ÈŞ´ëÇÏÁö¸¸
-//È£ÃâÀº ÆÄÀÌÇÁ¶óÀÎÀÌ ÇÏ´Â°Ô ¸ÂÀ»µí
-//´ë¹ÌÁö ÆÄÀÌÇÁ¶óÀÎÀ» µû·Î ¸¸µé¾î¾ß ÇÒµí
-//´ë¹ÌÁö°¡ ¾î¶² °¡°ø°úÁ¤À» °ÅÄ¡´ÂÁö 
-
-
-//°ø°İ½Ã¿¡ ´ë¹ÌÁö°¡ ¾î¶»°Ô º¯ÇÏ´ÂÁö 
-//°ø°İ½Ã¿¡ ½¯µå¿¡ ´ë¹ÌÁö¸¦ ÁÖ´Â ´Ü°è
-//°ø°İ½Ã¿¡ Ã¼·Â¿¡ ´ë¹ÌÁö¸¦ ÁÖ´Â ´Ü°è
-
-//°ø°İ ¹ŞÀ» ½Ã¿¡ ´ë¹ÌÁö°¡ ¾î¶»°Ô º¯ÇÏ´ÂÁö
-//°ø°İ ¹ŞÀ» ½Ã¿¡ ½¯µå¿¡ ´ë¹ÌÁö¸¦ ¹Ş´Â ´Ü°è
-//°ø°İ ¹Ş¸¦ ½Ã¿¡ Ã¼·Â¿¡ ´ë¹ÌÁö¸¦ ¹Ş´Â ´Ü°è
+//ê°œì¸ì—ê²Œ ì ìš©ë˜ëŠ” íš¨ê³¼ì™€ ì „ì²´ì—ê²Œ ì ìš©ë˜ëŠ” íš¨ê³¼
+//ë‘ê°œë‹¤ ì½œë°±ì´ í•„ìš”í•˜ì§€ë§Œ íŒŒì´í”„ë¼ì¸ ì½œë°±ì—ê²ŒëŠ” ì „ì²´ê°€ ì–´ìš¸ë¦¬ëŠ”ë°
+//ì¼ë‹¨ ì½œë°±ì„ í˜¸ì¶œí•˜ëŠ”ê±´ íŒŒì´í”„ë¼ì¸ì´ ì•Œë§ìœ¼ë‹ˆ ê°œì¸ì ì¸ íš¨ê³¼ëŠ” ê°œì¸ì´ ë”°ë¡œ íœ´ëŒ€í•˜ì§€ë§Œ
+//í˜¸ì¶œì€ íŒŒì´í”„ë¼ì¸ì´ í•˜ëŠ”ê²Œ ë§ì„ë“¯
+//ëŒ€ë¯¸ì§€ íŒŒì´í”„ë¼ì¸ì„ ë”°ë¡œ ë§Œë“¤ì–´ì•¼ í• ë“¯
+//ëŒ€ë¯¸ì§€ê°€ ì–´ë–¤ ê°€ê³µê³¼ì •ì„ ê±°ì¹˜ëŠ”ì§€ 
 
 
-//hit before -> attack before -> attack after -> hit after ¼øÀÌ°Ú´Ù
-//±×·¸´Ù¸é ÆÄÀÌÇÁ¶óÀÎµµ 4°³·Î ³ª´²Á® ÀÖ¾î¾ß ÇÏ°ÚÁö
-//1 ¸Â±â Àü ÇÇÇØÀÚ º¯È­´Ü°è
-//2 ¶§¸®±â Àü °¡ÇØÀÚ º¯È­´Ü°è
-//´ë¹ÌÁö Ã³¸® 2´Ü°è º¸È£¸·, Ã¼·Â
-//3 ¶§¸° ÈÄ °¡ÇØÀÚ º¯È­´Ü°è
-//4 ¸ÂÀº ÈÄ ÇÇÇØÀÚ º¯È­´Ü°è
-//ÃÑ 6°³ÀÇ ±âº» ÆÄÀÌÇÁ¶óÀÎÀÌ ÇÊ¿äÇÔ ±×Áß 4°³´Â null °¡´É
+//ê³µê²©ì‹œì— ëŒ€ë¯¸ì§€ê°€ ì–´ë–»ê²Œ ë³€í•˜ëŠ”ì§€ 
+//ê³µê²©ì‹œì— ì‰´ë“œì— ëŒ€ë¯¸ì§€ë¥¼ ì£¼ëŠ” ë‹¨ê³„
+//ê³µê²©ì‹œì— ì²´ë ¥ì— ëŒ€ë¯¸ì§€ë¥¼ ì£¼ëŠ” ë‹¨ê³„
 
-//±× ÆÄÀÌÇÁ¶óÀÎÀ» Åë°úÇÒ µ¥ÀÌÅÍ
+//ê³µê²© ë°›ì„ ì‹œì— ëŒ€ë¯¸ì§€ê°€ ì–´ë–»ê²Œ ë³€í•˜ëŠ”ì§€
+//ê³µê²© ë°›ì„ ì‹œì— ì‰´ë“œì— ëŒ€ë¯¸ì§€ë¥¼ ë°›ëŠ” ë‹¨ê³„
+//ê³µê²© ë°›ë¥¼ ì‹œì— ì²´ë ¥ì— ëŒ€ë¯¸ì§€ë¥¼ ë°›ëŠ” ë‹¨ê³„
+
+
+//hit before -> attack before -> attack after -> hit after ìˆœì´ê² ë‹¤
+//ê·¸ë ‡ë‹¤ë©´ íŒŒì´í”„ë¼ì¸ë„ 4ê°œë¡œ ë‚˜ëˆ ì ¸ ìˆì–´ì•¼ í•˜ê² ì§€
+//1 ë§ê¸° ì „ í”¼í•´ì ë³€í™”ë‹¨ê³„
+//2 ë•Œë¦¬ê¸° ì „ ê°€í•´ì ë³€í™”ë‹¨ê³„
+//ëŒ€ë¯¸ì§€ ì²˜ë¦¬ 2ë‹¨ê³„ ë³´í˜¸ë§‰, ì²´ë ¥
+//3 ë•Œë¦° í›„ ê°€í•´ì ë³€í™”ë‹¨ê³„
+//4 ë§ì€ í›„ í”¼í•´ì ë³€í™”ë‹¨ê³„
+//ì´ 6ê°œì˜ ê¸°ë³¸ íŒŒì´í”„ë¼ì¸ì´ í•„ìš”í•¨ ê·¸ì¤‘ 4ê°œëŠ” null ê°€ëŠ¥
+
+//ê·¸ íŒŒì´í”„ë¼ì¸ì„ í†µê³¼í•  ë°ì´í„°
 public class PL_AttackNHit
 {
-    //´©°¡ °ø°İÇÏ´ÂÁö
+    //ëˆ„ê°€ ê³µê²©í•˜ëŠ”ì§€
     private readonly Character perpetrator;
     public Character Perpetrator { get { return perpetrator; } }
-    //´©°¡ °ø°İ ´çÇÏ´ÂÁö
+    //ëˆ„ê°€ ê³µê²© ë‹¹í•˜ëŠ”ì§€
     private readonly List<AttackInfo> victims;
     public List<AttackInfo> Victims { get { return victims; } }
 
@@ -172,19 +172,19 @@ public class AttackInfo
     private Character victim;
     public Character Victim { get { return victim; } set { victim = value; } }
 
-    //´ë¹ÌÁö
+    //ëŒ€ë¯¸ì§€
     private float damage;
     public float Damage { get { return damage; } set { damage = value; } }
 
-    //º¸È£¸·À¸·Î ¸·Àº ¼öÄ¡
+    //ë³´í˜¸ë§‰ìœ¼ë¡œ ë§‰ì€ ìˆ˜ì¹˜
     private float defence;
     public float Defence { get { return defence; } set { defence = value; } }
 
-    //³²Àº º¸È£¸· ¼öÄ¡
+    //ë‚¨ì€ ë³´í˜¸ë§‰ ìˆ˜ì¹˜
     private float shield;
     public float Shield { get { return shield; } set { shield = value; } }
 
-    //º¸È£¸·À» °üÅëÇÑ ¼öÄ¡
+    //ë³´í˜¸ë§‰ì„ ê´€í†µí•œ ìˆ˜ì¹˜
     private float through;
     public float Through { get { return through; } set { through = value; } }
 
@@ -222,7 +222,7 @@ public interface IHPChange
 //    public void HitAfter(AttackInfo pL_AttackNHit);
 //}
 
-//±âº» ÆÄÀÌÇÁ¶óÀÎ 2°³
+//ê¸°ë³¸ íŒŒì´í”„ë¼ì¸ 2ê°œ
 public class DefaultShieldChange : IShieldChange
 {
     public void ShieldChange(AttackInfo attackInfo)
@@ -250,7 +250,7 @@ public class DefaultHPChange : IHPChange
     }
 }
 
-//º¸È£¸·¿¡°Ô Àı¹İÀÇ ´ë¹ÌÁö¸¦ ÁÖ±â
+//ë³´í˜¸ë§‰ì—ê²Œ ì ˆë°˜ì˜ ëŒ€ë¯¸ì§€ë¥¼ ì£¼ê¸°
 public class ShieldHalfChange : IShieldChange
 {
     public void ShieldChange(AttackInfo attackInfo)

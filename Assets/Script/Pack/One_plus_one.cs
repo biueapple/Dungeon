@@ -1,5 +1,5 @@
-
-//plus one Ä«µå¿Í minus one Ä«µå¸¦ ÇÏ³ª¾¿ °¡Áö°í ÀÖ´Â Ä«µåÆÑ
+ï»¿
+//plus one ì¹´ë“œì™€ minus one ì¹´ë“œë¥¼ í•˜ë‚˜ì”© ê°€ì§€ê³  ìžˆëŠ” ì¹´ë“œíŒ©
 public class One_plus_one : CardPack
 {
     new void Start()

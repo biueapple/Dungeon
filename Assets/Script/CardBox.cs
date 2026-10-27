@@ -1,22 +1,22 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CardBox : MonoBehaviour , IPointerDownHandler
 {
-    //¸ö¼Ó¿¡ °¡Áö°í ÀÖ´Â Ä«µåµé
+    //ëª¸ì†ì— ê°€ì§€ê³  ìˆëŠ” ì¹´ë“œë“¤
     protected Card[] cards;
     public Card[] Card { get { return cards; } }
-    //»èÁ¦ÇÒ¶§ ¾²·Á°í
+    //ì‚­ì œí• ë•Œ ì“°ë ¤ê³ 
     protected Deck deck;
 
-    //¹Ú½ºÀÇ Å©±â (Á¤·ÄÇÒ¶§ »ç¿ëÇÔ)
+    //ë°•ìŠ¤ì˜ í¬ê¸° (ì •ë ¬í• ë•Œ ì‚¬ìš©í•¨)
     protected float size;
     public float Size { get => size; }
     public void OnPointerDown(PointerEventData eventData)
     {
-        //¿ìÅ¬¸¯ÇÏ¸é deck¿¡¼­ »©¼­ »èÁ¦ÇÔ
+        //ìš°í´ë¦­í•˜ë©´ deckì—ì„œ ë¹¼ì„œ ì‚­ì œí•¨
         if(eventData.button == PointerEventData.InputButton.Right)
         {
             deck.OutputCard(this);

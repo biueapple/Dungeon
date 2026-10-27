@@ -1,6 +1,6 @@
+ï»¿
 
-
-//·º¸¯¿¡ ´ëÇÑ ¼³¸í¸¸ ÇØÁÖ¸é ³¡
+//ë ‰ë¦­ì— ëŒ€í•œ ì„¤ëª…ë§Œ í•´ì£¼ë©´ ë
 public class RelicBag : IRelicState
 {
     private readonly IInstruction instruction;

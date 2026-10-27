@@ -1,41 +1,41 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface IPCBG
 {
-    //ÅÏ½ÃÀÛ
+    //í„´ì‹œì‘
     public void TurnStart();
-    //»õ ÆÇÀ¸·Î ±³Ã¼ÇÑ ÈÄ create
+    //ìƒˆ íŒìœ¼ë¡œ êµì²´í•œ í›„ create
     public void Create();
-    //ÆÇºÎ¼ÅÁø ÈÄ broken
+    //íŒë¶€ì…”ì§„ í›„ broken
     public void Broken();
-    //¼öºñÇÏ±âÀü defence
+    //ìˆ˜ë¹„í•˜ê¸°ì „ defence
     public void Defence(PL_ShieldNHeal pl);
-    //°ø°İÇÏ±âÀü attack
+    //ê³µê²©í•˜ê¸°ì „ attack
     public void Attack(PL_AttackNHit pl);
-    //°ø°İÇÑ ÈÄ attack
+    //ê³µê²©í•œ í›„ attack
     public void Hit(PL_AttackNHit pl);
-    //ÃÊ±âÈ­ÇÑ ÈÄ function
+    //ì´ˆê¸°í™”í•œ í›„ function
     public void Function();
-    //µå·Î¿ì ÇÑ ÈÄ
+    //ë“œë¡œìš° í•œ í›„
     public void Draw();
-    //ÅÏÁ¾·á
+    //í„´ì¢…ë£Œ
     public void TurnEnd();
 }
 
 public interface IPCBC
 {
-    //»õ ÆÇÀ¸·Î ±³Ã¼ÇÑ ÈÄ create
+    //ìƒˆ íŒìœ¼ë¡œ êµì²´í•œ í›„ create
     public void Create();
-    //ÆÇºÎ¼ÅÁø ÈÄ broken
+    //íŒë¶€ì…”ì§„ í›„ broken
     public void Broken();
-    //¼öºñÇÏ±âÀü defence
+    //ìˆ˜ë¹„í•˜ê¸°ì „ defence
     public void Defence(PL_ShieldNHeal pl);
-    //°ø°İÇÏ±âÀü attack
+    //ê³µê²©í•˜ê¸°ì „ attack
     public void Attack(PL_AttackNHit pl);
-    //°ø°İÇÑ ÈÄ attack
+    //ê³µê²©í•œ í›„ attack
     public void Hit(PL_AttackNHit pl);
-    //ÃÊ±âÈ­ÇÑ ÈÄ function
+    //ì´ˆê¸°í™”í•œ í›„ function
     public void Function();
 }

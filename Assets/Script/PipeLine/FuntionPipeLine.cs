@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//±â´É´Ü°è¸¦ ´ç´ã
+//ê¸°ëŠ¥ë‹¨ê³„ë¥¼ ë‹¹ë‹´
 public class FuntionPipeLine : IPipeLine
 {
-    //´ÙÀ½´Ü°è
+    //ë‹¤ìŒë‹¨ê³„
     private IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
-    //ÀÌ ´Ü°è¸¦ ¼öÇàÇÑ ¸ğµç Ä³¸¯ÅÍµé
+    //ì´ ë‹¨ê³„ë¥¼ ìˆ˜í–‰í•œ ëª¨ë“  ìºë¦­í„°ë“¤
     private readonly List<Character> characters;
     public List<Character> Characters { get { return characters; } }
 
@@ -20,7 +20,7 @@ public class FuntionPipeLine : IPipeLine
 
     public void Start()
     {
-        //±â´ÉÀ» ¼öÇàÇÑ ¾ÖµéÀº ¸®½ºÆ®¿¡ Ãß°¡
+        //ê¸°ëŠ¥ì„ ìˆ˜í–‰í•œ ì• ë“¤ì€ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
         List<Character> list = GameManager.Instance.Characters;
         for (int i = 0; i < list.Count; i++)
         {
@@ -37,7 +37,7 @@ public class FuntionPipeLine : IPipeLine
 
     public void End()
     {
-        //Äİ¹é È£Ãâ
+        //ì½œë°± í˜¸ì¶œ
         for (int i = 0; i < characters.Count; i++)
         {
             for (int p = characters[i].PCB.Count - 1; p >= 0; p--)
@@ -50,7 +50,7 @@ public class FuntionPipeLine : IPipeLine
 
     private IEnumerator Wait()
     {
-        //1ÃÊÀÇ ÅÒÀ»µÎ°í ´ÙÀ½ ´Ü°è·Î
+        //1ì´ˆì˜ í…€ì„ë‘ê³  ë‹¤ìŒ ë‹¨ê³„ë¡œ
         yield return new WaitForSeconds(0.1f);
         GameManager.Instance.PipeLine = next;
     }

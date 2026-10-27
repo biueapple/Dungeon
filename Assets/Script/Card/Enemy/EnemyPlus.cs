@@ -1,20 +1,20 @@
-
+ï»¿
 public class EnemyPlus : Card
 {
     private void Start()
     {
         value = 1;
         friendly = false;
-        Description = "¸ó½ºÅÍÀÇ ¼öÄ¡ ÇÏ³ª¸¦ 1 Áõ°¡½ÃÅ²´Ù.";
+        Description = "ëª¬ìŠ¤í„°ì˜ ìˆ˜ì¹˜ í•˜ë‚˜ë¥¼ 1 ì¦ê°€ì‹œí‚¨ë‹¤.";
     }
 
     public override void UpPlate(Plate plate)
     {
-        //Ãß°¡
+        //ì¶”ê°€
         if (plate.InputKeyword(this))
         {
             GameManager.Instance.Hand.RemoveCard(this);
-            //¼º°øÇß´Ù¸é state¸¦ º¯°æÇØ¾ß ÇÔ
+            //ì„±ê³µí–ˆë‹¤ë©´ stateë¥¼ ë³€ê²½í•´ì•¼ í•¨
             State = new PlateInState_Card(this, plate, GameManager.Instance.Hand);
             Zoom.Insatnce.Active = true;
             return;

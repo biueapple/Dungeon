@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class IndividualBroken
         GameManager.Instance.StartCoroutine(PlateBroken(character));
     }
 
-    //plateÀÇ ³»¿ë¹°À» ÀüºÎ ¼ÕÆĞ·Î µÇµ¹·ÁÁà¾ß ÇÔ
+    //plateì˜ ë‚´ìš©ë¬¼ì„ ì „ë¶€ ì†íŒ¨ë¡œ ë˜ëŒë ¤ì¤˜ì•¼ í•¨
     public IEnumerator PlateBroken(Character character)
     {
         Plate plate = character.Plate;
@@ -20,9 +20,9 @@ public class IndividualBroken
                 plate.Keyword[i].Space[j].UpEmpty();
         }
         
-        //Ä³¸¯ÅÍ°¡ ÇÃ·¹ÀÌÆ®¸¦ ºÎ½Ã´Â°É ¿Ï·áÇÏ¸é 
+        //ìºë¦­í„°ê°€ í”Œë ˆì´íŠ¸ë¥¼ ë¶€ì‹œëŠ”ê±¸ ì™„ë£Œí•˜ë©´ 
         yield return GameManager.Instance.StartCoroutine(character.BrokenC());
-        //ÇÃ·¹ÀÌÆ®¿¡ µé¾îÀÖ´ø Ä«µåµé È¿°ú ÃÊ±âÈ­ ÈÄ ÅØ½ºÆÃ
+        //í”Œë ˆì´íŠ¸ì— ë“¤ì–´ìˆë˜ ì¹´ë“œë“¤ íš¨ê³¼ ì´ˆê¸°í™” í›„ í…ìŠ¤íŒ…
         if (plate != null)
         {
             plate.KeywordInit();

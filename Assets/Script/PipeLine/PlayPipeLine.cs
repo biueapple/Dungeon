@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayPipeLine : IPipeLine
 {
-    //´ÙÀ½ ÁøÇàµÉ ÆÄÀÌÇÁ¶óÀÎ
+    //ë‹¤ìŒ ì§„í–‰ë  íŒŒì´í”„ë¼ì¸
     private IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
 
@@ -20,7 +20,7 @@ public class PlayPipeLine : IPipeLine
 
     public void Start()
     {
-        //ÅÏ ½ÃÀÛ ÄÝ¹é
+        //í„´ ì‹œìž‘ ì½œë°±
         for (int i = GameManager.Instance.PCB.Count - 1; i >= 0; i--)
         {
             GameManager.Instance.PCB[i].TurnStart();
@@ -29,7 +29,7 @@ public class PlayPipeLine : IPipeLine
 
     public void Update() 
     {
-        //¸¸¾à ¸ðÇè°¡ÀÇ ³²¾ÆÀÖ´Â ÇÃ·¹ÀÌÆ®°¡ ¾ø´Ù¸é ÀÚµ¿À¸·Î ¸ðµç ¼ÕÆÐ¸¦ ¹ö¸®°í ´ÙÀ½ ´Ü°è·Î
+        //ë§Œì•½ ëª¨í—˜ê°€ì˜ ë‚¨ì•„ìžˆëŠ” í”Œë ˆì´íŠ¸ê°€ ì—†ë‹¤ë©´ ìžë™ìœ¼ë¡œ ëª¨ë“  ì†íŒ¨ë¥¼ ë²„ë¦¬ê³  ë‹¤ìŒ ë‹¨ê³„ë¡œ
         if (NonePlate())
         {
             for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
@@ -39,7 +39,7 @@ public class PlayPipeLine : IPipeLine
             }
             TurnEndButtonPush();
         }
-        //¸¸¾à ¸ðÇè°¡ÀÇ ¸ðµç ÇÃ·¹ÀÌÆ®ÀÇ ¸ðµç Å°¿öµå°¡ 0ÀÌ¸é¼­ ¼ÕÆÐ¿¡ minus¹Û¿¡ ¾ø´Ù¸é ´ÙÀ½ ´Ü°è·Î
+        //ë§Œì•½ ëª¨í—˜ê°€ì˜ ëª¨ë“  í”Œë ˆì´íŠ¸ì˜ ëª¨ë“  í‚¤ì›Œë“œê°€ 0ì´ë©´ì„œ ì†íŒ¨ì— minusë°–ì— ì—†ë‹¤ë©´ ë‹¤ìŒ ë‹¨ê³„ë¡œ
         if (PlateZero() && MinusHand())
         {
             for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
@@ -53,7 +53,7 @@ public class PlayPipeLine : IPipeLine
 
     public void End()
     {
-        //ÅÏ ³¡ ÄÝ¹é
+        //í„´ ë ì½œë°±
         for (int i = GameManager.Instance.PCB.Count - 1; i >= 0; i--)
         {
             GameManager.Instance.PCB[i].TurnEnd();
@@ -76,7 +76,7 @@ public class PlayPipeLine : IPipeLine
         {
             if (GameManager.Instance.Adventurer[i].Plate != null)
             {
-                for(int p = 0; i < GameManager.Instance.Adventurer[i].Plate.Keyword.Length; p++)
+                for(int p = 0; p < GameManager.Instance.Adventurer[i].Plate.Keyword.Length; p++)
                 {
                     if (GameManager.Instance.Adventurer[i].Plate.Keyword[p].Word != 0)
                         return false;

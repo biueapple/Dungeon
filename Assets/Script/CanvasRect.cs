@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//¾î¶°ÇÑ ui°¡ Äµ¹ö½ºÀÇ ¹üÀ§¸¦ ³Ñ¾î°¬´ÂÁö ÆÇ´ÜÇÏ°í ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸®´Â ¿ªÇÒ
+//ì–´ë– í•œ uiê°€ ìº”ë²„ìŠ¤ì˜ ë²”ìœ„ë¥¼ ë„˜ì–´ê°”ëŠ”ì§€ íŒë‹¨í•˜ê³  ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¬ëŠ” ì—­í• 
 public class CanvasRect : MonoBehaviour
 {
-    //Äµ¹ö½ºÀÇ Å©±â
+    //ìº”ë²„ìŠ¤ì˜ í¬ê¸°
     Rect rect;
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,10 @@ public class CanvasRect : MonoBehaviour
         rect.height = Screen.height;
     }
 
-    //ÀÔ·ÂÇÑ recttransfromÀÌ Äµ¹ö½ºÀÇ ¹üÀ§¸¦ ³Ñ¾î¼¹´Ù¸é ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸²
+    //ì…ë ¥í•œ recttransfromì´ ìº”ë²„ìŠ¤ì˜ ë²”ìœ„ë¥¼ ë„˜ì–´ì„°ë‹¤ë©´ ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¼
     public void InSide(RectTransform rectTransform)
     {
-        //rectTransform¸¦ rect¾ÈÀ¸·Î ¿Å±â±â
+        //rectTransformë¥¼ rectì•ˆìœ¼ë¡œ ì˜®ê¸°ê¸°
         if (rectTransform.position.x + rectTransform.rect.xMin * rectTransform.localScale.x < rect.xMin)
         {
             rectTransform.position += new Vector3(-(rectTransform.position.x + rectTransform.rect.xMin * rectTransform.localScale.x), 0, 0);
@@ -35,10 +35,10 @@ public class CanvasRect : MonoBehaviour
             rectTransform.position += new Vector3(0, -(rectTransform.position.y + rectTransform.rect.yMax * rectTransform.localScale.y - rect.height), 0);
         }
     }
-    //ÀÔ·ÂÇÑ recttransfromÀÌ Äµ¹ö½ºÀÇ ¹üÀ§¸¦ ³Ñ¾î¼¹´Ù¸é ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸²
+    //ì…ë ¥í•œ recttransfromì´ ìº”ë²„ìŠ¤ì˜ ë²”ìœ„ë¥¼ ë„˜ì–´ì„°ë‹¤ë©´ ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¼
     public void InSideChild(RectTransform rectTransform, RectTransform child)
     {
-        //rectTransform¸¦ rect¾ÈÀ¸·Î ¿Å±â±â
+        //rectTransformë¥¼ rectì•ˆìœ¼ë¡œ ì˜®ê¸°ê¸°
         if (child.position.x + child.rect.xMin * child.localScale.x < rect.xMin)
         {
             rectTransform.position += new Vector3(-(child.position.x + child.rect.xMin * child.localScale.x), 0, 0);

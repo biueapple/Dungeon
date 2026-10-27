@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Ä«µå¸¦ »Ì´Â ´Ü°è
+//ì¹´ë“œë¥¼ ë½‘ëŠ” ë‹¨ê³„
 public class DrawPipeLine : IPipeLine
 {
-    //´ÙÀ½ ÁøÇàµÉ ÆÄÀÌÇÁ¶óÀÎ
+    //ë‹¤ìŒ ì§„í–‰ë  íŒŒì´í”„ë¼ì¸
     private  IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
-    //µ¦
+    //ë±
     private readonly Dummy dummy;
-    //¸îÀåÀ» »ÌÀ»°ÇÁö
+    //ëª‡ì¥ì„ ë½‘ì„ê±´ì§€
     private int count;
     public int Count { get { return count; } set { count = value; } }
 
@@ -23,7 +23,7 @@ public class DrawPipeLine : IPipeLine
 
     public void Start()
     {
-        //µå·Î¿ì ½ÃÀÛ
+        //ë“œë¡œìš° ì‹œì‘
         GameManager.Instance.StartCoroutine(Draw(count));
     }
 
@@ -31,19 +31,19 @@ public class DrawPipeLine : IPipeLine
 
     private IEnumerator Draw(int count)
     {
-        //È½¼ö¸¸Å­
+        //íšŸìˆ˜ë§Œí¼
         for(int i = 0; i < count; i++)
         {
-            //µå·Î¿ì¸¦ ÇÒ¶§ ÇÑÀåÇÑÀå ¿Ï·áµÈ ÈÄ¿¡ ÀÛµ¿ÇÏµµ·Ï
+            //ë“œë¡œìš°ë¥¼ í• ë•Œ í•œì¥í•œì¥ ì™„ë£Œëœ í›„ì— ì‘ë™í•˜ë„ë¡
             yield return dummy.Draw();
         }
-        //´ÙÀ½´Ü°è·Î
+        //ë‹¤ìŒë‹¨ê³„ë¡œ
         GameManager.Instance.PipeLine = next;
     }
 
     public void End()
     {
-        //draw´Ü°è Äİ¹é È£Ãâ (µå·Î¿ì´Â Ä³¸¯ÅÍ¿Í´Â »ó°ü¾øÀ½ )
+        //drawë‹¨ê³„ ì½œë°± í˜¸ì¶œ (ë“œë¡œìš°ëŠ” ìºë¦­í„°ì™€ëŠ” ìƒê´€ì—†ìŒ )
         for (int i = GameManager.Instance.PCB.Count - 1; i >= 0; i--)
         {
             GameManager.Instance.PCB[i].Draw();

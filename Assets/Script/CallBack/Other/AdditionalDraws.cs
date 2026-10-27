@@ -1,7 +1,7 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
-//Ãß°¡ÀûÀ¸·Î µå·Î¿ì¸¦ ÇÏ´Â Äİ¹é
+//ì¶”ê°€ì ìœ¼ë¡œ ë“œë¡œìš°ë¥¼ í•˜ëŠ” ì½œë°±
 public class AdditionalDraws : IPCBG
 {
     public void Attack(PL_AttackNHit pl) { }
@@ -14,7 +14,7 @@ public class AdditionalDraws : IPCBG
     public void TurnEnd() { }
     public void TurnStart()
     {
-        //µå·Î¿ì ´Ü°è¸¦ Ã£¾Æ È½¼ö¸¦ ´Ã¸²
+        //ë“œë¡œìš° ë‹¨ê³„ë¥¼ ì°¾ì•„ íšŸìˆ˜ë¥¼ ëŠ˜ë¦¼
         DrawPipeLine pipeLine = GameManager.Instance.CyclePipeLine.Draw;
         
         if (pipeLine != null)
@@ -22,7 +22,7 @@ public class AdditionalDraws : IPCBG
             pipeLine.Count++;
         }
 
-        //Äİ¹é »èÁ¦
+        //ì½œë°± ì‚­ì œ
         GameManager.Instance.PCB.Remove(this);
     }
 }

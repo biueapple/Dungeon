@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +11,7 @@ public class SoundSetting : MonoBehaviour
     [SerializeField]
     private AudioMixer audioMixer;
 
-    //»ç¿îµå
+    //ì‚¬ìš´ë“œ
     [SerializeField]
     private Slider master;
     [SerializeField]

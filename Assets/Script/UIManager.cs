@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
                 Transform can = FindObjectOfType<Canvas>().transform;
                 if (can == null)
                 {
-                    Debug.Log("Äµ¹ö½º°¡ ¾øÀ½");
+                    Debug.Log("ìº”ë²„ìŠ¤ê°€ ì—†ìŒ");
                     return null;
                 }
                 else

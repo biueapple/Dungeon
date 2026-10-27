@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,50 +6,50 @@ public class Counter_Attack : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[1];
         keywords[0] = new Keyword(8, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("ÀÚ½Å¿¡°Ô º¸È£¸·À» <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " È¹µæÇÏ¸ç ¼öºñ ÈÄ ³²Àº º¸È£¸·¸¸Å­ ¸ó½ºÅÍµé¿¡°Ô ÇÇÇØ¸¦ ÀÔÈù´Ù.");
+            ("ìì‹ ì—ê²Œ ë³´í˜¸ë§‰ì„ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " íšë“í•˜ë©° ìˆ˜ë¹„ í›„ ë‚¨ì€ ë³´í˜¸ë§‰ë§Œí¼ ëª¬ìŠ¤í„°ë“¤ì—ê²Œ í”¼í•´ë¥¼ ì…íŒë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense()
     {
-        //º¸È£¸· È¹µæ
-        //¸¸¾à ¾ò´Â ¹æ¾î·ÂÀÌ 0ÀÌ¶ó¸é ¹æ¾î¸¦ ¼öÇàÇÑ°ÍÀÌ ¾Æ´Ô
+        //ë³´í˜¸ë§‰ íšë“
+        //ë§Œì•½ ì–»ëŠ” ë°©ì–´ë ¥ì´ 0ì´ë¼ë©´ ë°©ì–´ë¥¼ ìˆ˜í–‰í•œê²ƒì´ ì•„ë‹˜
         if (keywords[0].Word == 0)
             return;
         List<DefenceInfo> defenceInfos = new ()
         {
             new DefenceInfo(self, 0, keywords[0].Word)
         };
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Defence.Fulfillment.Add(new PL_ShieldNHeal(self, defenceInfos, null));
     }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //´ë¹ÌÁö ¼³Á¤
+        //ëŒ€ë¯¸ì§€ ì„¤ì •
         float damage = self.Shield;
-        //´ë¹ÌÁö°¡ 0ÀÌ¸é °ø°İÀ» ¼öÇàÇÑ°ÍÀÌ ¾Æ´Ô
+        //ëŒ€ë¯¸ì§€ê°€ 0ì´ë©´ ê³µê²©ì„ ìˆ˜í–‰í•œê²ƒì´ ì•„ë‹˜
         if (damage == 0)
             return;
 
         List<AttackInfo> list = new();
 
-        //³²¾ÆÀÖ´Â ÀûÀÇ ¼ö
+        //ë‚¨ì•„ìˆëŠ” ì ì˜ ìˆ˜
         switch (GameManager.Instance.Enemys.Count)
         {
-            //°ø°İÀ» ¼öÇà
+            //ê³µê²©ì„ ìˆ˜í–‰
             case 1:
                 {
                     list.Add(new AttackInfo(GameManager.Instance.Enemys[0], damage));
@@ -74,7 +74,7 @@ public class Counter_Attack : Plate
             default:
                 return;
         }
-        //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, list, SoundManager.Instance.Sword));
     }
 }

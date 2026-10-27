@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-    //¾Ö´Ï¸ŞÀÌ¼Ç
+    //ì• ë‹ˆë©”ì´ì…˜
     [SerializeField]
     protected PlayAnimation animator;
-    //ÀÚ½Å¸¸ÀÇ ÇÃ·¹ÀÌÆ®¸¦ 3°³Á¤µµ °¡Á®¾ß ÇÔ
+    //ìì‹ ë§Œì˜ í”Œë ˆì´íŠ¸ë¥¼ 3ê°œì •ë„ ê°€ì ¸ì•¼ í•¨
     [SerializeField]
     protected Plate[] plates;
     public Plate[] Plates { get { return plates; } }
-    //Áö±İ »ç¿ëÁßÀÎ ÇÃ·¹ÀÌÆ®
+    //ì§€ê¸ˆ ì‚¬ìš©ì¤‘ì¸ í”Œë ˆì´íŠ¸
     protected Plate plate;
     public Plate Plate { get { return plate; } }
-    //»ç¿ëÁßÀÎ ÇÃ·¹ÀÌÆ®°¡ ÃÖÁ¾ÀûÀ¸·Î ¾î´À localposition¿¡ µµÂøÇØ¾ß ÇÏ´ÂÁö (¸ğµç Ä³¸¯ÅÍµéÀÌ ÅëÀÏµÇÀÖÁö ¾Ê¾Æ À§Ä¡°¡ Á¦°¢°¢ÀÓ)
+    //ì‚¬ìš©ì¤‘ì¸ í”Œë ˆì´íŠ¸ê°€ ìµœì¢…ì ìœ¼ë¡œ ì–´ëŠ localpositionì— ë„ì°©í•´ì•¼ í•˜ëŠ”ì§€ (ëª¨ë“  ìºë¦­í„°ë“¤ì´ í†µì¼ë˜ìˆì§€ ì•Šì•„ ìœ„ì¹˜ê°€ ì œê°ê°ì„)
     [SerializeField]
     protected Vector3 platePosition;
     public Vector3 PlatePosition { get {  return platePosition; } }
@@ -25,11 +25,11 @@ public class Character : MonoBehaviour
     private Sorting statusEffect;
     public Sorting StatusEffect { get { return statusEffect; } }
 
-    //hp¸¦ Ç¥½ÃÇÒ ui
+    //hpë¥¼ í‘œì‹œí•  ui
     [SerializeField]
     protected Image hpImage;
 
-    //³²Àº Ã¼·Â
+    //ë‚¨ì€ ì²´ë ¥
     [SerializeField]
     protected float hp;
     public float HP 
@@ -46,7 +46,7 @@ public class Character : MonoBehaviour
             }
             else if(value > hp)
             {
-                //È¸º¹
+                //íšŒë³µ
                 DamageView.Instance.View(this, Color.green, value - hp);
             }
             hp = value;
@@ -54,12 +54,12 @@ public class Character : MonoBehaviour
         }
     }
 
-    //ÃÖ´ë Ã¼·Â
+    //ìµœëŒ€ ì²´ë ¥
     [SerializeField]
     protected float hpMax;
     public float HPMax { get { return hpMax; } }
 
-    //³²Àº º¸È£¸·
+    //ë‚¨ì€ ë³´í˜¸ë§‰
     [SerializeField]
     private float shield;
     public float Shield 
@@ -75,12 +75,12 @@ public class Character : MonoBehaviour
             shield = value; 
         }
     }
-    //¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àç»ıÇÏÁö ¾Ê´Â ½¯µå ÃÊ±âÈ­
+    //ì• ë‹ˆë©”ì´ì…˜ì„ ì¬ìƒí•˜ì§€ ì•ŠëŠ” ì‰´ë“œ ì´ˆê¸°í™”
     public void ResetShield()
     {
         shield = 0;
     }
-    //Ä³¸¯ÅÍ °³ÀÎÀÇ Äİ¹é
+    //ìºë¦­í„° ê°œì¸ì˜ ì½œë°±
     private readonly List<IPCBC> pcb = new();
     public List<IPCBC> PCB { get { return pcb; } }
 
@@ -90,27 +90,27 @@ public class Character : MonoBehaviour
 
     void Awake()
     {
-        //Ã¼·ÂÁ¶Á¤
+        //ì²´ë ¥ì¡°ì •
         hp = hpMax;
-        //¸ğµç ÇÃ·¹ÀÌÆ®µéÀº ÁÖÀÎÀÌ ´©±¸ÀÎÁö ³Ö¾îÁà¾ß ÇÔ
+        //ëª¨ë“  í”Œë ˆì´íŠ¸ë“¤ì€ ì£¼ì¸ì´ ëˆ„êµ¬ì¸ì§€ ë„£ì–´ì¤˜ì•¼ í•¨
         plates.ToList().ForEach(p => p.Self = this);
-        //»óÅÂÀÌ»óÀÇ ¾ÆÀÌÄÜ Å©±â
+        //ìƒíƒœì´ìƒì˜ ì•„ì´ì½˜ í¬ê¸°
         statusEffect.Size = 50;
-        //¸Å ÅÏÀÌ ³¡³¯¶§ ½¯µå¸¦ 0À¸·Î ¸¸µé±â
+        //ë§¤ í„´ì´ ëë‚ ë•Œ ì‰´ë“œë¥¼ 0ìœ¼ë¡œ ë§Œë“¤ê¸°
         pcb.Add(new ShieldReset(this));
     }
-    //°ø°İÇÒ¶§ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ºÒ·¯¾ß ÇÏ´Âµ¥
+    //ê³µê²©í• ë•Œ ì• ë‹ˆë©”ì´ì…˜ì„ ë¶ˆëŸ¬ì•¼ í•˜ëŠ”ë°
     public void AttackAnimation()
     {
         animator.SetTrigger("Attack");
     }
 
-    //ÀÚ½ÅÀÌ °¡Áø ÇÃ·¹ÀÌÆ®Áß ·£´ıÀ¸·Î ÇÏ³ª¸¦ ¼±ÅÃ
+    //ìì‹ ì´ ê°€ì§„ í”Œë ˆì´íŠ¸ì¤‘ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ë¥¼ ì„ íƒ
     private void PlateSelect()
     {
         if(plates.Length == 0)
         {
-            Debug.Log("Ä³¸¯ÅÍ°¡ ¼ÒÁöÇÑ ÇÃ·¹ÀÌÆ®°¡ ÇÏ³ªµµ ¾øÀ½");
+            Debug.Log("ìºë¦­í„°ê°€ ì†Œì§€í•œ í”Œë ˆì´íŠ¸ê°€ í•˜ë‚˜ë„ ì—†ìŒ");
             return;
         }
         plate = plates[Random.Range(0, plates.Length)];
@@ -118,38 +118,38 @@ public class Character : MonoBehaviour
 
     public IEnumerator CreateC()
     {
-        //ÇÃ·¹ÀÌÆ® ¼±ÅÃ
+        //í”Œë ˆì´íŠ¸ ì„ íƒ
         if(plate != null)
         {
-            Debug.Log("ÀÌ¹Ì ¸¸µé¾îÁø ÇÃ·¹ÀÌÆ®°¡ ÀÖ¾î¼­ »ı¼º ºÒ°¡´É");
+            Debug.Log("ì´ë¯¸ ë§Œë“¤ì–´ì§„ í”Œë ˆì´íŠ¸ê°€ ìˆì–´ì„œ ìƒì„± ë¶ˆê°€ëŠ¥");
             yield break;
         }
         PlateSelect();
         if(plate == null)
         {
-            Debug.Log("¼±ÅÃµÈ ÇÃ·¹ÀÌÆ®°¡ ¾ø±â¿¡ »ı¼º ºÒ°¡´É");
+            Debug.Log("ì„ íƒëœ í”Œë ˆì´íŠ¸ê°€ ì—†ê¸°ì— ìƒì„± ë¶ˆê°€ëŠ¥");
             yield break;
         }
             
-        //ÇÃ·¹ÀÌÆ®
+        //í”Œë ˆì´íŠ¸
         RectTransform rectTransform = plate.GetComponent<RectTransform>();
-        //Èû
+        //í˜
         Vector3 velocity = new();
-        //ÇÃ·¹ÀÌÆ®ÀÇ ÃÊ±â À§Ä¡ »ı¼ºµÉ¶§ È­¸é À§¿¡¼­ ³»·Á¿À°Ô ÇÏ±â À§ÇØ
+        //í”Œë ˆì´íŠ¸ì˜ ì´ˆê¸° ìœ„ì¹˜ ìƒì„±ë ë•Œ í™”ë©´ ìœ„ì—ì„œ ë‚´ë ¤ì˜¤ê²Œ í•˜ê¸° ìœ„í•´
         rectTransform.position = new Vector3(rectTransform.position.x, Screen.height + 200, 0);
-        //°¢µµ ÃÊ±âÈ­ (ÆÄ±«½Ã¿¡ °¢µµ°¡ È¸ÀüÇØ¼­)
+        //ê°ë„ ì´ˆê¸°í™” (íŒŒê´´ì‹œì— ê°ë„ê°€ íšŒì „í•´ì„œ)
         rectTransform.eulerAngles = Vector3.zero;
-        //È°¼ºÈ­
+        //í™œì„±í™”
         rectTransform.gameObject.SetActive(true);
-        //¾ÆÁ÷ ¸ñÇ¥ À§Ä¡º¸´Ù ³ô´Ù¸é
+        //ì•„ì§ ëª©í‘œ ìœ„ì¹˜ë³´ë‹¤ ë†’ë‹¤ë©´
         while (rectTransform.localPosition.y > platePosition.y)
         {
-            //Áß·ÂÀÇ ¿µÇâÀ» ¹Ş¾Æ ¶³¾îÁöµµ·Ï
+            //ì¤‘ë ¥ì˜ ì˜í–¥ì„ ë°›ì•„ ë–¨ì–´ì§€ë„ë¡
             velocity += new Vector3(0, -9.8f, 0) * Time.deltaTime;
             rectTransform.position += velocity;
             yield return null;
         }
-        //¸ñÇ¥ À§Ä¡ µµ´Ş
+        //ëª©í‘œ ìœ„ì¹˜ ë„ë‹¬
         rectTransform.localPosition = platePosition;
     }
 
@@ -157,26 +157,26 @@ public class Character : MonoBehaviour
     {
         if (plate == null)
         {
-            Debug.Log("¼±ÅÃµÈ ÇÃ·¹ÀÌÆ®°¡ ¾ø±â¿¡ ÆÄ±« ºÒ°¡´É");
+            Debug.Log("ì„ íƒëœ í”Œë ˆì´íŠ¸ê°€ ì—†ê¸°ì— íŒŒê´´ ë¶ˆê°€ëŠ¥");
             yield break;
         }
         RectTransform rectTransform = plate.GetComponent<RectTransform>();
         plate = null;
-        //ÃÖÃÊ¿¡´Â À§·Î ÇâÇÏ´Â Èûµµ ÀÖ¾î¾ß ÇÔ (Àá±ñ À§·Î ¿Ã¶ó°¡´Ù ¶³¾îÁö°Ô ÇÏ±â À§ÇÔ)
+        //ìµœì´ˆì—ëŠ” ìœ„ë¡œ í–¥í•˜ëŠ” í˜ë„ ìˆì–´ì•¼ í•¨ (ì ê¹ ìœ„ë¡œ ì˜¬ë¼ê°€ë‹¤ ë–¨ì–´ì§€ê²Œ í•˜ê¸° ìœ„í•¨)
         Vector3 velocity = new(0, 1.5f, 0);
 
-        //À§Ä¡ + 200ÀÌ È­¸é ¾Æ·¡º¸´Ù Å©´Ù¸é (¾ÆÁ÷ ÇÃ·¹ÀÌÆ®°¡ È­¸é¿¡ º¸ÀÎ´Ù¸é)
+        //ìœ„ì¹˜ + 200ì´ í™”ë©´ ì•„ë˜ë³´ë‹¤ í¬ë‹¤ë©´ (ì•„ì§ í”Œë ˆì´íŠ¸ê°€ í™”ë©´ì— ë³´ì¸ë‹¤ë©´)
         while (rectTransform.position.y + 200 >= 0)
         {
-            //Áß·ÂÀÇ ¿µÇâÀ» ¹Ş¾Æ ¶³¾îÁöµµ·Ï
+            //ì¤‘ë ¥ì˜ ì˜í–¥ì„ ë°›ì•„ ë–¨ì–´ì§€ë„ë¡
             velocity += new Vector3(0, -9.8f, 0) * Time.deltaTime;
             rectTransform.position += velocity;
-            //È¸ÀüÇÏµµ·Ï
+            //íšŒì „í•˜ë„ë¡
             rectTransform.eulerAngles += new Vector3(0, 0, Time.deltaTime * 25);
             yield return null;
         }
-        //¸ñÇ¥À§Ä¡¿¡ µµ´Ş
-        //ºñÈ°¼ºÈ­
+        //ëª©í‘œìœ„ì¹˜ì— ë„ë‹¬
+        //ë¹„í™œì„±í™”
         rectTransform.gameObject.SetActive(false);
     }
 }

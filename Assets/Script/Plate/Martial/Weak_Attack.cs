@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,37 +6,37 @@ public class Weak_Attack : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[1];
         keywords[0] = new Keyword(5, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ó½ºÅÍµé¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ´ë¹ÌÁö¸¦ ÁØ´Ù. º¸È£¸·¿¡°Ô´Â Àı¹İÀÇ ´ë¹ÌÁö¸¸ ÁØ´Ù.");
+            ("ëª¬ìŠ¤í„°ë“¤ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤. ë³´í˜¸ë§‰ì—ê²ŒëŠ” ì ˆë°˜ì˜ ëŒ€ë¯¸ì§€ë§Œ ì¤€ë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense() { }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //´ë¹ÌÁö ¼³Á¤
+        //ëŒ€ë¯¸ì§€ ì„¤ì •
         float damage = keywords[0].Word;
         if (damage == 0)
             return;
 
         List<AttackInfo> list = new();
 
-        //³²¾ÆÀÖ´Â ÀûÀÇ ¼ö
+        //ë‚¨ì•„ìˆëŠ” ì ì˜ ìˆ˜
         switch (GameManager.Instance.Enemys.Count)
         {
-            //°ø°İÀ» ¼öÇà
+            //ê³µê²©ì„ ìˆ˜í–‰
             case 1:
                 {
                     list.Add(new AttackInfo(GameManager.Instance.Enemys[0], damage));
@@ -61,12 +61,12 @@ public class Weak_Attack : Plate
             default:
                 return;
         }
-        //ÀÌ °ø°İÀº ½¯µå¿¡°Ô Àı¹İÀÇ ÇÇÇØ¸¸ ÀÔÈù´Ù´Â Å¬·¡½º
+        //ì´ ê³µê²©ì€ ì‰´ë“œì—ê²Œ ì ˆë°˜ì˜ í”¼í•´ë§Œ ì…íŒë‹¤ëŠ” í´ë˜ìŠ¤
         PL_AttackNHit pl = new(self, list, SoundManager.Instance.Fire)
         {
             ShieldChange = new ShieldHalfChange(),
         };
-        //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(pl);
     }
 }

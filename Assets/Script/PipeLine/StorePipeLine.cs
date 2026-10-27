@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +24,7 @@ public class StorePipeLine : IPipeLine
 
     public void Start()
     {
-        //»óÁ¡ ¸¸µé°í ±âÁ¸ÀÇ ÆÄÀÌÇÁ¶óÀÎ°ú´Â ´Ù¸¥ ±æÀ» °É¾î¾ß ÇÔ
+        //ìƒì  ë§Œë“¤ê³  ê¸°ì¡´ì˜ íŒŒì´í”„ë¼ì¸ê³¼ëŠ” ë‹¤ë¥¸ ê¸¸ì„ ê±¸ì–´ì•¼ í•¨
         store.gameObject.SetActive(true);
     }
 

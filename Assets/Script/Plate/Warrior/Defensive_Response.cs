@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class Defensive_Response : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[2];
         keywords[0] = new Keyword(0, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
@@ -14,18 +14,18 @@ public class Defensive_Response : Plate
         keywords[1].Conditions.Add(new Limit_Keyword(keywords[1], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ó½ºÅÍµé¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ÇÇÇØ¸¦ ÀÔÈ÷°í ¸ğµç ¸ğÇè°¡µéÀÌ º¸È£¸·À» <color=#C54646><link=word>" + keywords[1].Word + "</link></color> ¾ò´Â´Ù.");
+            ("ëª¬ìŠ¤í„°ë“¤ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " í”¼í•´ë¥¼ ì…íˆê³  ëª¨ë“  ëª¨í—˜ê°€ë“¤ì´ ë³´í˜¸ë§‰ì„ <color=#C54646><link=word>" + keywords[1].Word + "</link></color> ì–»ëŠ”ë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense()
     {
-        //°ø°İÀ» ÇÏÁö ¾Ê¾Ò°Å³ª ¾òÀ» º¸È£¸·ÀÌ 0ÀÌ¶ó¸é ¼öÇàÇÏÁö ¾ÊÀ½
+        //ê³µê²©ì„ í•˜ì§€ ì•Šì•˜ê±°ë‚˜ ì–»ì„ ë³´í˜¸ë§‰ì´ 0ì´ë¼ë©´ ìˆ˜í–‰í•˜ì§€ ì•ŠìŒ
         if (keywords[1].Word == 0 || keywords[0].Word == 0)
             return;
         List<DefenceInfo> defenceInfos = new ();
@@ -33,25 +33,25 @@ public class Defensive_Response : Plate
         {
             defenceInfos.Add(new DefenceInfo(GameManager.Instance.Adventurer[i], 0, keywords[1].Word));
         }
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Defence.Fulfillment.Add(new PL_ShieldNHeal(self, defenceInfos, null));
     }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //´ë¹ÌÁö ¼³Á¤
+        //ëŒ€ë¯¸ì§€ ì„¤ì •
         float damage = keywords[0].Word;
-        //´ë¹ÌÁö°¡ 0ÀÌ¸é °ø°İÀ» ¼öÇàÇÑ°ÍÀÌ ¾Æ´Ô
+        //ëŒ€ë¯¸ì§€ê°€ 0ì´ë©´ ê³µê²©ì„ ìˆ˜í–‰í•œê²ƒì´ ì•„ë‹˜
         if (damage == 0)
             return;
 
         List<AttackInfo> list = new();
 
-        //³²¾ÆÀÖ´Â ÀûÀÇ ¼ö
+        //ë‚¨ì•„ìˆëŠ” ì ì˜ ìˆ˜
         switch (GameManager.Instance.Enemys.Count)
         {
-            //°ø°İÀ» ¼öÇà
+            //ê³µê²©ì„ ìˆ˜í–‰
             case 1:
                 {
                     list.Add(new AttackInfo(GameManager.Instance.Enemys[0], damage));
@@ -76,7 +76,7 @@ public class Defensive_Response : Plate
             default:
                 return;
         }
-        //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, list, SoundManager.Instance.Sword));
     }
 }

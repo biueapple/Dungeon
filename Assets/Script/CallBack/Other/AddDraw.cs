@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class AddDraw : IPCBG
     public void Defence(PL_ShieldNHeal pl) { }
     public void Draw()
     {
-        //µå·Î¿ì ´Ü°è¸¦ Ã£¾Æ È½¼ö¸¦ ´Ã¸²
+        //ë“œë¡œìš° ë‹¨ê³„ë¥¼ ì°¾ì•„ íšŸìˆ˜ë¥¼ ëŠ˜ë¦¼
         DrawPipeLine pipeLine = GameManager.Instance.CyclePipeLine.Draw;
 
         if (pipeLine != null)
@@ -18,7 +18,7 @@ public class AddDraw : IPCBG
             pipeLine.Count--;
         }
 
-        //ÄÝ¹é »èÁ¦
+        //ì½œë°± ì‚­ì œ
         GameManager.Instance.PCB.Remove(this);
     }
     public void Function() { }

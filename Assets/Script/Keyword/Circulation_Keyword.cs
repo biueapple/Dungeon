@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Å°¿öµåÀÇ min max¸¦ Á¤ÇÏ°í minº¸´Ù ÀÛÀ¸¸é max·Î maxº¸´Ù Å©¸é minÀ¸·Î °ªÀ» º¯°æÇÏ´Â ¹æ¹ýÀ¸·Î °ªÀ» Á¦ÇÑÇÏ´Â Å¬·¡½º
+//í‚¤ì›Œë“œì˜ min maxë¥¼ ì •í•˜ê³  minë³´ë‹¤ ìž‘ìœ¼ë©´ maxë¡œ maxë³´ë‹¤ í¬ë©´ minìœ¼ë¡œ ê°’ì„ ë³€ê²½í•˜ëŠ” ë°©ë²•ìœ¼ë¡œ ê°’ì„ ì œí•œí•˜ëŠ” í´ëž˜ìŠ¤
 public class Circulation_Keyword : IKeywordAttribute
 {
-    //keywordÀÇ ÃÖ¼Ò ÃÖ´ë°ª
+    //keywordì˜ ìµœì†Œ ìµœëŒ€ê°’
     private readonly int min;
     private readonly int max;
 
@@ -15,11 +15,11 @@ public class Circulation_Keyword : IKeywordAttribute
         this.max = max;
     }
 
-    //ÀÌ Å¬·¡½ºÀÇ ±â´É
+    //ì´ í´ëž˜ìŠ¤ì˜ ê¸°ëŠ¥
     public void Attribute(ref int value)
     {
-        //¸¸¾à value°¡ max º¸´Ù Å©¸é minÀ¸·Î minº¸´Ù ÀÛÀ¸¸é max·Î
-        //È¤½Ã ¹«ÇÑ¹Ýº¹ÇÏ¸é ¾ÈµÇ´Ï±î
+        //ë§Œì•½ valueê°€ max ë³´ë‹¤ í¬ë©´ minìœ¼ë¡œ minë³´ë‹¤ ìž‘ìœ¼ë©´ maxë¡œ
+        //í˜¹ì‹œ ë¬´í•œë°˜ë³µí•˜ë©´ ì•ˆë˜ë‹ˆê¹Œ
         int count = 0;
         while (!(value >= min) || !(value <= max))
         {

@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//¸ğµç ¸ğÇè°¡°¡ ÁÖ´Â ½¯µå·® Áõ°¡
+//ëª¨ë“  ëª¨í—˜ê°€ê°€ ì£¼ëŠ” ì‰´ë“œëŸ‰ ì¦ê°€
 public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public override int Price => 20;
@@ -46,7 +46,7 @@ public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IP
 
     public override string Instruction()
     {
-        return new string($"¸ğµç ¸ğÇè°¡°¡ º¸È£¸·À» »ı¼ºÇÒ¶§ 1º¸È£¸· Ãß°¡");
+        return new string($"ëª¨ë“  ëª¨í—˜ê°€ê°€ ë³´í˜¸ë§‰ì„ ìƒì„±í• ë•Œ 1ë³´í˜¸ë§‰ ì¶”ê°€");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

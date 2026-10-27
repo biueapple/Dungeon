@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class Nimble_Attack : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[2];
         keywords[0] = new Keyword(1, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
@@ -14,33 +14,33 @@ public class Nimble_Attack : Plate
         keywords[1].Conditions.Add(new Limit_Keyword(keywords[1], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ó½ºÅÍµé¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ÇÇÇØ¸¦ <color=#C54646><link=word>" + keywords[1].Word + "</link></color> È¸ ÀÔÈù´Ù.");
+            ("ëª¬ìŠ¤í„°ë“¤ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " í”¼í•´ë¥¼ <color=#C54646><link=word>" + keywords[1].Word + "</link></color> íšŒ ì…íŒë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense() { }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //´ë¹ÌÁö ¼³Á¤
+        //ëŒ€ë¯¸ì§€ ì„¤ì •
         float damage = keywords[0].Word;
         if (damage == 0)
             return;
 
-        //keyword[1]È¸ ¸¸Å­ ¹İº¹
+        //keyword[1]íšŒ ë§Œí¼ ë°˜ë³µ
         for (int i = 0; i < keywords[1].Word; i++)
         {
             List<AttackInfo> list = new();
-            //³²¾ÆÀÖ´Â ÀûÀÇ ¼ö
+            //ë‚¨ì•„ìˆëŠ” ì ì˜ ìˆ˜
             switch (GameManager.Instance.Enemys.Count)
             {
-                //°ø°İÀ» ¼öÇà
+                //ê³µê²©ì„ ìˆ˜í–‰
                 case 1:
                     {
                         list.Add(new AttackInfo(GameManager.Instance.Enemys[0], damage));
@@ -65,7 +65,7 @@ public class Nimble_Attack : Plate
                 default:
                     return;
             }
-            //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+            //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
             GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, list, SoundManager.Instance.Sword));
         }
     }

@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
 
-//ÅØ½ºÆ®ÄÄÆ÷³ÍÆ®¸¦ °¡Áø ¿ÀºêÁ§Æ®°¡ ¶³¾îÁö´Ù°¡ Æ¯Á¤ ÅØ½ºÆ®¸¦ ¹ØÀ¸·Î ¶³¾îÆ®¸®´Â ¿¬ÃâÀ» ½ÃµµÇßÁö¸¸ ½ÇÆĞÇÔ
+//í…ìŠ¤íŠ¸ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ê°€ ë–¨ì–´ì§€ë‹¤ê°€ íŠ¹ì • í…ìŠ¤íŠ¸ë¥¼ ë°‘ìœ¼ë¡œ ë–¨ì–´íŠ¸ë¦¬ëŠ” ì—°ì¶œì„ ì‹œë„í–ˆì§€ë§Œ ì‹¤íŒ¨í•¨
 public class TextAnimator : MonoBehaviour
 {
     //public float fallSpeed = 3f;
@@ -13,103 +13,103 @@ public class TextAnimator : MonoBehaviour
     //private List<TextMeshProUGUI> letters = new List<TextMeshProUGUI>();
 
     ////[SerializeField]
-    ////private TextMeshProUGUI textComponent; // TextMeshProUGUI ÄÄÆ÷³ÍÆ®
+    ////private TextMeshProUGUI textComponent; // TextMeshProUGUI ì»´í¬ë„ŒíŠ¸
 
     ////private void Start()
     ////{
-    ////    textComponent.text = "Àû¿¡°Ô <color=#C54646><link=example>" + 0.ToString() + "</link></color>" +
-    ////        " ÇÇÇØ¸¦ <color=#C54646><link=word>" + 1.ToString() + "</link></color> È¸ ÀÔÈù´Ù.";
+    ////    textComponent.text = "ì ì—ê²Œ <color=#C54646><link=example>" + 0.ToString() + "</link></color>" +
+    ////        " í”¼í•´ë¥¼ <color=#C54646><link=word>" + 1.ToString() + "</link></color> íšŒ ì…íŒë‹¤.";
 
-    ////    // ÅØ½ºÆ® Á¤º¸¸¦ ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
+    ////    // í…ìŠ¤íŠ¸ ì •ë³´ë¥¼ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.
     ////    textComponent.ForceMeshUpdate();
 
-    ////    // ÅØ½ºÆ® Á¤º¸ °¡Á®¿À±â
+    ////    // í…ìŠ¤íŠ¸ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
     ////    TMP_TextInfo textInfo = textComponent.textInfo;
 
-    ////    // °¢ ¹®ÀÚ¿¡ ´ëÇØ Ã³¸®
+    ////    // ê° ë¬¸ìì— ëŒ€í•´ ì²˜ë¦¬
     ////    for (int i = 0; i < textComponent.textInfo.linkCount; i++)
     ////    {
     ////        TMP_LinkInfo linkInfo = textInfo.linkInfo[i];
 
-    ////        // ¸µÅ© ÅØ½ºÆ® °¡Á®¿À±â
+    ////        // ë§í¬ í…ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
     ////        string linkText = GetLinkText(linkInfo, textInfo);
     ////        Debug.Log(linkText);
-    ////        // ¹®ÀÚÀÇ ¿ùµå ÁÂÇ¥ °è»ê
+    ////        // ë¬¸ìì˜ ì›”ë“œ ì¢Œí‘œ ê³„ì‚°
     ////        //Rect rect = GetLinkBounds(linkInfo);
 
-    ////        //¿ÀºêÁ§Æ® »ı¼º
+    ////        //ì˜¤ë¸Œì íŠ¸ ìƒì„±
     ////        GameObject letterObj = Instantiate(textPrefab, transform);
     ////        //TextMeshProUGUI letter = letterObj.GetComponent<TextMeshProUGUI>();
 
     ////        //letter.text = linkText;
-    ////        //letter.transform.position = rect.center; // °¢ ±ÛÀÚÀÇ ÃÊ±â À§Ä¡ Á¶Á¤
+    ////        //letter.transform.position = rect.center; // ê° ê¸€ìì˜ ì´ˆê¸° ìœ„ì¹˜ ì¡°ì •
 
-    ////        // ÅØ½ºÆ®¸¦ char ¹è¿­·Î º¯È¯
+    ////        // í…ìŠ¤íŠ¸ë¥¼ char ë°°ì—´ë¡œ ë³€í™˜
     ////        //char[] textArray = textComponent.text.ToCharArray();
 
-    ////        // ÇØ´ç ¹®ÀÚ ºñ¿ì±â (°ø¹éÀ¸·Î ´ëÃ¼)
+    ////        // í•´ë‹¹ ë¬¸ì ë¹„ìš°ê¸° (ê³µë°±ìœ¼ë¡œ ëŒ€ì²´)
     ////        //textArray[i] = ' ';
 
-    ////        // ¼öÁ¤µÈ ÅØ½ºÆ®¸¦ ´Ù½Ã ¼³Á¤
+    ////        // ìˆ˜ì •ëœ í…ìŠ¤íŠ¸ë¥¼ ë‹¤ì‹œ ì„¤ì •
     ////        //textComponent.text = new string(textArray);
     ////        //letters.Add(letter);
-    ////        // ±ÛÀÚ ¶³¾îÁö±â ½ÃÀÛ
+    ////        // ê¸€ì ë–¨ì–´ì§€ê¸° ì‹œì‘
     ////        //StartCoroutine(FallLetters());
     ////    }
     ////}
 
     //[SerializeField]
-    //private TextMeshProUGUI textComponent; // TextMeshProUGUI ÄÄÆ÷³ÍÆ®
+    //private TextMeshProUGUI textComponent; // TextMeshProUGUI ì»´í¬ë„ŒíŠ¸
 
     //private void Start()
     //{
-    //    textComponent.text = "Àû¿¡°Ô <color=#C54646><link=example>0</link></color>" +
-    //        " ÇÇÇØ¸¦ <color=#C54646><link=word>1</link></color> È¸ ÀÔÈù´Ù.";
+    //    textComponent.text = "ì ì—ê²Œ <color=#C54646><link=example>0</link></color>" +
+    //        " í”¼í•´ë¥¼ <color=#C54646><link=word>1</link></color> íšŒ ì…íŒë‹¤.";
 
-    //    // ÅØ½ºÆ® Á¤º¸¸¦ ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
+    //    // í…ìŠ¤íŠ¸ ì •ë³´ë¥¼ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.
     //    textComponent.ForceMeshUpdate();
 
-    //    // ¸µÅ© ÅØ½ºÆ® º¯°æ
+    //    // ë§í¬ í…ìŠ¤íŠ¸ ë³€ê²½
     //    ReplaceLinkText("example", " ");
     //    ReplaceLinkText("word", "X");
 
-    //    //// ÅØ½ºÆ® Á¤º¸ °¡Á®¿À±â
+    //    //// í…ìŠ¤íŠ¸ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
     //    //TMP_TextInfo textInfo = textComponent.textInfo;
 
-    //    //// °¢ ¸µÅ©¿¡ ´ëÇØ Ã³¸®
+    //    //// ê° ë§í¬ì— ëŒ€í•´ ì²˜ë¦¬
     //    //for (int i = 0; i < textInfo.linkCount; i++)
     //    //{
     //    //    TMP_LinkInfo linkInfo = textInfo.linkInfo[i];
 
-    //    //    // ¸µÅ© Á¤º¸ µğ¹ö±ë Ãâ·Â
+    //    //    // ë§í¬ ì •ë³´ ë””ë²„ê¹… ì¶œë ¥
     //    //    Debug.Log($"Link ID: {linkInfo.GetLinkID()}");
     //    //    Debug.Log($"Link Start Index: {linkInfo.linkTextfirstCharacterIndex}, Length: {linkInfo.linkTextLength}");
 
-    //    //    // ¸µÅ© ÅØ½ºÆ® °¡Á®¿À±â
+    //    //    // ë§í¬ í…ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
     //    //    string linkText = GetLinkText(linkInfo, textInfo);
     //    //    Debug.Log($"Link Text: {linkText}");
 
     //    //    //Rect rect = GetLinkBounds(linkInfo);
 
 
-    //    //    ////¿ÀºêÁ§Æ® »ı¼º
+    //    //    ////ì˜¤ë¸Œì íŠ¸ ìƒì„±
     //    //    //GameObject letterObj = Instantiate(textPrefab, transform);
     //    //    //TextMeshProUGUI letter = letterObj.GetComponent<TextMeshProUGUI>();
 
     //    //    //letter.text = linkText;
-    //    //    //letter.transform.position = rect.center; // °¢ ±ÛÀÚÀÇ ÃÊ±â À§Ä¡ Á¶Á¤
+    //    //    //letter.transform.position = rect.center; // ê° ê¸€ìì˜ ì´ˆê¸° ìœ„ì¹˜ ì¡°ì •
 
-    //    //    ////ÅØ½ºÆ®¸¦ char ¹è¿­·Î º¯È¯
+    //    //    ////í…ìŠ¤íŠ¸ë¥¼ char ë°°ì—´ë¡œ ë³€í™˜
     //    //    //char[] textArray = textComponent.text.ToCharArray();
 
-    //    //    ////ÇØ´ç ¹®ÀÚ ºñ¿ì±â(°ø¹éÀ¸·Î ´ëÃ¼)
+    //    //    ////í•´ë‹¹ ë¬¸ì ë¹„ìš°ê¸°(ê³µë°±ìœ¼ë¡œ ëŒ€ì²´)
     //    //    //textArray[linkInfo.linkTextfirstCharacterIndex] = ' ';
 
-    //    //    ////¼öÁ¤µÈ ÅØ½ºÆ®¸¦ ´Ù½Ã ¼³Á¤
+    //    //    ////ìˆ˜ì •ëœ í…ìŠ¤íŠ¸ë¥¼ ë‹¤ì‹œ ì„¤ì •
     //    //    //textComponent.text = new string(textArray);
     //    //    ReplaceLinkText(linkInfo.GetLinkID(), " ");
     //    //    //letters.Add(letter);
-    //    //    ////±ÛÀÚ ¶³¾îÁö±â ½ÃÀÛ
+    //    //    ////ê¸€ì ë–¨ì–´ì§€ê¸° ì‹œì‘
     //    //    //StartCoroutine(FallLetters());
     //    //}
     //}
@@ -136,11 +136,11 @@ public class TextAnimator : MonoBehaviour
 
     //private string GetLinkText(TMP_LinkInfo linkInfo, TMP_TextInfo textInfo)
     //{
-    //    // ¸µÅ©ÀÇ ¹®ÀÚ ¹üÀ§
+    //    // ë§í¬ì˜ ë¬¸ì ë²”ìœ„
     //    int startIndex = linkInfo.linkTextfirstCharacterIndex;
     //    int length = linkInfo.linkTextLength;
 
-    //    // ¹®ÀÚµé·ÎºÎÅÍ ÅØ½ºÆ® Á¶ÇÕ
+    //    // ë¬¸ìë“¤ë¡œë¶€í„° í…ìŠ¤íŠ¸ ì¡°í•©
     //    char[] linkChars = new char[length];
     //    for (int i = 0; i < length; i++)
     //    {
@@ -150,7 +150,7 @@ public class TextAnimator : MonoBehaviour
     //    return new string(linkChars);
     //}
 
-    ////linkÀÇ À§Ä¡¸¦ ¸®ÅÏÇØÁÖ´Â ÇÔ¼ö
+    ////linkì˜ ìœ„ì¹˜ë¥¼ ë¦¬í„´í•´ì£¼ëŠ” í•¨ìˆ˜
     //private Rect GetLinkBounds(TMP_LinkInfo linkInfo)
     //{
     //    TMP_CharacterInfo firstChar = textComponent.textInfo.characterInfo[linkInfo.linkTextfirstCharacterIndex];
@@ -167,33 +167,33 @@ public class TextAnimator : MonoBehaviour
     //{
     //    TMP_TextInfo textInfo = textComponent.textInfo;
 
-    //    // ¸ğµç ¸µÅ©¸¦ Å½»ö
+    //    // ëª¨ë“  ë§í¬ë¥¼ íƒìƒ‰
     //    for (int i = 0; i < textInfo.linkCount; i++)
     //    {
     //        TMP_LinkInfo linkInfo = textInfo.linkInfo[i];
 
-    //        // ¸µÅ© ID ºñ±³
+    //        // ë§í¬ ID ë¹„êµ
     //        if (linkInfo.GetLinkID() == linkID)
     //        {
-    //            // ¿ø·¡ ÅØ½ºÆ® °¡Á®¿À±â
+    //            // ì›ë˜ í…ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
     //            string originalText = textComponent.text;
 
-    //            // ¸µÅ© ÅØ½ºÆ® ¹üÀ§ °¡Á®¿À±â
+    //            // ë§í¬ í…ìŠ¤íŠ¸ ë²”ìœ„ ê°€ì ¸ì˜¤ê¸°
     //            int startIndex = linkInfo.linkTextfirstCharacterIndex;
     //            int length = linkInfo.linkTextLength;
 
     //            Debug.Log($"Link ID: {linkID}, Start Index: {startIndex}, Length: {length}");
 
-    //            // ¸µÅ© ÅØ½ºÆ® ¼öÁ¤ (ÅÂ±×¸¦ À¯ÁöÇÏ°í ³»ºÎ ÅØ½ºÆ®¸¸ º¯°æ)
+    //            // ë§í¬ í…ìŠ¤íŠ¸ ìˆ˜ì • (íƒœê·¸ë¥¼ ìœ ì§€í•˜ê³  ë‚´ë¶€ í…ìŠ¤íŠ¸ë§Œ ë³€ê²½)
     //            string beforeLink = originalText.Substring(0, startIndex);
     //            string afterLink = originalText.Substring(startIndex + length);
     //            string modifiedText = beforeLink + replacement + afterLink;
 
-    //            // ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+    //            // í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
     //            textComponent.text = modifiedText;
     //            textComponent.ForceMeshUpdate();
     //            Debug.Log($"Updated Text: {textComponent.text}");
-    //            return; // ÇÑ ¹ø¸¸ Ã³¸® ÈÄ Á¾·á
+    //            return; // í•œ ë²ˆë§Œ ì²˜ë¦¬ í›„ ì¢…ë£Œ
     //        }
     //    }
     //}

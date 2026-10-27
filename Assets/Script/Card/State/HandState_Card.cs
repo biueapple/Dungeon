@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Ä«µå°¡ ¼ÕÆĞ¿¡ ÀÖÀ»¶§ ±â´É
+//ì¹´ë“œê°€ ì†íŒ¨ì— ìˆì„ë•Œ ê¸°ëŠ¥
 public class HandState_Card : IState_Card
 {
-    //ÀÌ ±â´ÉÀ» ¹Ş´Â Ä«µå
+    //ì´ ê¸°ëŠ¥ì„ ë°›ëŠ” ì¹´ë“œ
     private readonly Card card;
-    //¸¶¿ì½º¸¦ µû¶ó´Ù´Ï´Â ÄÚ·çÆ¾
+    //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆëŠ” ì½”ë£¨í‹´
     private Coroutine coroutine;
 
     public HandState_Card(Card card)
@@ -15,42 +15,42 @@ public class HandState_Card : IState_Card
         this.card = card;
     }
 
-    //¸¶¿ì½º¸¦ ¿Ã·Á³ùÀ»¶§ ¼³¸íÀ» Å©°Ô º¸µµ·Ï
+    //ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë ¤ë†¨ì„ë•Œ ì„¤ëª…ì„ í¬ê²Œ ë³´ë„ë¡
     public void OnPointerEnter()
     {
-        //¸¶¿ì½º¸¦ µû¶ó´Ù´Ï°í ÀÖÁö ¾Ê´Ù¸é (Ä«µå¸¦ Å¬¸¯ÇÑ »óÅÂ¶ó¸é)
-        //¼³¸í º¸ÀÌµµ·Ï
+        //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆê³  ìˆì§€ ì•Šë‹¤ë©´ (ì¹´ë“œë¥¼ í´ë¦­í•œ ìƒíƒœë¼ë©´)
+        //ì„¤ëª… ë³´ì´ë„ë¡
         Zoom.Insatnce.ViewON(card);
     }
 
     public void OnPointerExit()
     {
-        //¸¶¿ì½º¸¦ ´Ù¶ó´Ù´Ï°í ÀÖÁö ¾Ê´Ù¸é (Ä«µå¸¦ Å¬¸¯ÇÑ »óÅÂ¶ó¸é)
-        Zoom.Insatnce.ViewOFF();//¼³¸í º¸ÀÌÁö ¾Êµµ·Ï
+        //ë§ˆìš°ìŠ¤ë¥¼ ë‹¤ë¼ë‹¤ë‹ˆê³  ìˆì§€ ì•Šë‹¤ë©´ (ì¹´ë“œë¥¼ í´ë¦­í•œ ìƒíƒœë¼ë©´)
+        Zoom.Insatnce.ViewOFF();//ì„¤ëª… ë³´ì´ì§€ ì•Šë„ë¡
     }
 
-    //¸¶¿ì½º down
+    //ë§ˆìš°ìŠ¤ down
     public void OnPointerDown()
     {
-        //¼ÕÆĞ¿¡¼­ »©°í
+        //ì†íŒ¨ì—ì„œ ë¹¼ê³ 
         //hand.RemoveCard(card);
-        //¸¶¿ì½º¸¦ µû¶ó´Ù´Ïµµ·Ï ÇÏ°í
+        //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆë„ë¡ í•˜ê³ 
         coroutine = card.StartCoroutine(MF());
-        //Ä«µå¸¦ ÁÜÇÑ ¿ÀºêÁ§Æ®¸¦ ²¨µÎ±â
+        //ì¹´ë“œë¥¼ ì¤Œí•œ ì˜¤ë¸Œì íŠ¸ë¥¼ êº¼ë‘ê¸°
         Zoom.Insatnce.ViewOFF();
         Zoom.Insatnce.Active = false;
-        //raycast ¹ŞÁö ¾Êµµ·Ï
+        //raycast ë°›ì§€ ì•Šë„ë¡
         card.Raycast = false;
     }
 
-    //¸¶¿ì½º up
+    //ë§ˆìš°ìŠ¤ up
     public void OnPointerUp()
     {
-        //´õÀÌ»ó ¸¶¿ì½º¸¦ µû¶ó´Ù´ÏÁö ¸»°í
+        //ë”ì´ìƒ ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆì§€ ë§ê³ 
         card.StopCoroutine(coroutine);
-        //¸¶¿ì½º¸¦ µû¶ó´Ù´ÏÁö ¾Ê°í ÀÖ´Ù´Â ¶æ
+        //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆì§€ ì•Šê³  ìˆë‹¤ëŠ” ëœ»
         coroutine = null;
-        //ÆÇÀ» Å¬¸¯Çß´ÂÁö ÆÇ´Ü
+        //íŒì„ í´ë¦­í–ˆëŠ”ì§€ íŒë‹¨
         if (UIManager.Instance.TryGetGraphicRayFindParent(out Plate plate))
         {
             card.UpPlate(plate);
@@ -70,7 +70,7 @@ public class HandState_Card : IState_Card
         card.Raycast = true;
     }
 
-    //¸¶¿ì½º¸¦ µû¶ó´Ù´Ï°Ô ÇÏ´Â ÄÚ·çÆ¾
+    //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆê²Œ í•˜ëŠ” ì½”ë£¨í‹´
     private IEnumerator MF()
     {
         while (true)

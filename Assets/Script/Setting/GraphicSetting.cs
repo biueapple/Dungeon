@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GraphicSetting : MonoBehaviour
 {
-    //guideWindowÀÇ ¼³Á¤
+    //guideWindowì˜ ì„¤ì •
     [SerializeField]
     private Dropdown resolution;
     private List<Resolution> resolutions = new();
@@ -28,29 +28,29 @@ public class GraphicSetting : MonoBehaviour
 
     public void Init()
     {
-        //ÇØ»óµµ ¿É¼Ç ÃÊ±âÈ­
+        //í•´ìƒë„ ì˜µì…˜ ì´ˆê¸°í™”
         resolution.options.Clear();
-        // ±âÁ¸ ÇØ»óµµ ¸®½ºÆ® °¡Á®¿À±â
+        // ê¸°ì¡´ í•´ìƒë„ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
         resolutions.AddRange(Screen.resolutions);
 
-        // Áßº¹À» Á¦°ÅÇÏ°í °¡Àå ³ôÀº refresh rate¸¸ ÀúÀåÇÒ Dictionary »ı¼º
+        // ì¤‘ë³µì„ ì œê±°í•˜ê³  ê°€ì¥ ë†’ì€ refresh rateë§Œ ì €ì¥í•  Dictionary ìƒì„±
         Dictionary<string, Resolution> resolutionDict = new();
 
         foreach (var res in resolutions)
         {
             string key = res.width + "x" + res.height;
 
-            // ¸¸¾à °°Àº ÇØ»óµµ°¡ ÀÖ´Ù¸é refreshRateRatio°¡ ´õ ³ôÀº °æ¿ì¸¸ ÀúÀå
+            // ë§Œì•½ ê°™ì€ í•´ìƒë„ê°€ ìˆë‹¤ë©´ refreshRateRatioê°€ ë” ë†’ì€ ê²½ìš°ë§Œ ì €ì¥
             if (!resolutionDict.ContainsKey(key) || resolutionDict[key].refreshRateRatio.value < res.refreshRateRatio.value)
             {
                 resolutionDict[key] = res;
             }
         }
 
-        // Dictionary¿¡¼­ Áßº¹ Á¦°ÅµÈ ÇØ»óµµ ¸®½ºÆ®·Î º¯È¯
+        // Dictionaryì—ì„œ ì¤‘ë³µ ì œê±°ëœ í•´ìƒë„ ë¦¬ìŠ¤íŠ¸ë¡œ ë³€í™˜
         resolutions = resolutionDict.Values.ToList();
 
-        // Dropdown¿¡ Ãß°¡
+        // Dropdownì— ì¶”ê°€
         resolution.options.Clear();
         for (int i = 0; i < resolutions.Count; i++)
         {
@@ -60,7 +60,7 @@ public class GraphicSetting : MonoBehaviour
             };
             resolution.options.Add(optionData);
 
-            // ÇöÀç È­¸é ÇØ»óµµ¿Í ÀÏÄ¡ÇÏ¸é ±âº» ¼±ÅÃ°ª ¼³Á¤
+            // í˜„ì¬ í™”ë©´ í•´ìƒë„ì™€ ì¼ì¹˜í•˜ë©´ ê¸°ë³¸ ì„ íƒê°’ ì„¤ì •
             if (Screen.width == resolutions[i].width && Screen.height == resolutions[i].height)
             {
                 resolution.value = i;
@@ -72,7 +72,7 @@ public class GraphicSetting : MonoBehaviour
         }
         resolution.RefreshShownValue();
 
-        //ÇÁ·¹ÀÓ ¿É¼Ç ÃÊ±âÈ­
+        //í”„ë ˆì„ ì˜µì…˜ ì´ˆê¸°í™”
         frame.options.Clear();
         if (Application.targetFrameRate > 240)
             Application.targetFrameRate = 240;
@@ -99,23 +99,23 @@ public class GraphicSetting : MonoBehaviour
         }
         frame.RefreshShownValue();
 
-        //È­¸é¸ğµå ¿É¼Ç ÃÊ±âÈ­
+        //í™”ë©´ëª¨ë“œ ì˜µì…˜ ì´ˆê¸°í™”
         screenMode.options.Clear();
         Dropdown.OptionData data1 = new()
         {
-            text = "ÀüÃ¼È­¸é"
+            text = "ì „ì²´í™”ë©´"
         };
         Dropdown.OptionData data2 = new()
         {
-            text = "Å×µÎ¸® ¾ø´Â Ã¢¸ğµå"
+            text = "í…Œë‘ë¦¬ ì—†ëŠ” ì°½ëª¨ë“œ"
         };
         Dropdown.OptionData data3 = new()
         {
-            text = "ÀÌ°Ç ¹¹Áö"
+            text = "ì´ê±´ ë­ì§€"
         };
         Dropdown.OptionData data4 = new()
         {
-            text = "Ã¢¸ğµå"
+            text = "ì°½ëª¨ë“œ"
         };
         screenMode.options.Add(data1);
         screenMode.options.Add(data2);
@@ -125,7 +125,7 @@ public class GraphicSetting : MonoBehaviour
         screenMode.value = (int)Screen.fullScreenMode;
         screenMode.RefreshShownValue();
 
-        //¾ÈÆ¼ ¿¡ÀÏ¸®¾î½Ì
+        //ì•ˆí‹° ì—ì¼ë¦¬ì–´ì‹±
         anti_Aliasing.options.Clear();
         if (Camera.main.TryGetComponent(out UniversalAdditionalCameraData cameraData))
         {

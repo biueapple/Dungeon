@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-//ÇÃ·¹ÀÌÆ®°¡ ºÎ¼ÅÁö´Â ´Ü°è¸¦ ´ç´ã
+//í”Œë ˆì´íŠ¸ê°€ ë¶€ì…”ì§€ëŠ” ë‹¨ê³„ë¥¼ ë‹¹ë‹´
 public class BrokenPipeLine : IPipeLine
 {
-    //´ÙÀ½ ´Ü°è
+    //ë‹¤ìŒ ë‹¨ê³„
     private IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
-    //¸î°³ÀÇ Ä³¸¯ÅÍ°¡ ¿Ï·áÇß´ÂÁö
+    //ëª‡ê°œì˜ ìºë¦­í„°ê°€ ì™„ë£Œí–ˆëŠ”ì§€
     private int count = 0;
-    //¸î°³ÀÇ Ä³¸¯ÅÍ°¡ ¿Ï·á ÇØ¾ßÇÏ´ÂÁö
+    //ëª‡ê°œì˜ ìºë¦­í„°ê°€ ì™„ë£Œ í•´ì•¼í•˜ëŠ”ì§€
     private int listCount;
 
     public BrokenPipeLine(IPipeLine next)
@@ -21,18 +21,18 @@ public class BrokenPipeLine : IPipeLine
 
     public void Start()
     {
-        //Áö±İ Ä³¸¯ÅÍ°¡ ¸î°³ÀÎÁö ³Ö¾î³õ°í
+        //ì§€ê¸ˆ ìºë¦­í„°ê°€ ëª‡ê°œì¸ì§€ ë„£ì–´ë†“ê³ 
         listCount = GameManager.Instance.Characters.Count;
-        //ÇÃ·¹ÀÌÆ®°¡ ºÎ¼ÅÁö´Â ±â´É ¼öÇà
+        //í”Œë ˆì´íŠ¸ê°€ ë¶€ì…”ì§€ëŠ” ê¸°ëŠ¥ ìˆ˜í–‰
         PlateSetting();
     }
 
     public void Update()
     {
-        //¼öÇàÀ» ¿Ï·áÇÑ ¼ö¿Í Ä³¸¯ÅÍÀÇ ¼ö°¡ ¶È°°´Ù¸é ÀüºÎ ´Ù ¼öÇàÇÑ°ÅÀÓ
+        //ìˆ˜í–‰ì„ ì™„ë£Œí•œ ìˆ˜ì™€ ìºë¦­í„°ì˜ ìˆ˜ê°€ ë˜‘ê°™ë‹¤ë©´ ì „ë¶€ ë‹¤ ìˆ˜í–‰í•œê±°ì„
         if (count == listCount)
         {
-            //´ÙÀ½ ´Ü°è·Î
+            //ë‹¤ìŒ ë‹¨ê³„ë¡œ
             count = 0;
             GameManager.Instance.PipeLine = next;
         }
@@ -40,7 +40,7 @@ public class BrokenPipeLine : IPipeLine
 
     public void End() 
     {
-        //Äİ¹éÀ» ¼öÇà (¸ğµç Ä³¸¯ÅÍµéÀÌ ÇÃ·¹ÀÌÆ®°¡ ºÎ¼ÅÁúÅ×´Ï ¸ğµç Ä³¸¯ÅÍµéÀÌ ¼öÇà (³ªÁß¿£ ¼öÁ¤ÇØ¾ß ÇÒµí ))
+        //ì½œë°±ì„ ìˆ˜í–‰ (ëª¨ë“  ìºë¦­í„°ë“¤ì´ í”Œë ˆì´íŠ¸ê°€ ë¶€ì…”ì§ˆí…Œë‹ˆ ëª¨ë“  ìºë¦­í„°ë“¤ì´ ìˆ˜í–‰ (ë‚˜ì¤‘ì—” ìˆ˜ì •í•´ì•¼ í• ë“¯ ))
         List<Character> list = GameManager.Instance.Characters;
         for (int i = list.Count - 1; i >= 0; i--)
         {
@@ -53,7 +53,7 @@ public class BrokenPipeLine : IPipeLine
 
     public void PlateSetting()
     {
-        //¸ğµç Ä³¸¯ÅÍµé¿¡°Ô ÇÃ·¹ÀÌÆ®¸¦ ºÎ¼ö¶ó°í ¸í·É
+        //ëª¨ë“  ìºë¦­í„°ë“¤ì—ê²Œ í”Œë ˆì´íŠ¸ë¥¼ ë¶€ìˆ˜ë¼ê³  ëª…ë ¹
         List<Character> list = GameManager.Instance.Characters;
         for (int i = 0; i < list.Count; i++)
         {
@@ -63,15 +63,15 @@ public class BrokenPipeLine : IPipeLine
 
     private IEnumerator PlateBroken(Character character)
     {
-        //Ä³¸¯ÅÍ°¡ ÇÃ·¹ÀÌÆ®¸¦ ºÎ½Ã´Â°É ¿Ï·áÇÏ¸é 
+        //ìºë¦­í„°ê°€ í”Œë ˆì´íŠ¸ë¥¼ ë¶€ì‹œëŠ”ê±¸ ì™„ë£Œí•˜ë©´ 
         Plate plate = character.Plate;
         yield return GameManager.Instance.StartCoroutine(character.BrokenC());
-        //ÇÃ·¹ÀÌÆ®¿¡ µé¾îÀÖ´ø Ä«µåµé È¿°ú ÃÊ±âÈ­ ÈÄ ÅØ½ºÆÃ
+        //í”Œë ˆì´íŠ¸ì— ë“¤ì–´ìˆë˜ ì¹´ë“œë“¤ íš¨ê³¼ ì´ˆê¸°í™” í›„ í…ìŠ¤íŒ…
         if (plate != null)
         {
             plate.KeywordInit();
         }
-        //Ä«¿îÅÍ Áõ°¡
+        //ì¹´ìš´í„° ì¦ê°€
         count++;
     }
 }

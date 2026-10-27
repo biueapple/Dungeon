@@ -1,14 +1,14 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BleedingCreator : IPCBC
 {
-    //ÇÇÇØ¸¦ ¹ŞÀ» ÇÇÇØÀÚ
+    //í”¼í•´ë¥¼ ë°›ì„ í”¼í•´ì
     private readonly Character victim;
-    //´ë¹ÌÁö
+    //ëŒ€ë¯¸ì§€
     private readonly float damage;
-    //¾ó¸¶³ª Áö¼ÓÇÒÁö
+    //ì–¼ë§ˆë‚˜ ì§€ì†í• ì§€
     private readonly int count;
 
     public BleedingCreator(Character victim, float damage, int count)
@@ -18,7 +18,7 @@ public class BleedingCreator : IPCBC
         this.count = count;
     }
 
-    //°ø°İ½Ã¿¡ ´ë¹ÌÁö¸¦ ÁØ´Ù
+    //ê³µê²©ì‹œì— ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤
     public void Attack(PL_AttackNHit pl) { }
     public void Broken() { }
     public void Create() { }
@@ -36,16 +36,16 @@ public class BleedingCreator : IPCBC
 }
 
 
-//Ä³¸¯ÅÍÀÇ ÃâÇ÷ (Ä³¸¯ÅÍ°¡ °ø°İÇÒ¶§ ÇÇÇØ¸¦ ÀÔµµ·Ï ÇÔ)
+//ìºë¦­í„°ì˜ ì¶œí˜ˆ (ìºë¦­í„°ê°€ ê³µê²©í• ë•Œ í”¼í•´ë¥¼ ì…ë„ë¡ í•¨)
 public class Bleeding : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnterHandler, IPointerExitHandler
 {
-    //ÇÇÇØ¸¦ ¹ŞÀ» ÇÇÇØÀÚ
+    //í”¼í•´ë¥¼ ë°›ì„ í”¼í•´ì
     private Character victim;
     public Character Victim { get { return victim; } set { victim = value; } }
-    //´ë¹ÌÁö
+    //ëŒ€ë¯¸ì§€
     private float damage;
     public float Damage { get { return damage; } set { damage = value; } }
-    //¾ó¸¶³ª Áö¼ÓÇÒÁö
+    //ì–¼ë§ˆë‚˜ ì§€ì†í• ì§€
     private int count;
     public int Count { get { return count; } set { count = value; } }
 
@@ -53,7 +53,7 @@ public class Bleeding : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnt
 
     public void Init(Character victim, float damage, int count)
     {
-        //È½¼ö°¡ 0È¸¸é ¹Ù·Î »ç¶óÁöµµ·Ï
+        //íšŸìˆ˜ê°€ 0íšŒë©´ ë°”ë¡œ ì‚¬ë¼ì§€ë„ë¡
         if(count == 0)
         {
             Delete();
@@ -64,7 +64,7 @@ public class Bleeding : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnt
         this.count = count;
     }
 
-    //°ø°İ½Ã¿¡ ´ë¹ÌÁö¸¦ ÁØ´Ù
+    //ê³µê²©ì‹œì— ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤
     public void Attack(PL_AttackNHit pl)
     {
         Invocation();
@@ -78,12 +78,12 @@ public class Bleeding : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnt
 
     public void Invocation()
     {
-        Debug.Log($"{victim} ÃâÇ÷ {damage} ´ë¹ÌÁö");
-        //´ë¹ÌÁö
+        Debug.Log($"{victim} ì¶œí˜ˆ {damage} ëŒ€ë¯¸ì§€");
+        //ëŒ€ë¯¸ì§€
         victim.HP -= damage;
-        //È½¼ö Â÷°¨
+        //íšŸìˆ˜ ì°¨ê°
         count--;
-        //È½¼ö°¡ 0ÀÌ¸é »èÁ¦
+        //íšŸìˆ˜ê°€ 0ì´ë©´ ì‚­ì œ
         if (count <= 0)
         {
             Delete();
@@ -98,7 +98,7 @@ public class Bleeding : MonoBehaviour, IPCBC, IDebuff, IInstruction, IPointerEnt
 
     public string Instruction()
     {
-        return new string($"ÃâÇ÷ {damage} ´ë¹ÌÁö, {count} ÅÏ ³²À½");
+        return new string($"ì¶œí˜ˆ {damage} ëŒ€ë¯¸ì§€, {count} í„´ ë‚¨ìŒ");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

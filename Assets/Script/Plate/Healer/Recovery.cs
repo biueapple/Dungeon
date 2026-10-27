@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class Recovery : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[2];
         keywords[0] = new Keyword(3, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
@@ -14,16 +14,16 @@ public class Recovery : Plate
         keywords[1].Conditions.Add(new Limit_Keyword(keywords[1], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("°¡Àå ¾ÕÀÇ ¸ğÇè°¡¿¡°Ô <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ÀÇ Ã¼·ÂÀ» È¸º¹½ÃÄÑÁØ´Ù. °¡Àå ¾Õ¿¡ ¸ó½ºÅÍ¿¡°Ô <color=#C54646><link=word>" + keywords[1].Word + "</link></color>" +
-            " ÀÇ ´ë¹ÌÁö¸¦ ÁØ´Ù");
+            ("ê°€ì¥ ì•ì˜ ëª¨í—˜ê°€ì—ê²Œ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " ì˜ ì²´ë ¥ì„ íšŒë³µì‹œì¼œì¤€ë‹¤. ê°€ì¥ ì•ì— ëª¬ìŠ¤í„°ì—ê²Œ <color=#C54646><link=word>" + keywords[1].Word + "</link></color>" +
+            " ì˜ ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense() 
     {
         if (keywords[0].Word == 0)
@@ -32,11 +32,11 @@ public class Recovery : Plate
         {
             new DefenceInfo(GameManager.Instance.Adventurer[0], keywords[0].Word, 0)
         };
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Defence.Fulfillment.Add(new PL_ShieldNHeal(self, defenceInfos, SoundManager.Instance.Recovery));
     }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack() 
     {
         if(keywords[1].Word == 0)

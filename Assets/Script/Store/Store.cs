@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,21 +7,21 @@ public class Store : MonoBehaviour
 {
     [SerializeField]
     private Relic[] relicResources;
-    //ÀÚ¸®´Â 3°³
-    //Ä«µåÆÑ
+    //ìžë¦¬ëŠ” 3ê°œ
+    //ì¹´ë“œíŒ©
     [SerializeField]
     private Sorting pack;
-    //·º¸¯
+    //ë ‰ë¦­
     [SerializeField]
     private Sorting relic;
-    //ÇÃ·¹ÀÌÆ® °­È­ (ÇÃ¶óÀÌÆ® °­È­´Â ÇÑ°³¸¸)
+    //í”Œë ˆì´íŠ¸ ê°•í™” (í”Œë¼ì´íŠ¸ ê°•í™”ëŠ” í•œê°œë§Œ)
     [SerializeField]
     private Transform plate;
 
-    //¹°°ÇµéÀ» ¸¸µé¾î¼­ Áø¿­ ÇØ³õ±â
+    //ë¬¼ê±´ë“¤ì„ ë§Œë“¤ì–´ì„œ ì§„ì—´ í•´ë†“ê¸°
     public void Display()
     {
-        //ÀÌÀü¿¡ ¸¸µé¾ú´ø ¹°°ÇµéÀ» ¾ø¾Ö±â
+        //ì´ì „ì— ë§Œë“¤ì—ˆë˜ ë¬¼ê±´ë“¤ì„ ì—†ì• ê¸°
         for(int i = relic.List.Count - 1; i >= 0; i--)
         {
             Transform transform = relic.List[i];
@@ -29,7 +29,7 @@ public class Store : MonoBehaviour
             relic.Remove(transform);
         }
 
-        //pack ÃÖ´ë 2°³
+        //pack ìµœëŒ€ 2ê°œ
         //pack.Size = 200;
         //for (int i = 0; i < parent.childCount; i++)
         //{
@@ -38,7 +38,7 @@ public class Store : MonoBehaviour
         //}
 
 
-        //relic ÃÖ´ë 2 °³¾¿
+        //relic ìµœëŒ€ 2 ê°œì”©
         relic.Size = 100;
 
         Relic r = Instantiate(relicResources[Random.Range(0, relicResources.Length)], relic.transform);

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class Designated_Attack : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[2];
         keywords[0] = new Keyword(3, tool[0]);
         keywords[0].Attributes.Add(new Circulation_Keyword(1, 3));
@@ -14,31 +14,31 @@ public class Designated_Attack : Plate
         keywords[1].Conditions.Add(new Limit_Keyword(keywords[1], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
             ("<color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ¹øÂ° ¸ó½ºÅÍ¿¡°Ô <color=#C54646><link=word>" + keywords[1].Word + "</link></color> ´ë¹ÌÁö¸¦ ÁØ´Ù.");
+            " ë²ˆì§¸ ëª¬ìŠ¤í„°ì—ê²Œ <color=#C54646><link=word>" + keywords[1].Word + "</link></color> ëŒ€ë¯¸ì§€ë¥¼ ì¤€ë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense() { }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack()
     {
-        //keywords[0].Word ¹øÂ° ÀûÀ» Ã£À¸¸ç ¾ø´Ù¸é °ø°İÇÏÁö ¾ÊÀ½
+        //keywords[0].Word ë²ˆì§¸ ì ì„ ì°¾ìœ¼ë©° ì—†ë‹¤ë©´ ê³µê²©í•˜ì§€ ì•ŠìŒ
         int index = keywords[0].Word - 1;
         if (index < GameManager.Instance.Enemys.Count)
         {
-            //´ë¹ÌÁö ¼³Á¤
+            //ëŒ€ë¯¸ì§€ ì„¤ì •
             float damage = keywords[1].Word;
-            //´ë¹ÌÁö°¡ 0ÀÌ¸é °ø°İÀ» ¼öÇàÇÑ°ÍÀÌ ¾Æ´Ô
+            //ëŒ€ë¯¸ì§€ê°€ 0ì´ë©´ ê³µê²©ì„ ìˆ˜í–‰í•œê²ƒì´ ì•„ë‹˜
             if (damage == 0)
                 return;
 
-            //°ø°İÀ» ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+            //ê³µê²©ì„ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
             GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, new List<AttackInfo>() { new (GameManager.Instance.Enemys[index], damage) }, SoundManager.Instance.Sword));
         }
     }

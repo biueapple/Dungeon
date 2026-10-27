@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Limit_Keyword : IKeywordCondition
 {
-    //keywordÀÇ ÃÖ¼Ò ÃÖ´ë°ª
+    //keywordì˜ ìµœì†Œ ìµœëŒ€ê°’
     private readonly int min;
     private readonly int max;
     private readonly Keyword keyword;
@@ -16,14 +16,14 @@ public class Limit_Keyword : IKeywordCondition
         this.keyword = keyword;
     }
 
-    //Ä«µå°¡ Ãß°¡µÉ Á¶°Ç
+    //ì¹´ë“œê°€ ì¶”ê°€ë  ì¡°ê±´
     public bool AddCondition(Card card)
     {
         if(keyword.Value + card.Value < min)
             return false;
         return true;
     }
-    //Ä«µå¸¦ »¬ Á¶°ÇÀÎµ¥ ¾Æ¸¶ »ç¿ëÇÏÁö ¾ÊÀ»µí Ä«µå¸¦ ¸ø»©´Â Á¶°ÇÀÌ¶õ°Ô ¼¼»ó¿¡ ¾îµğÀÖ¾î
+    //ì¹´ë“œë¥¼ ëº„ ì¡°ê±´ì¸ë° ì•„ë§ˆ ì‚¬ìš©í•˜ì§€ ì•Šì„ë“¯ ì¹´ë“œë¥¼ ëª»ë¹¼ëŠ” ì¡°ê±´ì´ë€ê²Œ ì„¸ìƒì— ì–´ë””ìˆì–´
     public bool RemoveCondition(Card card)
     {
         return true;

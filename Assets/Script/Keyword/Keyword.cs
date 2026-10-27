@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class Keyword
         this.tool = tool;
         space = new();
     }
-    //ÇåÀç °ª
+    //í—Œì¬ ê°’
     private int value;
     public int Value { get { return value;} }
     public int Word
@@ -22,20 +22,20 @@ public class Keyword
             return v;
         }
     }
-    //ÀÌ Å°¿öµå¿¡ ¿µÇâÀ» ³¢Ä¡°í ÀÖ´Â Ä«µåµé
+    //ì´ í‚¤ì›Œë“œì— ì˜í–¥ì„ ë¼ì¹˜ê³  ìˆëŠ” ì¹´ë“œë“¤
     private readonly List<Card> space;
     public List<Card> Space { get { return space; } }
-    //±× Ä«µåµéÀ» Á¤·ÄÇØÁÖ´Â Åø
+    //ê·¸ ì¹´ë“œë“¤ì„ ì •ë ¬í•´ì£¼ëŠ” íˆ´
     private readonly Tool tool;
     public Tool Tool { get { return tool; } /*set {  tool = value; } */}
-    //¹ë·ù°¡ º¯ÇÒ¶§ Äİ¹é
+    //ë°¸ë¥˜ê°€ ë³€í• ë•Œ ì½œë°±
     private readonly List<IKeywordAttribute> attributes = new ();
     public List<IKeywordAttribute> Attributes { get {  return attributes; } }
-    //Ä«µå°¡ Ãß°¡µÉ ¼ö ÀÖ´Â Á¶°Ç
+    //ì¹´ë“œê°€ ì¶”ê°€ë  ìˆ˜ ìˆëŠ” ì¡°ê±´
     private readonly List<IKeywordCondition> conditions = new ();
     public List<IKeywordCondition> Conditions { get { return conditions; } }
 
-    //Å°¿öµå¿¡ Ä«µå¸¦ Ãß°¡ÇÏ°í Á¤·Ä
+    //í‚¤ì›Œë“œì— ì¹´ë“œë¥¼ ì¶”ê°€í•˜ê³  ì •ë ¬
     public bool Add(Card card)
     {
         for(int i = 0; i < conditions.Count; i++)
@@ -48,14 +48,14 @@ public class Keyword
         tool.Sorting.Add(card.transform);
         return true;
     }
-    //Å°¿öµå¿¡ Ä«µå¸¦ »©°í Á¤·Ä
+    //í‚¤ì›Œë“œì— ì¹´ë“œë¥¼ ë¹¼ê³  ì •ë ¬
     public void Remove(Card card)
     {
         value -= card.Value;
         space.Remove(card);
         tool.Sorting.Remove(card.transform);
     }
-    //¸ğµç Ä«µå¸¦ »©°í Á¤·Ä
+    //ëª¨ë“  ì¹´ë“œë¥¼ ë¹¼ê³  ì •ë ¬
     public void Clear()
     {
         for(int i = 0; i < space.Count; i++)

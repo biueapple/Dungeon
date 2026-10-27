@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,30 +6,30 @@ using UnityEngine.EventSystems;
 
 public abstract class Plate : MonoBehaviour , IPointerClickHandler
 {
-    //ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®
+    //í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸
     protected TextLinkClickHandler textLinkClickHandler;
     public TextLinkClickHandler TextLinkClickHandler { get { return textLinkClickHandler; } set {  textLinkClickHandler = value; } }
     
-    //ÀÔ·ÂµÈ Ä«µå¸¦ Á¤·ÄÇØÁÖ´Â °ø°£
+    //ì…ë ¥ëœ ì¹´ë“œë¥¼ ì •ë ¬í•´ì£¼ëŠ” ê³µê°„
     [SerializeField]
     protected Tool[] tool;
     public Tool[] Tool { get { return tool; } }
 
-    //Àû¿ëµÉ Å°¿öµåµé
+    //ì ìš©ë  í‚¤ì›Œë“œë“¤
     protected Keyword[] keywords;
     public Keyword[] Keyword { get { return keywords; } }
 
-    ////Àû±º
+    ////ì êµ°
     //protected List<Character> foe;
     //public List<Character> Foe { get {  return foe; } set {  foe = value; } }
-    ////¾Æ±º
+    ////ì•„êµ°
     //protected List<Character> ally;
     //public List<Character> Ally { get { return ally; } set { ally = value; } }
-    //ÀÚ½Å
+    //ìì‹ 
     protected Character self;
     public Character Self { get { return self; } set {  self = value; } }
 
-    //µ¦
+    //ë±
     protected Dummy dummy;
     public Dummy Dummy { get { return dummy; } }
 
@@ -41,16 +41,16 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
     private void Start()
     {
         dummy = GameManager.Instance.Dummy;
-        //È¤½Ã ÃÊ±âÈ­ ÇØ¾ßÇÒ °Å ÀÖÀ¸¸é overrideÇØ¼­ ¾²¶ó°í
+        //í˜¹ì‹œ ì´ˆê¸°í™” í•´ì•¼í•  ê±° ìˆìœ¼ë©´ overrideí•´ì„œ ì“°ë¼ê³ 
         Init();
-        //Å°¿öµå ¼³Á¤
+        //í‚¤ì›Œë“œ ì„¤ì •
         Texting();
     }
 
     //
     private void LateUpdate()
     {
-        //¿ìÅ¬¸¯À¸·Î ¸ğµç Å°¿öµå¿¡ ÀÖ´Â Ä«µå¸¦ º¸¿©ÁÖÁö ¾Êµµ·Ï
+        //ìš°í´ë¦­ìœ¼ë¡œ ëª¨ë“  í‚¤ì›Œë“œì— ìˆëŠ” ì¹´ë“œë¥¼ ë³´ì—¬ì£¼ì§€ ì•Šë„ë¡
         if(Input.GetMouseButtonDown(1))
         {
             //SpaceView(-1, Vector2.zero);
@@ -58,12 +58,12 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
         }
     }
 
-    //È¤½Ã ÃÊ±âÈ­ ÇØ¾ßÇÒ °Å ÀÖÀ¸¸é overrideÇØ¼­ ¾²¶ó°í
+    //í˜¹ì‹œ ì´ˆê¸°í™” í•´ì•¼í•  ê±° ìˆìœ¼ë©´ overrideí•´ì„œ ì“°ë¼ê³ 
     protected abstract void Init();
 
-    //ÀÌ ÇÃ·¹ÀÌÆ®¿¡ ¹«½¼ ÅØ½ºÆ®¿Í Å°¿öµå°¡ ÀÖ´ÂÁö ¼³Á¤
+    //ì´ í”Œë ˆì´íŠ¸ì— ë¬´ìŠ¨ í…ìŠ¤íŠ¸ì™€ í‚¤ì›Œë“œê°€ ìˆëŠ”ì§€ ì„¤ì •
     protected abstract void Texting();
-    //ÇÃ·¹ÀÌÆ®ÀÇ ´É·Âµé
+    //í”Œë ˆì´íŠ¸ì˜ ëŠ¥ë ¥ë“¤
     public abstract void Defense();
     public abstract void Attack();
     public virtual void Function()
@@ -71,10 +71,10 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
         GameManager.Instance.CyclePipeLine.Function.Characters.Add(self);
     }
 
-    //¸ğµç Àû¿ëµÈ Ä«µåµéÀ» ÃÊ±âÈ­½ÃÅ°´Â ÀÛ¾÷
+    //ëª¨ë“  ì ìš©ëœ ì¹´ë“œë“¤ì„ ì´ˆê¸°í™”ì‹œí‚¤ëŠ” ì‘ì—…
     public void KeywordInit()
     {
-        //¸ğµç Å°¿öµå¿¡ µé¾îÀÖ´Â Ä«µåµéÀ» µ¦ÀÇ »ç¿ëµÈ °ø°£À¸·Î ¿Å±â±â
+        //ëª¨ë“  í‚¤ì›Œë“œì— ë“¤ì–´ìˆëŠ” ì¹´ë“œë“¤ì„ ë±ì˜ ì‚¬ìš©ëœ ê³µê°„ìœ¼ë¡œ ì˜®ê¸°ê¸°
         for (int i = 0; i < keywords.Length; i++)
         {
             if (dummy != null)
@@ -92,7 +92,7 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
 
     public void ToolDeactive()
     {
-        //Ä«µåµéÀÌ º¸ÀÌÁö ¾Êµµ·Ï
+        //ì¹´ë“œë“¤ì´ ë³´ì´ì§€ ì•Šë„ë¡
         for (int i = 0; i < keywords.Length; i++)
         {
             if (dummy != null)
@@ -103,35 +103,35 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
                 }
             }
         }
-        //Ä«µå°¡ Á¤·ÄµÇ¾î ÀÖ´ø ÅøÀ» ºñÈ°¼ºÈ­ ÇØ¼­ º¸ÀÌÁö ¾Êµµ·Ï (Ä«µå°¡ parent°¡ toolÀÌ ¾Æ´Ô)
+        //ì¹´ë“œê°€ ì •ë ¬ë˜ì–´ ìˆë˜ íˆ´ì„ ë¹„í™œì„±í™” í•´ì„œ ë³´ì´ì§€ ì•Šë„ë¡ (ì¹´ë“œê°€ parentê°€ toolì´ ì•„ë‹˜)
         for (int i = 0; i < tool.Length; i++)
         {
             tool[i].gameObject.SetActive(false);
         }
     }
 
-    //card¿¡¼­ È£ÃâÇÏ´Â ÇÔ¼ö Ä«µå°¡ ¾î´À Å°¿öµå¿¡ µé¾î°¡¾ß ÇÑ´Ù´Â ÇÔ¼ö
+    //cardì—ì„œ í˜¸ì¶œí•˜ëŠ” í•¨ìˆ˜ ì¹´ë“œê°€ ì–´ëŠ í‚¤ì›Œë“œì— ë“¤ì–´ê°€ì•¼ í•œë‹¤ëŠ” í•¨ìˆ˜
     public bool InputKeyword(Card card)
     {
-        //Ä«µå°¡ plate À§¿¡¼­ upÇßÀ¸¸é¼­ keyword À§¿¡¼­ upÇÑ °æ¿ì
+        //ì¹´ë“œê°€ plate ìœ„ì—ì„œ upí–ˆìœ¼ë©´ì„œ keyword ìœ„ì—ì„œ upí•œ ê²½ìš°
         if(textLinkClickHandler.OnPointerClick(out int index, out Vector3 position))
         {
-            //¸ğÇè°¡ÀÎ°æ¿ì¿¡¸¸ Àû¿ë
+            //ëª¨í—˜ê°€ì¸ê²½ìš°ì—ë§Œ ì ìš©
             if(card.Friendly && GameManager.Instance.Adventurer.Contains(self))
             {
-                //Å°¿öµå¿¡ Ãß°¡
+                //í‚¤ì›Œë“œì— ì¶”ê°€
                 if (keywords[index].Add(card))
                 {
-                    //Å°¿öµå¿¡ µé¾î°¡ ÀÖ´Â Ä«µåµé º¸¿©ÁÖ±â
+                    //í‚¤ì›Œë“œì— ë“¤ì–´ê°€ ìˆëŠ” ì¹´ë“œë“¤ ë³´ì—¬ì£¼ê¸°
                     Zoom.Insatnce.ViewTool(this, index, position);
-                    //Á¤·Ä
+                    //ì •ë ¬
                     keywords[index].Tool.Sorting.Sort(null);
-                    //Å°¿öµå°¡ º¯È­ ÇßÀ»Å×´Ï±î ´Ù½Ã ÅØ½ºÆ® ·Îµå
+                    //í‚¤ì›Œë“œê°€ ë³€í™” í–ˆì„í…Œë‹ˆê¹Œ ë‹¤ì‹œ í…ìŠ¤íŠ¸ ë¡œë“œ
                     Texting();
                     return true;
                 }
             }
-            //ÀûÀÎ °æ¿ì¿¡¸¸ Àû¿ë
+            //ì ì¸ ê²½ìš°ì—ë§Œ ì ìš©
             else if(!card.Friendly && GameManager.Instance.Enemys.Contains(self))
             {
                 if (keywords[index].Add(card))
@@ -146,7 +146,7 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
         return false;
     }
 
-    //card¿¡¼­ È£ÃâÇÏ´Â ÇÔ¼ö Ä«µå°¡ ¾î´À Å°¿öµå¿¡¼­ ºüÁ®¾ß ÇÑ´Ù´Â ÇÔ¼ö
+    //cardì—ì„œ í˜¸ì¶œí•˜ëŠ” í•¨ìˆ˜ ì¹´ë“œê°€ ì–´ëŠ í‚¤ì›Œë“œì—ì„œ ë¹ ì ¸ì•¼ í•œë‹¤ëŠ” í•¨ìˆ˜
     public void OutputKeyword(Card card)
     {
         for (int i = 0; i < keywords.Length; i++)
@@ -160,7 +160,7 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
         }
     }
 
-    //Å°¿öµå¸¦ Å¬¸¯ÇßÀ»¶§ ¾î´À Ä«µåµéÀÌ µé¾î°¡ ÀÖ´ÂÁö º¸¿©ÁÖ´Â ÇÔ¼ö (ÀÌº¥Æ®)
+    //í‚¤ì›Œë“œë¥¼ í´ë¦­í–ˆì„ë•Œ ì–´ëŠ ì¹´ë“œë“¤ì´ ë“¤ì–´ê°€ ìˆëŠ”ì§€ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜ (ì´ë²¤íŠ¸)
     public void OnPointerClick(PointerEventData eventData)
     {
         if (textLinkClickHandler.OnPointerClick(out int index, out Vector3 position))

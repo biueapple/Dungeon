@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DisposalPipeLine : IPipeLine
 {
-    //¾ÆÁ÷ »ì¾ÆÀÖ´Â ÀûÀÌ ÀÖ´Ù
+    //ì•„ì§ ì‚´ì•„ìˆëŠ” ì ì´ ìˆë‹¤
     private readonly IPipeLine yet;
-    //ÀûÀÌ ÀüºÎ Á×À½
+    //ì ì´ ì „ë¶€ ì£½ìŒ
     private readonly StorePipeLine store;
     private readonly DungeonPipeLine dungeon;
     private IPipeLine next;
-    //¸ğÇè°¡°¡ ÀüºÎ Á×À½
+    //ëª¨í—˜ê°€ê°€ ì „ë¶€ ì£½ìŒ
     private readonly IPipeLine end;
 
     public IPipeLine Next { get => next; set => next = value; }
@@ -31,8 +31,8 @@ public class DisposalPipeLine : IPipeLine
 
     public void Start()
     {
-        //ÀÏºÎ¸¸ Á×¾ú´õ¶óµµ Á×Àº Ä³¸¯ÅÍÀÇ Ã³¸®´Â ¿©±â¼­ ÇØÁÖ´Â°É·Î
-        //»ì¾ÆÀÖ°í Á×¾îÀÖ´Â ¸ğµç Ä³¸¯ÅÍ¸¦ Ã¼Å©
+        //ì¼ë¶€ë§Œ ì£½ì—ˆë”ë¼ë„ ì£½ì€ ìºë¦­í„°ì˜ ì²˜ë¦¬ëŠ” ì—¬ê¸°ì„œ í•´ì£¼ëŠ”ê±¸ë¡œ
+        //ì‚´ì•„ìˆê³  ì£½ì–´ìˆëŠ” ëª¨ë“  ìºë¦­í„°ë¥¼ ì²´í¬
         for (int i = GameManager.Instance.Adventurer.Count - 1; i >= 0; i--)
         {
             if(GameManager.Instance.Adventurer[i].HP <= 0)
@@ -54,7 +54,7 @@ public class DisposalPipeLine : IPipeLine
             }
         }
 
-        //ÀÏ´Ü ¸ğÇè°¡°¡ ¸ğµÎ Á×¾ú´Ù¸é °ÔÀÓ¿À¹ö
+        //ì¼ë‹¨ ëª¨í—˜ê°€ê°€ ëª¨ë‘ ì£½ì—ˆë‹¤ë©´ ê²Œì„ì˜¤ë²„
         if (GameManager.Instance.Adventurer.Count <= 0)
         {
             for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
@@ -64,7 +64,7 @@ public class DisposalPipeLine : IPipeLine
             }
             GameManager.Instance.PipeLine = end;
         }
-        //¸ğµç ÀûÀÌ Á×¾ú´Ù¸é ´ÙÀ½´Ü°è
+        //ëª¨ë“  ì ì´ ì£½ì—ˆë‹¤ë©´ ë‹¤ìŒë‹¨ê³„
         else if (GameManager.Instance.Enemys.Count <= 0)
         {
             for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
@@ -78,7 +78,7 @@ public class DisposalPipeLine : IPipeLine
             else if(next == dungeon)
                 next = store;
         }
-        //¾ÆÁ÷ ÀüÅõÁß
+        //ì•„ì§ ì „íˆ¬ì¤‘
         else
         {
             GameManager.Instance.PipeLine = yet;

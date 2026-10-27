@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public class GameClearPipeLine : IPipeLine
 
     public void Start()
     {
-        //Ã³À½ È­¸éÀ¸·Î ÀÌµ¿ÇÏ°í ¸ğµç °ÍµéÀ» ÃÊ±âÈ­
+        //ì²˜ìŒ í™”ë©´ìœ¼ë¡œ ì´ë™í•˜ê³  ëª¨ë“  ê²ƒë“¤ì„ ì´ˆê¸°í™”
         //GameManager.Instance.GameInit();
         gamaclear.SetActive(true);
     }

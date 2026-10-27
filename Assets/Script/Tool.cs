@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ÆÇ¿¡ Å°¿öµå¿¡ ¹«½¼ Ä«µå°¡ ¼Ò¼ÓµÇ¾î ÀÖ´ÂÁö º¸¿©ÁÖ´Â Åø
+//íŒì— í‚¤ì›Œë“œì— ë¬´ìŠ¨ ì¹´ë“œê°€ ì†Œì†ë˜ì–´ ìˆëŠ”ì§€ ë³´ì—¬ì£¼ëŠ” íˆ´
 public class Tool : MonoBehaviour
 {
-    //Á¤·Ä (¹«½¼ Ä«µåµéÀÌ ¼Ò¼ÓµÇ¾î ÀÖ´ÂÁö Á¤·ÄÇØ¼­ º¸¿©ÁÜ)
+    //ì •ë ¬ (ë¬´ìŠ¨ ì¹´ë“œë“¤ì´ ì†Œì†ë˜ì–´ ìˆëŠ”ì§€ ì •ë ¬í•´ì„œ ë³´ì—¬ì¤Œ)
     [SerializeField]
     private Sorting sorting;
     public Sorting Sorting { get { return sorting; } }
@@ -13,9 +13,9 @@ public class Tool : MonoBehaviour
 
     void Start()
     {
-        //Ä«µåÀÇ Å©±â
+        //ì¹´ë“œì˜ í¬ê¸°
         sorting.Size = 150;
-        //±× »çÀÌÀÇ °£°İ
+        //ê·¸ ì‚¬ì´ì˜ ê°„ê²©
         sorting.Padding = 10;
     }
 }

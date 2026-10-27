@@ -1,50 +1,50 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CardPack : MonoBehaviour
 {
-    //ÆÑÀÌ °¡Áö°í ÀÖ´Â Ä«µåµé
+    //íŒ©ì´ ê°€ì§€ê³  ìˆëŠ” ì¹´ë“œë“¤
     [SerializeField]
     protected List<Card> cards = new ();
     public List<Card> Cards { get { return cards; } }
 
-    //Ä«µåµéÀ» Á¤·ÄÇØ¾ß ÇÔ (Á¤·Ä ¹æ½ÄÀÌ ´Ş¶ó sorting Å¬·¡½º¸¦ »ç¿ëÇÏÁö ¾ÊÀ½)
-    //Ä«µå°¡ ¿øÁ¡À¸·ÎºÎÅÍ ¶³¾îÁø °Å¸®
+    //ì¹´ë“œë“¤ì„ ì •ë ¬í•´ì•¼ í•¨ (ì •ë ¬ ë°©ì‹ì´ ë‹¬ë¼ sorting í´ë˜ìŠ¤ë¥¼ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+    //ì¹´ë“œê°€ ì›ì ìœ¼ë¡œë¶€í„° ë–¨ì–´ì§„ ê±°ë¦¬
     [SerializeField]
     protected float range = 140;
-    //Ä«µå³¢¸®ÀÇ °Å¸® (°¢µµ)
+    //ì¹´ë“œë¼ë¦¬ì˜ ê±°ë¦¬ (ê°ë„)
     [SerializeField]
     protected float bet = 20;
 
     protected void Start()
     {
-        //ÀÚ½ÅÀÌ °¡Áø ¸ğµç Ä«µåÀÇ »óÅÂ´Â ÆÑ¼Ó¿¡ ¼ÓÇÑ »óÅÂÀÓ
+        //ìì‹ ì´ ê°€ì§„ ëª¨ë“  ì¹´ë“œì˜ ìƒíƒœëŠ” íŒ©ì†ì— ì†í•œ ìƒíƒœì„
         for (int i = 0; i < cards.Count; i++)
         {
             if(cards[i].State == null)
                 cards[i].State = new PackInState_Card(this, cards[i]);
         }
-        //Á¤·Ä
+        //ì •ë ¬
         Sorting();
     }
 
-    //Á¤·Ä (Ä«µå¸¦ °ñ¶ú´Ù¸é ÀÌµ¿ÇÏ°í ´Ù½Ã °í¸£´Â È­¸éÀ¸·Î µ¹¾Æ°£´Ù¸é µ¹¾Æ°¡¼­ Á¤·Ä ÇØ¾ßÁö)
+    //ì •ë ¬ (ì¹´ë“œë¥¼ ê³¨ëë‹¤ë©´ ì´ë™í•˜ê³  ë‹¤ì‹œ ê³ ë¥´ëŠ” í™”ë©´ìœ¼ë¡œ ëŒì•„ê°„ë‹¤ë©´ ëŒì•„ê°€ì„œ ì •ë ¬ í•´ì•¼ì§€)
     public void Sorting()
     {
-        //Ä«µå´Â Áß°£À» ±âÁØÀ¸·Î Á¤·ÄÇØ¾ß ÇÏ´Ï Àı¹İÁ¤µµ´Â »« »óÅÂ·Î Á¤·ÄÀ» ½ÃÀÛÇÔ
+        //ì¹´ë“œëŠ” ì¤‘ê°„ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬í•´ì•¼ í•˜ë‹ˆ ì ˆë°˜ì •ë„ëŠ” ëº€ ìƒíƒœë¡œ ì •ë ¬ì„ ì‹œì‘í•¨
         float minus = (cards.Count - 1) * bet * 0.5f;
-        //Ä«µå ¼ö¸¸Å­ ¹İº¹
+        //ì¹´ë“œ ìˆ˜ë§Œí¼ ë°˜ë³µ
         for (int i = 0; i < cards.Count; i++)
         {
-            //°¢µµ °è»ê
+            //ê°ë„ ê³„ì‚°
             float angle = ((i * bet) - minus + 90) * Mathf.Deg2Rad;
-            //À§Ä¡°è»ê
+            //ìœ„ì¹˜ê³„ì‚°
             float x = Mathf.Cos(angle) * range;
             float y = Mathf.Sin(angle) * range;
-            //Ä«µåÀÇ À§Ä¡¸¦ Á¤ÇØÁÖ±â (y°ª¿¡ - range¸¦ ÇÑ ÀÌÀ¯´Â ¼­·Î ¶³¾îÁø °Å¸®¿Í °¢µµ°¡ ¼­·Î ¸ÂÁö ¾Ê¾Æ y°ªÀ» Á¶ÀıÇØ ¹®Á¦¸¦ ÇØ°áÇÔ)
+            //ì¹´ë“œì˜ ìœ„ì¹˜ë¥¼ ì •í•´ì£¼ê¸° (yê°’ì— - rangeë¥¼ í•œ ì´ìœ ëŠ” ì„œë¡œ ë–¨ì–´ì§„ ê±°ë¦¬ì™€ ê°ë„ê°€ ì„œë¡œ ë§ì§€ ì•Šì•„ yê°’ì„ ì¡°ì ˆí•´ ë¬¸ì œë¥¼ í•´ê²°í•¨)
             cards[i].transform.localPosition = new Vector3(x, y - range, 0);
-            //°¢µµµµ º¯°æ (ÀÚ¿¬½º·´°Ô)
+            //ê°ë„ë„ ë³€ê²½ (ìì—°ìŠ¤ëŸ½ê²Œ)
             cards[i].transform.eulerAngles = new Vector3(0, 0, angle * Mathf.Rad2Deg - 90);
         }
     }

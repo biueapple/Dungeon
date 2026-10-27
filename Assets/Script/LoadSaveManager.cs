@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -17,7 +17,7 @@ public class LoadSaveManager
             return instance;
         }
     }
-    //ÀúÀå °æ·Î : C:\Users\»ç¿ëÀÚ¸í\AppData\LocalLow\DefaultCompany\...
+    //ì €ì¥ ê²½ë¡œ : C:\Users\ì‚¬ìš©ìëª…\AppData\LocalLow\DefaultCompany\...
     public void SaveJson<T>(T data, string path)
     {
         string fullPath = Path.Combine(Application.persistentDataPath, path);
@@ -25,7 +25,7 @@ public class LoadSaveManager
         File.WriteAllText(fullPath, json);
     }
 
-    //ºÒ·¯¿À±â °æ·Î : C:\Users\»ç¿ëÀÚ¸í\AppData\LocalLow\DefaultCompany\...
+    //ë¶ˆëŸ¬ì˜¤ê¸° ê²½ë¡œ : C:\Users\ì‚¬ìš©ìëª…\AppData\LocalLow\DefaultCompany\...
     public bool LoadJson<T>(ref T t, string path)
     {
         string fullPath = Path.Combine(Application.persistentDataPath, path);

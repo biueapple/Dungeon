@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,36 +8,36 @@ public class Rest : Card
     {
         value = 0;
         friendly = true;
-        Description = "¸ğÇè°¡ÀÇ ÇÃ·¹ÀÌÆ®¸¦ ÇÏ³ª ºÎ¼ö°í Ä«µå ÇÑÀåÀ» »Ì°í ÈÖ¹ß¼ºÀÎ ¸ğÇè°¡ +1 Ä«µå¸¦ ÇÏ³ª »ı¼ºÇÑ´Ù.";
+        Description = "ëª¨í—˜ê°€ì˜ í”Œë ˆì´íŠ¸ë¥¼ í•˜ë‚˜ ë¶€ìˆ˜ê³  ì¹´ë“œ í•œì¥ì„ ë½‘ê³  íœ˜ë°œì„±ì¸ ëª¨í—˜ê°€ +1 ì¹´ë“œë¥¼ í•˜ë‚˜ ìƒì„±í•œë‹¤.";
     }
 
     public override void UpPlate(Plate plate)
     {
-        //¾Æ±ºÀÇ ÇÃ·¹ÀÌÆ®¶ó¸é
+        //ì•„êµ°ì˜ í”Œë ˆì´íŠ¸ë¼ë©´
         if(GameManager.Instance.Adventurer.Contains(plate.Self))
         {
-            //µå·Î¿ì¿Í »ı¼º
+            //ë“œë¡œìš°ì™€ ìƒì„±
             new IndividualDraw(1);
             new IndividualCard("Adventurer/VolatilityPlus");
-            //ºÎ½Ã´Â ÇÃ·¹ÀÌÆ®¿¡ ÀÖ´ø Ä«µå¸¦ ¼ÕÆĞ¿¡ Ãß°¡ÇØÁà¾ß ÇÏ´Âµ¥
+            //ë¶€ì‹œëŠ” í”Œë ˆì´íŠ¸ì— ìˆë˜ ì¹´ë“œë¥¼ ì†íŒ¨ì— ì¶”ê°€í•´ì¤˜ì•¼ í•˜ëŠ”ë°
             for(int i  = 0; i < plate.Keyword.Length; i++)
             {
                 for (int j = plate.Keyword[i].Space.Count - 1; j >= 0; j--)
                 {
-                    //Ä«µå°¡ Áö±İ ¼ÕÆĞ¿¡ ÀÖ´Â »óÅÂÀÓÀ» ³Ö°í
+                    //ì¹´ë“œê°€ ì§€ê¸ˆ ì†íŒ¨ì— ìˆëŠ” ìƒíƒœì„ì„ ë„£ê³ 
                     plate.Keyword[i].Space[j].State = new HandState_Card(plate.Keyword[i].Space[j]);
-                    //È°¼ºÈ­
+                    //í™œì„±í™”
                     plate.Keyword[i].Space[j].gameObject.SetActive(true);
-                    //¼ÕÆĞ¿¡ Ãß°¡
+                    //ì†íŒ¨ì— ì¶”ê°€
                     GameManager.Instance.Hand.AddCard(plate.Keyword[i].Space[j]);
                     plate.Keyword[i].Space.RemoveAt(j);
                 }
             }
-            //ÀÚ½ÅÀº »ç¿ëµÇ¾úÀ¸´Ï »ç¿ëÇÑ µ¦À¸·Î µ¹¾Æ°¡±â
+            //ìì‹ ì€ ì‚¬ìš©ë˜ì—ˆìœ¼ë‹ˆ ì‚¬ìš©í•œ ë±ìœ¼ë¡œ ëŒì•„ê°€ê¸°
             plate.Dummy.Before.Remove(this);
             GameManager.Instance.Hand.RemoveCard(this);
             plate.Dummy.AfterCard(this);
-            //ÇÃ·¹ÀÌÆ® ºÎ¼ö±â
+            //í”Œë ˆì´íŠ¸ ë¶€ìˆ˜ê¸°
             new IndividualBroken(plate.Self);
         }
         Zoom.Insatnce.Active = true;

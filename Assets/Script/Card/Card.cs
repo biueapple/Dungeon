@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    //ÀÌ Ä«µå°¡ °¡Áö°í ÀÖ´Â ¼öÄ¡
+    //ì´ ì¹´ë“œê°€ ê°€ì§€ê³  ìˆëŠ” ìˆ˜ì¹˜
     //[SerializeField]
     protected int value;
     public int Value { get { return value; } }
 
-    //ÀÌ ¼öÄ¡°¡ ´©±¸¿¡°Ô ÇØ´çµÉ ¼ö ÀÖ´Â°¡
+    //ì´ ìˆ˜ì¹˜ê°€ ëˆ„êµ¬ì—ê²Œ í•´ë‹¹ë  ìˆ˜ ìˆëŠ”ê°€
     //[SerializeField]
     protected bool friendly;
     public bool Friendly { get {  return friendly; } }
@@ -20,22 +20,22 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, I
     protected bool volatility = false;
     public bool Volatility { get { return volatility; } }
 
-    //Ä«µåÀÇ ¹é±×¶ó¿îµå
+    //ì¹´ë“œì˜ ë°±ê·¸ë¼ìš´ë“œ
     [SerializeField] 
     protected Image back;
-    //Ä«µåÀÇ ¾ÆÀÌÄÜ
+    //ì¹´ë“œì˜ ì•„ì´ì½˜
     [SerializeField]
     protected Image icon;
     public Sprite Icon { get { return icon.sprite; } set { icon.sprite = value; } }
-    //Ä«µåÀÇ ¼³¸íÀÌ ÀÔ·ÂµÇ¾î ÀÖ´Â ÄÄÆ÷³ÍÆ®
+    //ì¹´ë“œì˜ ì„¤ëª…ì´ ì…ë ¥ë˜ì–´ ìˆëŠ” ì»´í¬ë„ŒíŠ¸
     [SerializeField]
     protected TextMeshProUGUI textComponent;
     public string Description { get { return textComponent.text; } set { textComponent.text = value; } }
 
     public bool Raycast { get { return back.raycastTarget; } set { back.raycastTarget = value; } }
 
-    //Ä«µå°¡ ¾î¶² »óÈ²¿¡ ¾î¶»°Ô ¹İÀÀÇØ¾ß ÇÏ´ÂÁö °æ¿ì°¡ ¸¹¾ÆÁ®¼­ state·Î ³ª´©±â·Î ÇÔ
-    //Áö±İ Ä«µå°¡ ¹«½¼ »óÈ²ÀÎÁö ¾î¶»°Ô ¹İÀÀÇØ¾ß ÇÏ´ÂÁö
+    //ì¹´ë“œê°€ ì–´ë–¤ ìƒí™©ì— ì–´ë–»ê²Œ ë°˜ì‘í•´ì•¼ í•˜ëŠ”ì§€ ê²½ìš°ê°€ ë§ì•„ì ¸ì„œ stateë¡œ ë‚˜ëˆ„ê¸°ë¡œ í•¨
+    //ì§€ê¸ˆ ì¹´ë“œê°€ ë¬´ìŠ¨ ìƒí™©ì¸ì§€ ì–´ë–»ê²Œ ë°˜ì‘í•´ì•¼ í•˜ëŠ”ì§€
     [SerializeField]
     protected IState_Card state;
     public IState_Card State { get { return state; } set { state?.Exit(); state = value; state?.Enter(); } }   
@@ -60,14 +60,14 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, I
         state?.OnPointerUp();
     }
 
-    //¾î´À À§¿¡¼­ up Çß´ÂÁö Äİ¹éÀ» ÇØÁà¾ß ÇÒµí
-    //´Ù¸¥ Ä«µå À§¿¡¼­ upÇß´Ù
+    //ì–´ëŠ ìœ„ì—ì„œ up í–ˆëŠ”ì§€ ì½œë°±ì„ í•´ì¤˜ì•¼ í• ë“¯
+    //ë‹¤ë¥¸ ì¹´ë“œ ìœ„ì—ì„œ upí–ˆë‹¤
     public virtual void UpCard(Card card) { UpEmpty(); }
-    //plate À§¿¡¼­ upÇß´Ù
+    //plate ìœ„ì—ì„œ upí–ˆë‹¤
     public virtual void UpPlate(Plate plate) { UpEmpty(); }
-    //character À§¿¡¼­ upÇß´Ù
+    //character ìœ„ì—ì„œ upí–ˆë‹¤
     public virtual void UpCharacter(Character character) { UpEmpty(); }
-    //ºó°÷¿¡¼­ upÇß´Ù
+    //ë¹ˆê³³ì—ì„œ upí–ˆë‹¤
     public virtual void UpEmpty()
     {
         GameManager.Instance.Hand.Sorting.Sort(null);

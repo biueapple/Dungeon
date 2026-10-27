@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Ä«µå°¡ ÆÑ ¾È¿¡ ÀÖÀ»¶§ÀÇ ±â´É
+//ì¹´ë“œê°€ íŒ© ì•ˆì— ìˆì„ë•Œì˜ ê¸°ëŠ¥
 public class PackInState_Card : IState_Card
 {
-    //ÀÚ½ÅÀÌ ¼ÓÇÑ ÆÑ
+    //ìì‹ ì´ ì†í•œ íŒ©
     private readonly CardPack pack;
-    //ÀÚ½ÅÀÌ ¼ÓÇÑ Ä«µå
+    //ìì‹ ì´ ì†í•œ ì¹´ë“œ
     private readonly Card card;
-    //¸¶¿ì½º down½ÃÀÇ pack À§Ä¡
+    //ë§ˆìš°ìŠ¤ downì‹œì˜ pack ìœ„ì¹˜
     private Vector3 position;
-    //¸¶¿ì½º¸¦ µû¶ó°¡´ÂÁö
+    //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ê°€ëŠ”ì§€
     private Coroutine coroutine;
 
     public PackInState_Card(CardPack pack, Card card)
@@ -24,49 +24,49 @@ public class PackInState_Card : IState_Card
     public void Exit() { }
     public void OnPointerEnter()
     {
-        //¼³¸í º¸±â
+        //ì„¤ëª… ë³´ê¸°
         Zoom.Insatnce.ViewON(card);
     }
     public void OnPointerExit()
     {
-        //¼³¸í ²ô±â
+        //ì„¤ëª… ë„ê¸°
         Zoom.Insatnce.ViewOFF();
     }
     public void OnPointerDown()
     {
-        //¿ø·¡ ÆÑÀÌ ÀÖ´ø°÷À» ±â¾ïÇÏ°í
+        //ì›ë˜ íŒ©ì´ ìˆë˜ê³³ì„ ê¸°ì–µí•˜ê³ 
         position = pack.transform.position;
-        //¸¶¿ì½º¸¦ µû¶ó´Ù´Ïµµ·Ï ÇÏ°í
+        //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆë„ë¡ í•˜ê³ 
         coroutine = card.StartCoroutine(MF());
-        //Ä«µå¸¦ ÁÜÇÑ ¿ÀºêÁ§Æ®¸¦ ²¨µÎ±â
+        //ì¹´ë“œë¥¼ ì¤Œí•œ ì˜¤ë¸Œì íŠ¸ë¥¼ êº¼ë‘ê¸°
         Zoom.Insatnce.Active = false;
     }
     public void OnPointerUp()
     {
-        //µ¦¿¡¼­ upÇß´Ù¸é ¼Ò¼Ó
-        //¾Æ´Ï¶ó¸é µ¹¾Æ°¡±â
+        //ë±ì—ì„œ upí–ˆë‹¤ë©´ ì†Œì†
+        //ì•„ë‹ˆë¼ë©´ ëŒì•„ê°€ê¸°
 
-        //´õÀÌ»ó ¸¶¿ì½º¸¦ µû¶ó´Ù´ÏÁö ¸»°í
+        //ë”ì´ìƒ ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆì§€ ë§ê³ 
         card.StopCoroutine(coroutine);
-        //¸¶¿ì½º¸¦ µû¶ó´Ù´ÏÁö ¾Ê°í ÀÖ´Ù´Â ¶æ
+        //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆì§€ ì•Šê³  ìˆë‹¤ëŠ” ëœ»
         coroutine = null;
 
-        //ÆÇÀ» Å¬¸¯Çß´ÂÁö ÆÇ´Ü
+        //íŒì„ í´ë¦­í–ˆëŠ”ì§€ íŒë‹¨
         if (UIManager.Instance.TryGetGraphicRayFindParent(out Deck deck))
         {
-            //Ãß°¡
+            //ì¶”ê°€
             if (deck.InputCard(pack))
             {
-                //Ãß°¡°¡ ¼º°øÇßÀ»¶§ µû·Î ÇÒ ÀÏÀº ¾øÀ½
+                //ì¶”ê°€ê°€ ì„±ê³µí–ˆì„ë•Œ ë”°ë¡œ í•  ì¼ì€ ì—†ìŒ
             }
         }
 
-        //ÆÑÀº ´Ù½Ã ¿ø·¡ À§Ä¡·Î (ÆÑÀº ¹«ÇÑÈ÷ µ¦¿¡ ³ÖÀ» ¼ö ÀÖÀ½)
+        //íŒ©ì€ ë‹¤ì‹œ ì›ë˜ ìœ„ì¹˜ë¡œ (íŒ©ì€ ë¬´í•œíˆ ë±ì— ë„£ì„ ìˆ˜ ìˆìŒ)
         pack.transform.position = position;
-        //¼³¸íÀÌ ´Ù½Ã º¸ÀÌµµ·Ï
+        //ì„¤ëª…ì´ ë‹¤ì‹œ ë³´ì´ë„ë¡
         Zoom.Insatnce.Active = true;
     }
-    //¸¶¿ì½º¸¦ µû¶ó´Ù´Ï°Ô ÇÏ´Â ÄÚ·çÆ¾
+    //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆê²Œ í•˜ëŠ” ì½”ë£¨í‹´
     private IEnumerator MF()
     {
         while (true)

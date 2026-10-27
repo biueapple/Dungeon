@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Ä«µå°¡ ÇÃ·¹ÀÌÆ®¿¡ ¼ÓÇÒ¶§
+//ì¹´ë“œê°€ í”Œë ˆì´íŠ¸ì— ì†í• ë•Œ
 public class PlateInState_Card : IState_Card
 {
-    //ÀÌ ±â´ÉÀÌ ¼ÓÇÑ Ä«µå
+    //ì´ ê¸°ëŠ¥ì´ ì†í•œ ì¹´ë“œ
     private readonly Card card;
-    //ÀÌ Ä«µå°¡ ¼ÓÇÑ ÇÃ·¹ÀÌÆ®
+    //ì´ ì¹´ë“œê°€ ì†í•œ í”Œë ˆì´íŠ¸
     private readonly Plate plate;
-    //¼ÕÆĞ
+    //ì†íŒ¨
     private readonly Hand hand;
-    //¸¶¿ì½º¸¦ µû¶ó´Ù´Ï´ÂÁö
+    //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆëŠ”ì§€
     private Coroutine coroutine;
 
     public PlateInState_Card(Card card, Plate plate, Hand hand)
@@ -23,12 +23,12 @@ public class PlateInState_Card : IState_Card
 
     public void Enter() { }
     public void Exit() { }
-    //¼³¸í º¸±â
+    //ì„¤ëª… ë³´ê¸°
     public void OnPointerEnter() 
     {
         Zoom.Insatnce.ViewON(card);
     }
-    //¼³¸í ²ô±â
+    //ì„¤ëª… ë„ê¸°
     public void OnPointerExit()
     {
         Zoom.Insatnce.ViewOFF();
@@ -37,7 +37,7 @@ public class PlateInState_Card : IState_Card
 
     public void OnPointerDown()
     {
-        //¼ÕÆĞ¿¡¼­ »©°í
+        //ì†íŒ¨ì—ì„œ ë¹¼ê³ 
         plate.OutputKeyword(card);
 
         card.State = new HandState_Card(card);
@@ -48,11 +48,11 @@ public class PlateInState_Card : IState_Card
 
     public void OnPointerUp()
     {
-        //´õÀÌ»ó ¸¶¿ì½º¸¦ µû¶ó´Ù´ÏÁö ¸»°í
+        //ë”ì´ìƒ ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆì§€ ë§ê³ 
         card.StopCoroutine(coroutine);
-        //¸¶¿ì½º¸¦ µû¶ó´Ù´ÏÁö ¾Ê°í ÀÖ´Ù´Â ¶æ
+        //ë§ˆìš°ìŠ¤ë¥¼ ë”°ë¼ë‹¤ë‹ˆì§€ ì•Šê³  ìˆë‹¤ëŠ” ëœ»
         coroutine = null;
-        //ÆÇÀ» Å¬¸¯Çß´ÂÁö ÆÇ´Ü
+        //íŒì„ í´ë¦­í–ˆëŠ”ì§€ íŒë‹¨
         if (UIManager.Instance.TryGetGraphicRayFindParent(out Plate plate))
         {
             card.UpPlate(plate);

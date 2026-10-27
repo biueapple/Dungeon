@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayAnimation : MonoBehaviour
 {
-    //¾Ö´Ï¸ŞÀÌ¼Ç
+    //ì• ë‹ˆë©”ì´ì…˜
     protected Animator animator;
-    //SpriteRenderer´Â ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ SpriteRendererÀÇ sprite¸¸À» º¯°æÇØ ÁÖÁö¸¸ Ä³¸¯ÅÍ´Â image±â¿¡ Àû¿ëÀÌ ¾ÈµÊ Àû¿ë½ÃÄÑ ÁÖ±â À§ÇØ ÂüÁ¶
+    //SpriteRendererëŠ” ì• ë‹ˆë©”ì´ì…˜ì´ SpriteRendererì˜ spriteë§Œì„ ë³€ê²½í•´ ì£¼ì§€ë§Œ ìºë¦­í„°ëŠ” imageê¸°ì— ì ìš©ì´ ì•ˆë¨ ì ìš©ì‹œì¼œ ì£¼ê¸° ìœ„í•´ ì°¸ì¡°
     protected SpriteRenderer spriteRenderer;
-    //ÀÚ½ÅÀÇ ÀÌ¹ÌÁö ÂüÁ¶ ÀÌÀ¯´Â À§¿¡
+    //ìì‹ ì˜ ì´ë¯¸ì§€ ì°¸ì¡° ì´ìœ ëŠ” ìœ„ì—
     protected Image image;
-    //ÀÚ½Å¸¸ÀÇ ÇÃ·¹ÀÌÆ®¸¦ 3°³Á¤µµ °¡Á®¾ß ÇÔ
+    //ìì‹ ë§Œì˜ í”Œë ˆì´íŠ¸ë¥¼ 3ê°œì •ë„ ê°€ì ¸ì•¼ í•¨
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class PlayAnimation : MonoBehaviour
 
     private void LateUpdate()
     {
-        //¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıÁß º¯°æµÇ´Â sprite°¡ image¿¡ Àû¿ëµÇµµ·Ï
+        //ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒì¤‘ ë³€ê²½ë˜ëŠ” spriteê°€ imageì— ì ìš©ë˜ë„ë¡
         image.sprite = spriteRenderer.sprite;
     }
 

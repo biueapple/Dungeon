@@ -1,68 +1,68 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Dummy : MonoBehaviour
 {
-    //¾²Áö ¾ÊÀº°Å 
+    //ì“°ì§€ ì•Šì€ê±° 
     private readonly List<Card> before = new();
     public List<Card> Before { get { return before; } }
-    //¾´°Å
+    //ì“´ê±°
     private readonly List<Card> after = new();
     public List<Card> After { get { return after; } }
 
-    //µå·Î¿ì¸¦ ÇÒ¶§ ÀÌµ¿ÇÒ °æ·Î¸¦ ¼³Á¤ÇØÁÜ
+    //ë“œë¡œìš°ë¥¼ í• ë•Œ ì´ë™í•  ê²½ë¡œë¥¼ ì„¤ì •í•´ì¤Œ
     [SerializeField]
     private Bazier bazier;
-    //ÇÃ·¹ÀÌ¾îÀÇ ¼ÕÆĞ
+    //í”Œë ˆì´ì–´ì˜ ì†íŒ¨
     [SerializeField]
     private Hand hand;
 
-    //Ã¥¿¡¼­ °í¸¥ Ä«µåÆÑ¿¡ ´ã±ä Ä«µåµéÀ» »ı¼ºÇÏ¸é¼­ ÃÊ±âÈ­ ÇÏ´Â ´Ü°è
+    //ì±…ì—ì„œ ê³ ë¥¸ ì¹´ë“œíŒ©ì— ë‹´ê¸´ ì¹´ë“œë“¤ì„ ìƒì„±í•˜ë©´ì„œ ì´ˆê¸°í™” í•˜ëŠ” ë‹¨ê³„
     public void Init(List<Card> cards)
     {
         for(int i = 0; i < cards.Count; i++)
         {
-            //Ä«µå »ı¼º
+            //ì¹´ë“œ ìƒì„±
             Card card = Instantiate(cards[i], new Vector2(), Quaternion.identity, transform);
-            //ºñÈ°¼ºÈ­
+            //ë¹„í™œì„±í™”
             card.gameObject.SetActive(false);
-            //¾ÆÁ÷ »ç¿ëÇÏÁö ¾ÊÀº Ä«µå ¸®½ºÆ®¿¡ Ãß°¡
+            //ì•„ì§ ì‚¬ìš©í•˜ì§€ ì•Šì€ ì¹´ë“œ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
             before.Add(card);
-            //µ¦À» ¼¯±â
+            //ë±ì„ ì„ê¸°
             UIManager.Instance.Shuffle(before);
         }
     }
 
-    //Ä«µå¸¦ »ç¿ëÇßÀ»°æ¿ì
+    //ì¹´ë“œë¥¼ ì‚¬ìš©í–ˆì„ê²½ìš°
     public void AfterCard(Card card)
     {
-        //ºñÈ°¼ºÈ­
+        //ë¹„í™œì„±í™”
         card.gameObject.SetActive(false);
         if (card.Volatility)
         {
-            //ÈÖ¹ß¼º Ä«µå¶ó¸é »èÁ¦
+            //íœ˜ë°œì„± ì¹´ë“œë¼ë©´ ì‚­ì œ
             Destroy(card.gameObject);
         }
         else
         {
-            //»ç¿ëÇÑ ¸®½ºÆ®¿¡ Ãß°¡
+            //ì‚¬ìš©í•œ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
             after.Add(card);
-            //before.remove°¡ ¾ø´Â ÀÌÀ¯´Â ÀÌ¹Ì µå·Î¿ì ´Ü°è¿¡¼­ removeÇÏ±â¶§¹®
+            //before.removeê°€ ì—†ëŠ” ì´ìœ ëŠ” ì´ë¯¸ ë“œë¡œìš° ë‹¨ê³„ì—ì„œ removeí•˜ê¸°ë•Œë¬¸
         }
     }
 
-    //µå·Î¿ì½Ã Ä«µå°¡ ÀÌµ¿ÇÏ´Â ¿¬Ãâ°ú µµÂøÇßÀ» ¶§ ¼ÕÆĞ¿¡ Ãß°¡
+    //ë“œë¡œìš°ì‹œ ì¹´ë“œê°€ ì´ë™í•˜ëŠ” ì—°ì¶œê³¼ ë„ì°©í–ˆì„ ë•Œ ì†íŒ¨ì— ì¶”ê°€
     public IEnumerator Draw()
     {
-        //ÀÌµ¿°æ·Î´ë·Î ÀÌµ¿
+        //ì´ë™ê²½ë¡œëŒ€ë¡œ ì´ë™
         while (bazier != null && bazier.Value < 1)
         {
             bazier.Value += Time.deltaTime * 2;
             yield return null;
         }
 
-        //»ç¿ëÇÏÁö ¾ÊÀº Ä«µå°¡ ¾ø´Ù¸é »ç¿ëÇÑ Ä«µå¸¦ ¸ğµÎ ¿Å±â°í ¼¯±â
+        //ì‚¬ìš©í•˜ì§€ ì•Šì€ ì¹´ë“œê°€ ì—†ë‹¤ë©´ ì‚¬ìš©í•œ ì¹´ë“œë¥¼ ëª¨ë‘ ì˜®ê¸°ê³  ì„ê¸°
         if(before.Count == 0)
         {
             before.AddRange(after);
@@ -70,16 +70,16 @@ public class Dummy : MonoBehaviour
             after.Clear();
         }
 
-        //ÀÌµ¿°æ·Î ÃÊ±âÈ­
+        //ì´ë™ê²½ë¡œ ì´ˆê¸°í™”
         bazier.Value = 0;
         
-        //Ä«µå°¡ Áö±İ ¼ÕÆĞ¿¡ ÀÖ´Â »óÅÂÀÓÀ» ³Ö°í
+        //ì¹´ë“œê°€ ì§€ê¸ˆ ì†íŒ¨ì— ìˆëŠ” ìƒíƒœì„ì„ ë„£ê³ 
         before[0].State = new HandState_Card(before[0]);
-        //È°¼ºÈ­
+        //í™œì„±í™”
         before[0].gameObject.SetActive(true);
-        //¼ÕÆĞ¿¡ Ãß°¡
+        //ì†íŒ¨ì— ì¶”ê°€
         hand.AddCard(before[0]);
-        //¾²Áö ¾ÊÀº Ä«µå ¸®½ºÆ®¿¡¼­ »©±â
+        //ì“°ì§€ ì•Šì€ ì¹´ë“œ ë¦¬ìŠ¤íŠ¸ì—ì„œ ë¹¼ê¸°
         before.RemoveAt(0);
     }
 

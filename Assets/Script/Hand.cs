@@ -1,40 +1,40 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
-    //Á¤·ÄÇØÁÖ´Â Å¬·¡½º
+    //ì •ë ¬í•´ì£¼ëŠ” í´ë˜ìŠ¤
     [SerializeField]
     private Sorting sorting;
     public Sorting Sorting => sorting;
 
-    //¼ÕÆĞ¿¡ ÀÖ´Â Ä«µåµé
+    //ì†íŒ¨ì— ìˆëŠ” ì¹´ë“œë“¤
     private readonly List<Card> cards = new ();
     public List<Card> Cards { get { return cards; } }
 
-    //Á¤·ÄÇÒ °´Ã¼ÀÇ Å©±â¿Í ±× »çÀÌÀÇ °£°İ
+    //ì •ë ¬í•  ê°ì²´ì˜ í¬ê¸°ì™€ ê·¸ ì‚¬ì´ì˜ ê°„ê²©
     private void Start()
     {
         sorting.Size = 150;
         sorting.Padding = 10;
     }
 
-    //¼ÕÆĞ¿¡ Ä«µå Ãß°¡
+    //ì†íŒ¨ì— ì¹´ë“œ ì¶”ê°€
     public void AddCard(Card card)
     {
-        //¸®½ºÆ®¿¡ Ãß°¡ÇÏ°í
+        //ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•˜ê³ 
         cards.Add(card);
-        //Á¤·ÄÇØÁÖ±â
+        //ì •ë ¬í•´ì£¼ê¸°
         sorting.Add(card.transform);
     }
 
-    //¼ÕÆĞ¿¡ Ä«µå Á¦°Å
+    //ì†íŒ¨ì— ì¹´ë“œ ì œê±°
     public void RemoveCard(Card card)
     {
-        //¸®½ºÆ®¿¡¼­ ¾ø¾Ö°í
+        //ë¦¬ìŠ¤íŠ¸ì—ì„œ ì—†ì• ê³ 
         cards.Remove(card);
-        //Á¤·ÄÇØÁÖ±â
+        //ì •ë ¬í•´ì£¼ê¸°
         sorting.Remove(card.transform);
     }
 }

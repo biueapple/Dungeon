@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,27 +6,27 @@ public class Focus : Plate
 {
     protected override void Init()
     {
-        //Å°¿öµå°¡ ¸î°³°í ±âº»°ªÀÌ ¾ó¸¶ÀÎÁö
+        //í‚¤ì›Œë“œê°€ ëª‡ê°œê³  ê¸°ë³¸ê°’ì´ ì–¼ë§ˆì¸ì§€
         keywords = new Keyword[1];
         keywords[0] = new Keyword(2, tool[0]);
         keywords[0].Conditions.Add(new Limit_Keyword(keywords[0], 0, 30));
     }
 
-    //ÅØ½ºÆ®
+    //í…ìŠ¤íŠ¸
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("¸ğµç ¸ğÇè°¡µéÀÌ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " ¸¸Å­ º¸È£¸·À» È¹µæÇÏ°í ´ÙÀ½ ÅÏ¿¡ Ä«µå¸¦ 1Àå ´õ »Ì´Â´Ù.");
+            ("ëª¨ë“  ëª¨í—˜ê°€ë“¤ì´ <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " ë§Œí¼ ë³´í˜¸ë§‰ì„ íšë“í•˜ê³  ë‹¤ìŒ í„´ì— ì¹´ë“œë¥¼ 1ì¥ ë” ë½‘ëŠ”ë‹¤.");
     }
 
-    //¹æ¾î±â´É
+    //ë°©ì–´ê¸°ëŠ¥
     public override void Defense()
     {
-        //¸¸¾à ¾òÀ» º¸È£¸·ÀÌ ¾ø´Ù¸é µÚ¿¡ È¿°úµµ ÀÌ·ïÁöÁö ¾ÊÀ½
+        //ë§Œì•½ ì–»ì„ ë³´í˜¸ë§‰ì´ ì—†ë‹¤ë©´ ë’¤ì— íš¨ê³¼ë„ ì´ë¤„ì§€ì§€ ì•ŠìŒ
         if (keywords[0].Word == 0)
             return;
-        //Äİ¹é (Ãß°¡µå·Î¿ì) Ãß°¡
+        //ì½œë°± (ì¶”ê°€ë“œë¡œìš°) ì¶”ê°€
         GameManager.Instance.PCB.Add(new AdditionalDraws());
         GameManager.Instance.PCB.Add(new ReductionDraws()); 
         List<DefenceInfo> defenceInfos = new();
@@ -34,10 +34,10 @@ public class Focus : Plate
         {
             defenceInfos.Add(new DefenceInfo(GameManager.Instance.Adventurer[i], 0, keywords[0].Word));
         }
-        //¹æ¾î¸¦ ¼öÇàÇÑ Ä³¸¯ÅÍ¿¡ ¼ÓÇÔ
+        //ë°©ì–´ë¥¼ ìˆ˜í–‰í•œ ìºë¦­í„°ì— ì†í•¨
         GameManager.Instance.CyclePipeLine.Defence.Fulfillment.Add(new PL_ShieldNHeal(self, defenceInfos, SoundManager.Instance.Recovery));
     }
 
-    //°ø°İ±â´É
+    //ê³µê²©ê¸°ëŠ¥
     public override void Attack() { }
 }

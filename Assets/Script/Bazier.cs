@@ -1,22 +1,22 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bazier : MonoBehaviour
 {
-    //À§Ä¡°ª
+    //ìœ„ì¹˜ê°’
     [SerializeField]
     [Range(0f, 1f)]
     private float value;
     public float Value { get { return value; } set { this.value = value; } }
-    //¾î¶² ÁöÁ¡µéÀ» ÂüÁ¶ÇÒ°ÇÁö (½ÃÀÛÀ§Ä¡¿Í ¸¶Áö¸· À§Ä¡¸¦ Æ÷ÇÔ)
+    //ì–´ë–¤ ì§€ì ë“¤ì„ ì°¸ì¡°í• ê±´ì§€ (ì‹œì‘ìœ„ì¹˜ì™€ ë§ˆì§€ë§‰ ìœ„ì¹˜ë¥¼ í¬í•¨)
     [SerializeField]
     private List<Transform> list;
-    //¿òÁ÷ÀÏ °´Ã¼
+    //ì›€ì§ì¼ ê°ì²´
     [SerializeField]
     private Transform target;
     public Transform Target { get { return target; } set { target = value; } }
-    //targetÀÌ ¹æÇâ´ë·Î ¸öÀ» È¸ÀüÇÒÁö
+    //targetì´ ë°©í–¥ëŒ€ë¡œ ëª¸ì„ íšŒì „í• ì§€
     [SerializeField]
     private bool dir;
     public bool Dir { get { return dir; } set { dir = value; } }
@@ -24,19 +24,19 @@ public class Bazier : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Å¸°ÙÀÌ ÀÖ´Ù¸é ¿µÇâÀ» ¹ŞÀ» À§Ä¡µµ ÃÖ¼Ò 2°³°¡ ÀÖ¾î¾ß ÇÔ
+        //íƒ€ê²Ÿì´ ìˆë‹¤ë©´ ì˜í–¥ì„ ë°›ì„ ìœ„ì¹˜ë„ ìµœì†Œ 2ê°œê°€ ìˆì–´ì•¼ í•¨
         if(target != null && list != null && list.Count > 0)
         {
-            //value´ë·Î ¿ÀºêÁ§Æ®¸¦ ÀÌµ¿½ÃÅ°±â
+            //valueëŒ€ë¡œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì´ë™ì‹œí‚¤ê¸°
 
-            //¸ğµç ÁöÁ¡¿¡ ´ëÇØ value¸¸Å­ÀÇ ¿µÇâÀ» ¹Ş°í 
+            //ëª¨ë“  ì§€ì ì— ëŒ€í•´ valueë§Œí¼ì˜ ì˜í–¥ì„ ë°›ê³  
             Vector3 position = list[0].position;
             for(int i = 1; i < list.Count; i++)
             {
                 position = Vector3.Lerp(position, list[i].position, value);
             }
 
-            //ÀÌµ¿ÁßÀÎ ¹æÇâÀ¸·Î ¸öÀ» È¸Àü½ÃÄÑ¾ß ÇÏ¸é È¸Àü
+            //ì´ë™ì¤‘ì¸ ë°©í–¥ìœ¼ë¡œ ëª¸ì„ íšŒì „ì‹œì¼œì•¼ í•˜ë©´ íšŒì „
             if(dir)
             {
                 Vector3 look = position - target.position.normalized;
@@ -44,7 +44,7 @@ public class Bazier : MonoBehaviour
                 target.eulerAngles = new Vector3(0, 0, -angle);
             }
 
-            //À§Ä¡ ÀÌµ¿
+            //ìœ„ì¹˜ ì´ë™
             target.position = position;
         }
     }

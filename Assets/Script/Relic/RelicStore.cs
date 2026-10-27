@@ -1,13 +1,13 @@
+ï»¿
 
-
-//·¼¸¯ÀÇ ¼³¸í°ú °¡°ÝÀ» º¸¿©Áà¾ß ÇÔ
+//ë ë¦­ì˜ ì„¤ëª…ê³¼ ê°€ê²©ì„ ë³´ì—¬ì¤˜ì•¼ í•¨
 using UnityEngine;
 
 public class RelicStore : IRelicState, IInstruction
 {
     private readonly Relic relic;
     private readonly IInstruction instruction;
-    //°¡°Ý
+    //ê°€ê²©
     private readonly int price;
 
     public RelicStore(Relic relic, IInstruction instruction, int price)
@@ -21,10 +21,10 @@ public class RelicStore : IRelicState, IInstruction
 
     public string Instruction()
     {
-        return $"°¡°Ý {price}\n" + instruction.Instruction();
+        return $"ê°€ê²© {price}\n" + instruction.Instruction();
     }
 
-    //±¸ÀÔ
+    //êµ¬ìž…
     public void OnMouseClick()
     {
         if(GameManager.Instance.Money >= price)

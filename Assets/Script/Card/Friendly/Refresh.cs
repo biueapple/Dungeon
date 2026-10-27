@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ public class Refresh : Card
     {
         value = 0;
         friendly = true;
-        Description = "¸ğÇè°¡ÀÇ ÇÃ·¹ÀÌÆ®¸¦ ºÎ¼ö°í Ä«µå¸¦ ÇÑÀå »Ì´Â´Ù." +
-            "¸ğÇè°¡ÀÇ ÇÃ·¹ÀÌÆ®¸¦ »ı¼ºÇÑ´Ù.";
+        Description = "ëª¨í—˜ê°€ì˜ í”Œë ˆì´íŠ¸ë¥¼ ë¶€ìˆ˜ê³  ì¹´ë“œë¥¼ í•œì¥ ë½‘ëŠ”ë‹¤." +
+            "ëª¨í—˜ê°€ì˜ í”Œë ˆì´íŠ¸ë¥¼ ìƒì„±í•œë‹¤.";
     }
 
     public override void UpCharacter(Character character)
@@ -23,14 +23,14 @@ public class Refresh : Card
 
     private IEnumerator Process(Character character)
     {
-        //ÇÃ·¹ÀÌÆ®¸¦ ºÎ¼ö´Â °úÁ¤
+        //í”Œë ˆì´íŠ¸ë¥¼ ë¶€ìˆ˜ëŠ” ê³¼ì •
         if (character.Plate != null)
         {
             IndividualBroken b = new();
             yield return b.PlateBroken(character);
             new IndividualDraw(1);
         }
-        //ÇÃ·¹ÀÌÆ®¸¦ »ı¼ºÇÏ´Â °úÁ¤
+        //í”Œë ˆì´íŠ¸ë¥¼ ìƒì„±í•˜ëŠ” ê³¼ì •
         new IndividualCreate(character);
     }
 }

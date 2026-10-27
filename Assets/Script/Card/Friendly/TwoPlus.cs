@@ -1,20 +1,20 @@
-
+ï»¿
 public class TwoPlus : Card
 {
     private void Start()
     {
         value = 2;
         friendly = true;
-        Description = "¸ğÇè°¡ÀÇ ¼öÄ¡ ÇÏ³ª¸¦ 2 Áõ°¡½ÃÅ²´Ù.";
+        Description = "ëª¨í—˜ê°€ì˜ ìˆ˜ì¹˜ í•˜ë‚˜ë¥¼ 2 ì¦ê°€ì‹œí‚¨ë‹¤.";
     }
 
     public override void UpPlate(Plate plate)
     {
-        //Ãß°¡
+        //ì¶”ê°€
         if (plate.InputKeyword(this))
         {
             GameManager.Instance.Hand.RemoveCard(this);
-            //¼º°øÇß´Ù¸é state¸¦ º¯°æÇØ¾ß ÇÔ
+            //ì„±ê³µí–ˆë‹¤ë©´ stateë¥¼ ë³€ê²½í•´ì•¼ í•¨
             State = new PlateInState_Card(this, plate, GameManager.Instance.Hand);
             Zoom.Insatnce.Active = true;
             return;

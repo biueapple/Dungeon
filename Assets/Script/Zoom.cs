@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -6,13 +6,13 @@ using System;
 
 public class Zoom : MonoBehaviour
 {
-    //½Ì±ÛÅÏ
+    //ì‹±ê¸€í„´
     private static Zoom instance;
     public static Zoom Insatnce { get { return instance; } }
-    //¾î¶² ui°¡ Äµ¹ö½ºÀÇ ¹üÀ§¸¦ ³Ñ¾î°¬´ÂÁö È®ÀÎ°ú ¹üÀ§ ¾ÈÀ¸·Î ÀÌµ¿½ÃÄÑÁÖ´Â Å¬·¡½º
+    //ì–´ë–¤ uiê°€ ìº”ë²„ìŠ¤ì˜ ë²”ìœ„ë¥¼ ë„˜ì–´ê°”ëŠ”ì§€ í™•ì¸ê³¼ ë²”ìœ„ ì•ˆìœ¼ë¡œ ì´ë™ì‹œì¼œì£¼ëŠ” í´ë˜ìŠ¤
     [SerializeField]
     private CanvasRect canvasRect;
-    //Ä«µåÀÇ Å«¹öÁ¯ (Àß º¸¿©ÁÙ·Á°í)
+    //ì¹´ë“œì˜ í°ë²„ì ¼ (ì˜ ë³´ì—¬ì¤„ë ¤ê³ )
     [SerializeField]
     private Card big;
     [SerializeField]
@@ -24,7 +24,7 @@ public class Zoom : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI  textMeshPro;
 
-    //true¶ó¸é ViewON ÇßÀ»¶§ º¸¿©ÁÖ°í false¶ó¸é ViewONÇØµµ º¸¿©ÁÖÁö ¾ÊÀ½
+    //trueë¼ë©´ ViewON í–ˆì„ë•Œ ë³´ì—¬ì£¼ê³  falseë¼ë©´ ViewONí•´ë„ ë³´ì—¬ì£¼ì§€ ì•ŠìŒ
     private bool active = true;
     public bool Active
     {
@@ -37,8 +37,8 @@ public class Zoom : MonoBehaviour
         instance = this;
     }
 
-    //Ä«µå¸¦ Å©°Ô º¸¿©ÁÖ·Á°í
-    //4°¡Áö °æ¿ì 
+    //ì¹´ë“œë¥¼ í¬ê²Œ ë³´ì—¬ì£¼ë ¤ê³ 
+    //4ê°€ì§€ ê²½ìš° 
     public void ViewON(Card card)
     {
         if(active)
@@ -47,26 +47,26 @@ public class Zoom : MonoBehaviour
             {
                 if (card.Friendly)
                 {
-                    //À§Ä¡ ¿Å°ÜÁÖ°í
+                    //ìœ„ì¹˜ ì˜®ê²¨ì£¼ê³ 
                     volatilityCard.transform.position = card.transform.position;
-                    //bigÀÌ cardº¸´Ù Ä¿¼­ À§Ä¡¸¦ °°µµ·Ï ÇÏ¸é Äµ¹ö½º ¹ÛÀ¸·Î ³ª°¡´Â °æ¿ì°¡ ÀÖ¾î¼­ ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸®±â À§ÇØ
+                    //bigì´ cardë³´ë‹¤ ì»¤ì„œ ìœ„ì¹˜ë¥¼ ê°™ë„ë¡ í•˜ë©´ ìº”ë²„ìŠ¤ ë°–ìœ¼ë¡œ ë‚˜ê°€ëŠ” ê²½ìš°ê°€ ìˆì–´ì„œ ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¬ê¸° ìœ„í•´
                     canvasRect.InSide(volatilityCard.GetComponent<RectTransform>());
-                    //Á¤º¸ º¹»çÇØ¼­ º¸¿©ÁÖ·Á°í
+                    //ì •ë³´ ë³µì‚¬í•´ì„œ ë³´ì—¬ì£¼ë ¤ê³ 
                     volatilityCard.Icon = card.Icon;
                     volatilityCard.Description = card.Description;
-                    //È°¼ºÈ­
+                    //í™œì„±í™”
                     volatilityCard.gameObject.SetActive(true);
                 }
                 else
                 {
-                    //À§Ä¡ ¿Å°ÜÁÖ°í
+                    //ìœ„ì¹˜ ì˜®ê²¨ì£¼ê³ 
                     evolatilityCard.transform.position = card.transform.position;
-                    //bigÀÌ cardº¸´Ù Ä¿¼­ À§Ä¡¸¦ °°µµ·Ï ÇÏ¸é Äµ¹ö½º ¹ÛÀ¸·Î ³ª°¡´Â °æ¿ì°¡ ÀÖ¾î¼­ ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸®±â À§ÇØ
+                    //bigì´ cardë³´ë‹¤ ì»¤ì„œ ìœ„ì¹˜ë¥¼ ê°™ë„ë¡ í•˜ë©´ ìº”ë²„ìŠ¤ ë°–ìœ¼ë¡œ ë‚˜ê°€ëŠ” ê²½ìš°ê°€ ìˆì–´ì„œ ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¬ê¸° ìœ„í•´
                     canvasRect.InSide(evolatilityCard.GetComponent<RectTransform>());
-                    //Á¤º¸ º¹»çÇØ¼­ º¸¿©ÁÖ·Á°í
+                    //ì •ë³´ ë³µì‚¬í•´ì„œ ë³´ì—¬ì£¼ë ¤ê³ 
                     evolatilityCard.Icon = card.Icon;
                     evolatilityCard.Description = card.Description;
-                    //È°¼ºÈ­
+                    //í™œì„±í™”
                     evolatilityCard.gameObject.SetActive(true);
                 }
             }
@@ -74,33 +74,33 @@ public class Zoom : MonoBehaviour
             {
                 if (card.Friendly)
                 {
-                    //À§Ä¡ ¿Å°ÜÁÖ°í
+                    //ìœ„ì¹˜ ì˜®ê²¨ì£¼ê³ 
                     big.transform.position = card.transform.position;
-                    //bigÀÌ cardº¸´Ù Ä¿¼­ À§Ä¡¸¦ °°µµ·Ï ÇÏ¸é Äµ¹ö½º ¹ÛÀ¸·Î ³ª°¡´Â °æ¿ì°¡ ÀÖ¾î¼­ ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸®±â À§ÇØ
+                    //bigì´ cardë³´ë‹¤ ì»¤ì„œ ìœ„ì¹˜ë¥¼ ê°™ë„ë¡ í•˜ë©´ ìº”ë²„ìŠ¤ ë°–ìœ¼ë¡œ ë‚˜ê°€ëŠ” ê²½ìš°ê°€ ìˆì–´ì„œ ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¬ê¸° ìœ„í•´
                     canvasRect.InSide(big.GetComponent<RectTransform>());
-                    //Á¤º¸ º¹»çÇØ¼­ º¸¿©ÁÖ·Á°í
+                    //ì •ë³´ ë³µì‚¬í•´ì„œ ë³´ì—¬ì£¼ë ¤ê³ 
                     big.Icon = card.Icon;
                     big.Description = card.Description;
-                    //È°¼ºÈ­
+                    //í™œì„±í™”
                     big.gameObject.SetActive(true);
                 }
                 else
                 {
-                    //À§Ä¡ ¿Å°ÜÁÖ°í
+                    //ìœ„ì¹˜ ì˜®ê²¨ì£¼ê³ 
                     ebig.transform.position = card.transform.position;
-                    //bigÀÌ cardº¸´Ù Ä¿¼­ À§Ä¡¸¦ °°µµ·Ï ÇÏ¸é Äµ¹ö½º ¹ÛÀ¸·Î ³ª°¡´Â °æ¿ì°¡ ÀÖ¾î¼­ ´Ù½Ã ¾ÈÀ¸·Î µÇµ¹¸®±â À§ÇØ
+                    //bigì´ cardë³´ë‹¤ ì»¤ì„œ ìœ„ì¹˜ë¥¼ ê°™ë„ë¡ í•˜ë©´ ìº”ë²„ìŠ¤ ë°–ìœ¼ë¡œ ë‚˜ê°€ëŠ” ê²½ìš°ê°€ ìˆì–´ì„œ ë‹¤ì‹œ ì•ˆìœ¼ë¡œ ë˜ëŒë¦¬ê¸° ìœ„í•´
                     canvasRect.InSide(ebig.GetComponent<RectTransform>());
-                    //Á¤º¸ º¹»çÇØ¼­ º¸¿©ÁÖ·Á°í
+                    //ì •ë³´ ë³µì‚¬í•´ì„œ ë³´ì—¬ì£¼ë ¤ê³ 
                     ebig.Icon = card.Icon;
                     ebig.Description = card.Description;
-                    //È°¼ºÈ­
+                    //í™œì„±í™”
                     ebig.gameObject.SetActive(true);
                 }
             }
         }
     }
 
-    //ºñÈ°¼ºÈ­
+    //ë¹„í™œì„±í™”
     public void ViewOFF()
     {
         big.gameObject.SetActive(false);

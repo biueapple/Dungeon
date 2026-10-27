@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ÇÃ·¹ÀÌÆ®¸¦ »ı¼ºÇÏ´Â ´Ü°è
+//í”Œë ˆì´íŠ¸ë¥¼ ìƒì„±í•˜ëŠ” ë‹¨ê³„
 public class CreatePipeLine : IPipeLine
 {
-    //´ÙÀ½ ´Ü°è
+    //ë‹¤ìŒ ë‹¨ê³„
     private IPipeLine next;
     public IPipeLine Next { get { return next; } set { next = value; } }
-    //¸î°³¸¦ Çß´ÂÁö
+    //ëª‡ê°œë¥¼ í–ˆëŠ”ì§€
     private int count = 0;
-    //¸î°³¸¦ ÇØ¾ßÇÏ´ÂÁö
+    //ëª‡ê°œë¥¼ í•´ì•¼í•˜ëŠ”ì§€
     private int listCount;
 
     public CreatePipeLine(IPipeLine next)
@@ -20,18 +20,18 @@ public class CreatePipeLine : IPipeLine
 
     public void Start()
     {
-        //¸î°³¸¦ ÇØ¾ßÇÏ´ÂÁö ÀÔ·Â
+        //ëª‡ê°œë¥¼ í•´ì•¼í•˜ëŠ”ì§€ ì…ë ¥
         listCount = GameManager.Instance.Characters.Count;
-        //»ı¼º
+        //ìƒì„±
         PlateSetting();
     }
 
     public void Update()
     {
-        //¿Ï·áÇÑ °¹¼ö¿Í ÇØ¾ßÇÏ´Â °¹¼ö°¡ °°´Ù¸é
+        //ì™„ë£Œí•œ ê°¯ìˆ˜ì™€ í•´ì•¼í•˜ëŠ” ê°¯ìˆ˜ê°€ ê°™ë‹¤ë©´
         if(count == listCount)
         {
-            //´ÙÀ½´Ü°è·Î
+            //ë‹¤ìŒë‹¨ê³„ë¡œ
             count = 0;
             GameManager.Instance.PipeLine = next;
         }
@@ -39,7 +39,7 @@ public class CreatePipeLine : IPipeLine
 
     public void End()
     {
-        //Äİ¹é È£Ãâ (¸ğµç Ä³¸¯ÅÍ°¡ ¸ñÇ¥)
+        //ì½œë°± í˜¸ì¶œ (ëª¨ë“  ìºë¦­í„°ê°€ ëª©í‘œ)
         List<Character> list = GameManager.Instance.Characters;
         for (int i = list.Count - 1; i >= 0; i--)
         {
@@ -50,7 +50,7 @@ public class CreatePipeLine : IPipeLine
         }
     }
 
-    //¸ğµç Ä³¸¯ÅÍµéÀÌ ÆÇÀ» »ı¼ºÇÏ±â·Î
+    //ëª¨ë“  ìºë¦­í„°ë“¤ì´ íŒì„ ìƒì„±í•˜ê¸°ë¡œ
     private void PlateSetting()
     {
         List<Character> list = GameManager.Instance.Characters;
@@ -62,9 +62,9 @@ public class CreatePipeLine : IPipeLine
 
     private IEnumerator PlateCreate(Character character)
     {
-        //Ä³¸¯ÅÍ°¡ ÆÇ »ı¼ºÀ» ¿Ï·áÇÏ¸é
+        //ìºë¦­í„°ê°€ íŒ ìƒì„±ì„ ì™„ë£Œí•˜ë©´
         yield return GameManager.Instance.StartCoroutine(character.CreateC());
-        //Ä«¿îÅÍ Áõ°¡
+        //ì¹´ìš´í„° ì¦ê°€
         count++;
     }
 

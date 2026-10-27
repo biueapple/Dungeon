@@ -1,47 +1,47 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//transformµéÀ» Á¤·ÄÇØÁÖ´Â Å¬·¡½º
+//transformë“¤ì„ ì •ë ¬í•´ì£¼ëŠ” í´ë˜ìŠ¤
 public class Sorting : MonoBehaviour
 {
-    //ÇöÀç ¼Ò¼ÓµÇ¾î ÀÖ´Â transfromµé
+    //í˜„ì¬ ì†Œì†ë˜ì–´ ìˆëŠ” transfromë“¤
     private readonly List<Transform> list = new();
     public List<Transform> List { get => list; }
 
-    //ÇöÀç ¼Ò¼ÓµÇ¾î ÀÖ´Â transformÀÇ ¼ıÀÚ
+    //í˜„ì¬ ì†Œì†ë˜ì–´ ìˆëŠ” transformì˜ ìˆ«ì
     public int Count { get { return list.Count; } }
 
-    //¼Ò¼ÓµÇ¾î ÀÖ´Â transformÀÇ Å©±â
+    //ì†Œì†ë˜ì–´ ìˆëŠ” transformì˜ í¬ê¸°
     private float size;
     public float Size { get => size; set => size = value; }
-    //transform³¢¸®ÀÇ °£°İ
+    //transformë¼ë¦¬ì˜ ê°„ê²©
     private float padding;
     public float Padding { get => padding; set => padding = value; }
-    //È¤½Ã Á¤·Ä ÈÄ callbackÇØÁà¾ß ÇÏ´Â°Ô ÀÖ´Ù¸é È£ÃâÇØÁÜ
+    //í˜¹ì‹œ ì •ë ¬ í›„ callbackí•´ì¤˜ì•¼ í•˜ëŠ”ê²Œ ìˆë‹¤ë©´ í˜¸ì¶œí•´ì¤Œ
     private Action<Transform> action = null;
     public Action<Transform> Action { get => action; set => action = value; }
 
-    //Á¤·Ä
+    //ì •ë ¬
     public void Sort(Transform tf)
     {
         float average = (size + padding) * 0.5f;
         float minus = list.Count * -average + average;
-        //Ä«µå À§Ä¡¸¦ Á¤ÇØÁÖ±â
+        //ì¹´ë“œ ìœ„ì¹˜ë¥¼ ì •í•´ì£¼ê¸°
         for (int i = 0; i < list.Count; i++)
         {
             list[i].position = transform.position + new Vector3(minus + i * (size + padding), 0, 0);
         }
         action?.Invoke(tf);
     }
-    //Á¦°Å
+    //ì œê±°
     public void Remove(Transform tf)
     {
         list.Remove(tf);
         Sort(tf);
     }
-    //Ãß°¡
+    //ì¶”ê°€
     public void Add(Transform tf)
     {
         list.Add(tf);
