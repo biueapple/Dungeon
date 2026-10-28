@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //카드가 손패에 있을때 기능
 public class HandState_Card : IState_Card
@@ -75,7 +76,7 @@ public class HandState_Card : IState_Card
     {
         while (true)
         {
-            card.transform.position = Input.mousePosition + new Vector3(75, -125, 0);
+            card.transform.position = (Vector3)Mouse.current.position.ReadValue() + new Vector3(75, -125, 0);
             yield return null;
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
@@ -118,7 +119,7 @@ public class UIManager : MonoBehaviour
     {
         while (true)
         {
-            graphic.transform.position = Input.mousePosition;
+            graphic.transform.position = (Vector3)Mouse.current.position.ReadValue();
 
             yield return null;
         }
@@ -142,7 +143,7 @@ public class UIManager : MonoBehaviour
     {
         results.Clear();
 
-        m_ped.position = Input.mousePosition;
+        m_ped.position = Mouse.current.position.ReadValue();
 
         m_gr.Raycast(m_ped, results);
 
@@ -157,7 +158,7 @@ public class UIManager : MonoBehaviour
     {
         results.Clear();
 
-        m_ped.position = Input.mousePosition;
+        m_ped.position = Mouse.current.position.ReadValue();
 
         m_gr.Raycast(m_ped, results);
 
@@ -172,7 +173,7 @@ public class UIManager : MonoBehaviour
     {
         results.Clear();
 
-        m_ped.position = Input.mousePosition;
+        m_ped.position = Mouse.current.position.ReadValue();
 
         m_gr.Raycast(m_ped, results);
         if (results.Count > 0)
@@ -188,7 +189,7 @@ public class UIManager : MonoBehaviour
     {
         results.Clear();
 
-        m_ped.position = Input.mousePosition;
+        m_ped.position = Mouse.current.position.ReadValue();
 
         m_gr.Raycast(m_ped, results);
 
@@ -205,7 +206,7 @@ public class UIManager : MonoBehaviour
     {
         results.Clear();
 
-        m_ped.position = Input.mousePosition;
+        m_ped.position = Mouse.current.position.ReadValue();
 
         m_gr.Raycast(m_ped, results);
 
@@ -229,7 +230,7 @@ public class UIManager : MonoBehaviour
     {
         results.Clear();
 
-        m_ped.position = Input.mousePosition;
+        m_ped.position = Mouse.current.position.ReadValue();
 
         m_gr.Raycast(m_ped, results);
 

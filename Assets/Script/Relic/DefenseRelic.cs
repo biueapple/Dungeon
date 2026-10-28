@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 //모든 모험가가 주는 쉴드량 증가
 public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    //상점 가격 (카드 장수)
-    public override int Price => 2;
+    //상점 가격 (카드 가치의 합)
+    public override int Price => 4;
 
     public override void RelicCreate()
     {                                                               

@@ -1,6 +1,9 @@
 ﻿
 public class EnemyPlus : Card
 {
+    //카드의 가치 (몬스터를 강하게 하는 카드라 마이너스)
+    public override int Worth { get { return -1; } }
+
     private void Start()
     {
         value = 1;

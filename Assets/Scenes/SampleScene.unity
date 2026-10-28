@@ -309,8 +309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relicResources:
-  - {fileID: 273062042239820510, guid: 8be59a420293ef341b1d1d0782ded408, type: 3}
-  - {fileID: 4530732037404258804, guid: 8b95579bda2b3954091cec3d298313bd, type: 3}
+  - {fileID: 273062042239820510, guid: ccef376ceffa8ba40bb79625ed4ce57f, type: 3}
+  - {fileID: 4530732037404258804, guid: 205a00524815cc2458407d62391a9339, type: 3}
   pack: {fileID: 321579176}
   relic: {fileID: 733238324}
   plate: {fileID: 1258001128}
@@ -3602,17 +3602,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 928211019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &928211021
 MonoBehaviour:
   m_ObjectHideFlags: 0

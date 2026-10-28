@@ -21,7 +21,7 @@ public class CardPayment : MonoBehaviour
     private RectTransform content;
     private Button confirm;
 
-    //지불할 카드 수
+    //지불할 가치
     private int price;
     //지불이 끝났을 때 호출
     private Action onPaid;
@@ -38,11 +38,18 @@ public class CardPayment : MonoBehaviour
         get { return GameManager.Instance.Dummy.Before.Concat(GameManager.Instance.Dummy.After).ToList(); }
     }
 
-    //price장을 내고도 최소 덱 수를 유지할 수 있는지
+    //최소 덱 수를 남기고 낼 수 있는 카드들로 가치 합 price 이상을 만들 수 있는지
     public static bool CanPay(int price)
     {
-        return DeckCards.Count - price >= MinDeck;
+        List<Card> deck = DeckCards;
+        int sum = deck.Select(c => c.Worth).Where(w => w > 0).OrderByDescending(w => w).Take(deck.Count - MinDeck).Sum();
+        return sum >= price;
     }
+
+    //선택한 카드들의 가치 합
+    private int SelectedWorth { get { return selected.Sum(c => c.Worth); } }
+    //최소 덱 수를 남기고 고를 수 있는 최대 장수
+    private int MaxSelect { get { return cards.Count - MinDeck; } }
 
     //창 열기
     public static void Open(int price, Action onPaid)
@@ -95,7 +102,7 @@ public class CardPayment : MonoBehaviour
             Refresh();
             return false;
         }
-        if (selected.Count >= price)
+        if (selected.Count >= MaxSelect)
             return false;
         selected.Add(card);
         Refresh();
@@ -104,8 +111,8 @@ public class CardPayment : MonoBehaviour
 
     private void Refresh()
     {
-        title.text = $"비용으로 낼 카드를 선택하세요 ({selected.Count}/{price})";
-        confirm.interactable = selected.Count == price;
+        title.text = $"비용으로 낼 카드를 선택하세요 (가치 {SelectedWorth}/{price})\n<size=26>덱에 최소 {MinDeck}장은 남아야 하고, 넘친 가치는 돌려받지 못함</size>";
+        confirm.interactable = SelectedWorth >= price;
     }
 
     private void OnConfirm()

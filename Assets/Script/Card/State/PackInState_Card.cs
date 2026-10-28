@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //카드가 팩 안에 있을때의 기능
 public class PackInState_Card : IState_Card
@@ -71,7 +72,7 @@ public class PackInState_Card : IState_Card
     {
         while (true)
         {
-            pack.transform.position = Input.mousePosition;
+            pack.transform.position = (Vector3)Mouse.current.position.ReadValue();
             yield return null;
         }
     }

@@ -18,9 +18,9 @@ public class RelicStore : IRelicState, IInstruction
 
     public string Instruction()
     {
-        string price = $"가격 카드 {relic.Price}장\n";
+        string price = $"가격 : 카드 가치 {relic.Price}\n";
         if (!CardPayment.CanPay(relic.Price))
-            price += $"<color=#C54646>덱에 최소 {CardPayment.MinDeck}장은 남아있어야 함</color>\n";
+            price += $"<color=#C54646>덱에 최소 {CardPayment.MinDeck}장을 남기고 낼 수 있는 가치가 부족함</color>\n";
         return price + instruction.Instruction();
     }
 

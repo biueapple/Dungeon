@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Rest : Card
 {
+    //카드의 가치
+    public override int Worth { get { return 3; } }
+
     private void Start()
     {
         value = 0;

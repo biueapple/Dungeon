@@ -121,9 +121,9 @@ public class GameManager : MonoBehaviour
         pipeLine?.Update();
 
         //플레이어가 모든 카드를 썻는지 확인해야 함
-        //다 썻다면 그리고 카드를 내는 단계라면 턴 종료가 가능함
+        //다 썻다면(아무 효과가 없는 카드만 남았어도) 그리고 카드를 내는 단계라면 턴 종료가 가능함
         //(첫 턴은 드로우 후 pipeLine이 null, 두번째 턴부터는 PlayPipeLine이 진행중)
-        if (hand.Cards.Count == 0 && (pipeLine == null || pipeLine is PlayPipeLine))
+        if (hand.Cards.All(c => c.NoEffect) && (pipeLine == null || pipeLine is PlayPipeLine))
         {
             turnEndButton.raycastTarget = true;
             turnEndButton.sprite = buttonSprite[0];

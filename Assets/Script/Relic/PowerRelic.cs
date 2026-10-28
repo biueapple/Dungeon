@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 //모든 모험가가 하는 공격에 1 대미지 추가
 public class PowerRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    //상점 가격 (카드 장수)
-    public override int Price => 3;
+    //상점 가격 (카드 가치의 합)
+    public override int Price => 5;
 
     public override void RelicCreate()
     {

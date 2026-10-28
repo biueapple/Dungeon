@@ -54,6 +54,7 @@ public class Zoom : MonoBehaviour
                     //정보 복사해서 보여주려고
                     volatilityCard.Icon = card.Icon;
                     volatilityCard.Description = card.Description;
+                    volatilityCard.Gem = card.Worth;
                     //활성화
                     volatilityCard.gameObject.SetActive(true);
                 }
@@ -66,6 +67,7 @@ public class Zoom : MonoBehaviour
                     //정보 복사해서 보여주려고
                     evolatilityCard.Icon = card.Icon;
                     evolatilityCard.Description = card.Description;
+                    evolatilityCard.Gem = card.Worth;
                     //활성화
                     evolatilityCard.gameObject.SetActive(true);
                 }
@@ -81,6 +83,7 @@ public class Zoom : MonoBehaviour
                     //정보 복사해서 보여주려고
                     big.Icon = card.Icon;
                     big.Description = card.Description;
+                    big.Gem = card.Worth;
                     //활성화
                     big.gameObject.SetActive(true);
                 }
@@ -93,6 +96,7 @@ public class Zoom : MonoBehaviour
                     //정보 복사해서 보여주려고
                     ebig.Icon = card.Icon;
                     ebig.Description = card.Description;
+                    ebig.Gem = card.Worth;
                     //활성화
                     ebig.gameObject.SetActive(true);
                 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
@@ -16,7 +17,7 @@ public class TextLinkClickHandler : MonoBehaviour
     public bool OnPointerClick(out string word, out Vector3 position)
     {
         //마우스 위치에 따른 링크의 인덱스를 리턴
-        int linkIndex = TMP_TextUtilities.FindIntersectingLink(textComponent, Input.mousePosition, null);
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(textComponent, (Vector3)Mouse.current.position.ReadValue(), null);
 
         //링크가 있었다면
         if (linkIndex != -1)
@@ -46,7 +47,7 @@ public class TextLinkClickHandler : MonoBehaviour
     public bool OnPointerClick(out int index, out Vector3 position)
     {
         //마우스 위치에 따른 링크의 인덱스를 리턴
-        index = TMP_TextUtilities.FindIntersectingLink(textComponent, Input.mousePosition, null);
+        index = TMP_TextUtilities.FindIntersectingLink(textComponent, (Vector3)Mouse.current.position.ReadValue(), null);
 
         //링크가 있었다면
         if (index != -1)

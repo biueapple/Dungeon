@@ -15,6 +15,16 @@ public class PlayPipeLine : IPipeLine
 
     public void TurnEndButtonPush()
     {
+        //손패에 남은 아무 효과가 없는 카드들은 사용한 덱으로
+        for (int i = GameManager.Instance.Hand.Cards.Count - 1; i >= 0; i--)
+        {
+            Card card = GameManager.Instance.Hand.Cards[i];
+            if (card.NoEffect)
+            {
+                GameManager.Instance.Hand.RemoveCard(card);
+                GameManager.Instance.Dummy.AfterCard(card);
+            }
+        }
         GameManager.Instance.PipeLine = next;
     }
 
@@ -89,6 +99,9 @@ public class PlayPipeLine : IPipeLine
     {
         for (int i = 0; i < GameManager.Instance.Hand.Cards.Count; i++)
         {
+            //아무 효과가 없는 카드는 남아있어도 상관없음
+            if (GameManager.Instance.Hand.Cards[i].NoEffect)
+                continue;
             if (GameManager.Instance.Hand.Cards[i].Friendly && GameManager.Instance.Hand.Cards[i].Value >= 0)
                 return false;
         }

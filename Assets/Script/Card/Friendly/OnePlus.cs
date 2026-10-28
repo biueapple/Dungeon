@@ -1,6 +1,9 @@
 ﻿
 public class OnePlus : Card
 {
+    //카드의 가치
+    public override int Worth { get { return 1; } }
+
     private void Start()
     {
         value = 1;

@@ -1,6 +1,9 @@
 ﻿
 public class TwoPlus : Card
 {
+    //카드의 가치
+    public override int Worth { get { return 2; } }
+
     private void Start()
     {
         value = 2;

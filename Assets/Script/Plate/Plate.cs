@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public abstract class Plate : MonoBehaviour , IPointerClickHandler
@@ -51,7 +52,7 @@ public abstract class Plate : MonoBehaviour , IPointerClickHandler
     private void LateUpdate()
     {
         //우클릭으로 모든 키워드에 있는 카드를 보여주지 않도록
-        if(Input.GetMouseButtonDown(1))
+        if(Mouse.current.rightButton.wasPressedThisFrame)
         {
             //SpaceView(-1, Vector2.zero);
             Zoom.Insatnce.ViewTool(this, -1, Vector2.zero);
