@@ -80,6 +80,11 @@ public class Character : MonoBehaviour
     {
         shield = 0;
     }
+    //직업 이름 (캐릭터를 고르는 창 등에 표시)
+    public virtual string JobName { get { return name.Replace("(Clone)", "").Trim(); } }
+    //게임을 시작할때 이 캐릭터의 덱에 들어가는 카드들 (Resources/Card 기준 경로)
+    public virtual string[] StartingCards { get { return new[] { "Adventurer/OnePlus", "Adventurer/OnePlus", "Adventurer/TwoPlus" }; } }
+
     //캐릭터 개인의 콜백
     private readonly List<IPCBC> pcb = new();
     public List<IPCBC> PCB { get { return pcb; } }
@@ -94,6 +99,8 @@ public class Character : MonoBehaviour
         statusEffect.Size = 50;
         //매 턴이 끝날때 쉴드를 0으로 만들기
         pcb.Add(new ShieldReset(this));
+        //끌어서 공격 대상으로 지정하는 기능
+        animator.gameObject.AddComponent<CharacterTarget>().Init(this);
     }
     //공격할때 애니메이션을 불러야 하는데
     public void AttackAnimation()
@@ -126,6 +133,8 @@ public class Character : MonoBehaviour
             Debug.Log("선택된 플레이트가 없기에 생성 불가능");
             yield break;
         }
+        //새 플레이트니까 공격 대상도 새로 정하기
+        plate.ResetTarget();
             
         //플레이트
         RectTransform rectTransform = plate.GetComponent<RectTransform>();

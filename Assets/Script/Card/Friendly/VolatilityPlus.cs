@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class VolatilityPlus : Card
 {
+    //휘발성 카드 (사용하면 사라짐)
+    public override bool Volatility { get { return true; } }
     //카드의 가치
     public override int Worth { get { return 1; } }
 
@@ -11,7 +13,6 @@ public class VolatilityPlus : Card
     {
         value = 1;
         friendly = true;
-        volatility = true;
         Description = "모험가의 수치 하나를 1 증가시킨다.";
     }
 

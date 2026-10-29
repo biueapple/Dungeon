@@ -180,9 +180,8 @@ public class GameManager : MonoBehaviour
         {
             adventurer.Add(characters[i].Character);
         }
-        //책 열고
-        book.SetActive(true);
-        deck.gameObject.SetActive(true);
+        //카드팩을 고르지 않고 캐릭터마다 정해진 시작 카드로 바로 시작
+        GameStart();
     }
 
     //이거 하기 전에 캐릭터와 적을 생성해야 함
@@ -194,14 +193,6 @@ public class GameManager : MonoBehaviour
         deck.gameObject.SetActive(false);
         //시작버튼 끄고
         startButton.SetActive(false);
-        //골라던 카드팩들을 덱에 넣어주고
-        List<Card> list = new();
-        for (int i = 0; i < deck.CardBoxes.Count; i++)
-        {
-            list.AddRange(deck.CardBoxes[i].Card);
-        }
-        dummy.Init(list);
-
         //모든 캐릭터들을 활성화
         //모험가들 x : 850 550 250, y :-250
         for (int i = 0; i < adventurer.Count; i++)
@@ -209,6 +200,8 @@ public class GameManager : MonoBehaviour
             adventurer[i] = Instantiate(adventurer[i], adventurerParent);
             adventurer[i].transform.localPosition = new Vector3(850 - i * 300, -250, 0);
         }
+        //모험가마다 시작 카드로 덱을 만들기
+        dummy.Init(adventurer);
 
         turnEndButton.gameObject.SetActive(true);
         //맵을 만들고 첫 스테이지 고르기 (첫 전투는 시작 파이프라인으로 진행)
@@ -247,17 +240,9 @@ public class GameManager : MonoBehaviour
         manager.Init();
         sel.SetActive(true);
         can.SetActive (true);
-        //모든 손패 삭제
-        for(int i = 0; i < dummy.Before.Count; i++)
-        {
-            Destroy(dummy.Before[i].gameObject);
-        }
-        dummy.Before.Clear();
-        for (int i = 0; i < dummy.After.Count; i++)
-        {
-            Destroy(dummy.After[i].gameObject);
-        }
-        dummy.After.Clear();
+        //모든 덱과 손패 삭제
+        dummy.Clear();
+        hand.Cards.ForEach(c => { if (c != null) Destroy(c.gameObject); });
         hand.Cards.Clear();
         //모든 캐릭터 삭제
         for(int i = 0; i < adventurer.Count; i++)
@@ -272,12 +257,7 @@ public class GameManager : MonoBehaviour
         enemys.Clear();
         //덱 초기화
         deck.InitDeck();
-        //모든 보석 삭제
-        for(int i = relic.List.Count - 1; i >= 0; i--)
-        {
-            Relic r = relic.List[i].GetComponent<Relic>();
-            r.RelicDestroy();
-        }
+        //보석(렐릭)은 캐릭터에게 장착되어 있어서 캐릭터를 삭제할 때 같이 삭제됨
         //파이프 라인 초기화
         cyclePipeLine = null;
         pipeLine = null;
@@ -300,7 +280,7 @@ public class StartPipeLine
 
     public StartPipeLine(Dummy dummy, Character[] enemys)
     {
-        draw = new DrawPipeLine(null, dummy, 5);
+        draw = new DrawPipeLine(null, dummy, 0);
         plate = new CreatePipeLine(draw);
         dungeon = new DungeonPipeLine(plate, enemys);
     }
@@ -344,7 +324,7 @@ public class CyclePipeLine
     {
         //여기서 play에 defense의 값이 들어가지 않음 defence는 null인 상태라
         play = new PlayPipeLine(defense);
-        draw = new DrawPipeLine(play, dummy, 5);
+        draw = new DrawPipeLine(play, dummy, 0);
         create = new CreatePipeLine(draw);
 
         dungeon = new DungeonPipeLine(create, enemys);

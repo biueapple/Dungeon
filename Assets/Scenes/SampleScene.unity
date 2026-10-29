@@ -3606,6 +3606,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: 0}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &928211021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4119,6 +4137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6790503ba8f034048964bac55e44872f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worth: 0
   back: {fileID: 0}
   icon: {fileID: 1628555268}
   textComponent: {fileID: 970600132}
@@ -5493,6 +5512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6790503ba8f034048964bac55e44872f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worth: 0
   back: {fileID: 0}
   icon: {fileID: 1269168648}
   textComponent: {fileID: 1128620911}
@@ -6780,12 +6800,12 @@ GameObject:
   - component: {fileID: 1650103211}
   - component: {fileID: 1650103212}
   m_Layer: 5
-  m_Name: Relic
+  m_Name: "Relic (\uC774\uC81C \uC548\uC4F0\uB2C8 \uC0AD\uC81C\uD574\uB3C4 \uB420\uB4EF)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1650103211
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9257,6 +9277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6790503ba8f034048964bac55e44872f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worth: 0
   back: {fileID: 0}
   icon: {fileID: 1164773980617853553}
   textComponent: {fileID: 7052128841664476020}
@@ -10248,6 +10269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6790503ba8f034048964bac55e44872f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worth: 0
   back: {fileID: 0}
   icon: {fileID: 8906329928063729608}
   textComponent: {fileID: 2840204042138081434}

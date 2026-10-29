@@ -17,7 +17,6 @@ public class Refresh : Card
 
     public override void UpCharacter(Character character)
     {
-        GameManager.Instance.Dummy.Before.Remove(this);
         GameManager.Instance.Hand.RemoveCard(this);
         GameManager.Instance.Dummy.AfterCard(this);
         Zoom.Insatnce.Active = true;
@@ -31,7 +30,7 @@ public class Refresh : Card
         {
             IndividualBroken b = new();
             yield return b.PlateBroken(character);
-            new IndividualDraw(1);
+            new IndividualDraw(1, character);
         }
         //플레이트를 생성하는 과정
         new IndividualCreate(character);

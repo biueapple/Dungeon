@@ -11,7 +11,7 @@ public static class RuntimeUI
     {
         get
         {
-            Card card = GameManager.Instance.Dummy.Before.Concat(GameManager.Instance.Dummy.After).FirstOrDefault();
+            Card card = GameManager.Instance.Dummy.Cards.FirstOrDefault();
             return card != null ? card.Font : null;
         }
     }

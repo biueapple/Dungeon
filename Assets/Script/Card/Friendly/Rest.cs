@@ -20,7 +20,7 @@ public class Rest : Card
         if(GameManager.Instance.Adventurer.Contains(plate.Self))
         {
             //드로우와 생성
-            new IndividualDraw(1);
+            new IndividualDraw(1, plate.Self);
             new IndividualCard("Adventurer/VolatilityPlus");
             //부시는 플레이트에 있던 카드를 손패에 추가해줘야 하는데
             for(int i  = 0; i < plate.Keyword.Length; i++)
@@ -37,7 +37,6 @@ public class Rest : Card
                 }
             }
             //자신은 사용되었으니 사용한 덱으로 돌아가기
-            plate.Dummy.Before.Remove(this);
             GameManager.Instance.Hand.RemoveCard(this);
             plate.Dummy.AfterCard(this);
             //플레이트 부수기

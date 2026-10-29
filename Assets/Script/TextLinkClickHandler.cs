@@ -47,13 +47,15 @@ public class TextLinkClickHandler : MonoBehaviour
     public bool OnPointerClick(out int index, out Vector3 position)
     {
         //마우스 위치에 따른 링크의 인덱스를 리턴
-        index = TMP_TextUtilities.FindIntersectingLink(textComponent, (Vector3)Mouse.current.position.ReadValue(), null);
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(textComponent, (Vector3)Mouse.current.position.ReadValue(), null);
+        //공격 대상 표시(target)는 키워드가 아니므로 무시하고, 키워드 번호는 대상 표시를 빼고 셈
+        index = KeywordIndex(linkIndex);
 
         //링크가 있었다면
         if (index != -1)
-        { 
+        {
             //위치도 가져와서 out해줌
-            TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[index];
+            TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[linkIndex];
             Rect rect = GetLinkBounds(linkInfo);
             position = rect.center;
             //성공적
@@ -66,6 +68,26 @@ public class TextLinkClickHandler : MonoBehaviour
             return false;
         }
     }
+
+    //링크 번호를 키워드 번호로 바꿔주는 함수 (대상 표시 링크라면 -1)
+    private int KeywordIndex(int linkIndex)
+    {
+        if (linkIndex == -1)
+            return -1;
+        TMP_LinkInfo[] links = textComponent.textInfo.linkInfo;
+        if (links[linkIndex].GetLinkID() == TargetLink)
+            return -1;
+        int index = 0;
+        for (int i = 0; i < linkIndex; i++)
+        {
+            if (links[i].GetLinkID() != TargetLink)
+                index++;
+        }
+        return index;
+    }
+
+    //공격 대상 표시에 쓰는 링크 이름
+    private const string TargetLink = "target";
 
     //link의 위치를 리턴해주는 함수
     private Rect GetLinkBounds(TMP_LinkInfo linkInfo)

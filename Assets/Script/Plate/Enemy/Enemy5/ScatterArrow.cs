@@ -6,6 +6,8 @@ public class ScatterArrow : Plate
 {
     protected override void Init()
     {
+        //공격 대상을 정할 수 있는 플레이트
+        useTarget = true;
         //키워드가 몇개고 기본값이 얼마인지
         keywords = new Keyword[1];
         keywords[0] = new Keyword(8, tool[0]);
@@ -16,8 +18,15 @@ public class ScatterArrow : Plate
     protected override void Texting()
     {
         textLinkClickHandler.Texting
-            ("모험가들에게 <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
-            " 의 대미지를 준다. 이 공격은 대미지 계산을 뒤에서부터 한다.");
+            (TargetText + "에게 <color=#C54646><link=example>" + keywords[0].Word + "</link></color>" +
+            " 의 대미지를 준다. 이 공격은 가장 뒤의 모험가를 노린다.");
+    }
+
+    //가장 뒤의 모험가를 노림
+    protected override Character DefaultTarget()
+    {
+        List<Character> opponents = Opponents;
+        return opponents.Count > 0 ? opponents[opponents.Count - 1] : null;
     }
 
     //방어기능
@@ -36,33 +45,11 @@ public class ScatterArrow : Plate
 
         List<AttackInfo> list = new();
 
-        switch (GameManager.Instance.Adventurer.Count)
-        {
-            //공격을 수행
-            case 1:
-                {
-                    list.Add(new AttackInfo(GameManager.Instance.Adventurer[0], damage));
-                }
-                break;
-            case 2:
-                {
-                    list.Add(new AttackInfo(GameManager.Instance.Adventurer[1], damage * 0.7f));
-
-                    list.Add(new AttackInfo(GameManager.Instance.Adventurer[0], damage * 0.3f));
-                }
-                break;
-            case 3:
-                {
-                    list.Add(new AttackInfo(GameManager.Instance.Adventurer[2], damage * 0.6f));
-
-                    list.Add(new AttackInfo(GameManager.Instance.Adventurer[1], damage * 0.3f));
-
-                    list.Add(new AttackInfo(GameManager.Instance.Adventurer[0], damage * 0.1f));
-                }
-                break;
-            default:
-                return;
-        }
+        //플레이트에 지정된 대상에게 공격
+        Character target = Target;
+        if (target == null)
+            return;
+        list.Add(new AttackInfo(target, damage));
 
         //공격을 수행한 캐릭터에 속함
         GameManager.Instance.CyclePipeLine.Attack.Fulfillment.Add(new PL_AttackNHit(self, list, null));

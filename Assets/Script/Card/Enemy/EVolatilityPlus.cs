@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EVolatilityPlus : Card
 {
+    //휘발성 카드 (사용하면 사라짐)
+    public override bool Volatility { get { return true; } }
     private void Start()
     {
         value = 1;
         friendly = false;
-        volatility = true;
         Description = "몬스터의 수치 하나를 1 증가시킨다.";
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-//전투를 클리어하면 골드 카드와 무작위 카드 중 하나를 골라 덱에 추가하는 창
+//전투를 클리어하면 골드 카드와 무작위 카드 중 원하는 만큼 골라 모험가의 덱에 추가하는 창
 //씬에 미리 배치할 필요 없이 처음 열 때 코드로 UI를 만듬
 public class CardReward : MonoBehaviour
 {
@@ -14,8 +14,8 @@ public class CardReward : MonoBehaviour
 
     //항상 나오는 골드 카드
     private const string GoldCard = "Adventurer/Gold";
-    //무작위로 나올 수 있는 카드들 (휘발성 카드는 덱에 남지 않으므로 제외)
-    private static readonly string[] pool = { "Adventurer/OnePlus", "Adventurer/TwoPlus", "Adventurer/OneMinus", "Adventurer/Refresh", "Adventurer/Rest" };
+    //무작위로 나올 수 있는 카드가 들어있는 폴더
+    private const string PoolFolder = "Card/Adventurer";
     //무작위 카드 수
     private const int MinRandom = 2;
     private const int MaxRandom = 3;
@@ -48,8 +48,9 @@ public class CardReward : MonoBehaviour
         this.onDone = onDone;
 
         //골드 카드 + 서로 다른 무작위 카드들
-        List<string> list = new() { GoldCard };
-        list.AddRange(pool.OrderBy(_ => Random.value).Take(Random.Range(MinRandom, MaxRandom + 1)));
+        Card gold = Resources.Load<Card>("Card/" + GoldCard);
+        List<Card> list = new() { gold };
+        list.AddRange(Pool(gold).OrderBy(_ => Random.value).Take(Random.Range(MinRandom, MaxRandom + 1)));
 
         for (int i = 0; i < list.Count; i++)
         {
@@ -58,7 +59,7 @@ public class CardReward : MonoBehaviour
             cell.transform.SetParent(content, false);
             cells.Add(cell);
 
-            Card card = Instantiate(Resources.Load<Card>("Card/" + list[i]), cell.transform);
+            Card card = Instantiate(list[i], cell.transform);
             RectTransform rect = (RectTransform)card.transform;
             card.transform.localPosition = Vector3.zero;
             float scale = Mathf.Min(cellSize.x / rect.rect.width, cellSize.y / rect.rect.height);
@@ -76,6 +77,13 @@ public class CardReward : MonoBehaviour
         Refresh();
     }
 
+    //보상으로 나올 수 있는 카드들 (골드, 휘발성 카드, 가치가 마이너스인 카드, 살아있는 모험가 누구도 가질 수 없는 전용 카드는 제외)
+    private static IEnumerable<Card> Pool(Card gold)
+    {
+        return Resources.LoadAll<Card>(PoolFolder).Where(c => c != gold && !c.Volatility && c.Worth >= 0
+            && GameManager.Instance.Adventurer.Any(c.CanBelongTo));
+    }
+
     //카드를 클릭했을 때 선택/해제 (원하는 만큼 고를 수 있음)
     public bool Toggle(Card card)
     {
@@ -91,22 +99,50 @@ public class CardReward : MonoBehaviour
         confirmLabel.text = selected.Count == 0 ? "받지 않기" : $"{selected.Count}장 받기";
     }
 
-    //선택한 카드들을 덱에 추가
+    //선택한 카드들을 한장씩 넣을 모험가를 골라서 그 덱에 추가
     private void OnConfirm()
     {
-        for (int i = 0; i < selected.Count; i++)
-        {
-            Card card = selected[i];
-            cards.Remove(card);
-            card.State = null;
-            card.transform.SetParent(GameManager.Instance.Dummy.transform, false);
-            card.transform.localScale = Vector3.one;
-            //사용한 카드 리스트에 넣어서 다음에 덱을 섞을 때 들어오도록
-            GameManager.Instance.Dummy.AfterCard(card);
-        }
+        //선택 표시(색)를 원래대로
+        selected.ForEach(c => c.State = null);
+        gameObject.SetActive(false);
+        Zoom.Insatnce.ViewOFF();
         if (selected.Count > 0)
             SoundManager.Instance.Play(SoundManager.Instance.Coin);
-        Close();
+        AssignNext(0);
+    }
+
+    private void AssignNext(int index)
+    {
+        if (index >= selected.Count)
+        {
+            Close();
+            return;
+        }
+        Card card = selected[index];
+        List<Character> owners = GameManager.Instance.Adventurer.Where(card.CanBelongTo).ToList();
+        //넣을 수 있는 모험가가 한명뿐이면 바로
+        if (owners.Count <= 1)
+        {
+            if (owners.Count == 1)
+                Give(card, owners[0]);
+            AssignNext(index + 1);
+            return;
+        }
+        string count = selected.Count > 1 ? $" ({index + 1}/{selected.Count})" : "";
+        CharacterPick.Open("이 카드를 넣을 모험가를 고르세요" + count, owner =>
+        {
+            Give(card, owner);
+            AssignNext(index + 1);
+        }, card.CanBelongTo, card);
+    }
+
+    //카드를 owner의 덱에 추가
+    private void Give(Card card, Character owner)
+    {
+        cards.Remove(card);
+        card.transform.localScale = Vector3.one;
+        //사용한 카드 리스트에 넣어서 다음에 덱을 섞을 때 들어오도록
+        GameManager.Instance.Dummy.AddCard(card, owner);
     }
 
     private void Close()

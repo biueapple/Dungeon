@@ -11,8 +11,8 @@ public class CardPayment : MonoBehaviour
 {
     private static CardPayment instance;
 
-    //구매 후에도 덱에 남아있어야 하는 최소 카드 수
-    public const int MinDeck = 5;
+    //구매 후에도 모험가마다 덱에 남아있어야 하는 최소 카드 수
+    public const int MinDeck = 2;
 
     //카드 한장이 그리드에서 차지하는 크기
     private static readonly Vector2 cellSize = new(160, 240);
@@ -32,24 +32,33 @@ public class CardPayment : MonoBehaviour
     //카드를 담고 있는 칸
     private readonly List<GameObject> cells = new();
 
-    //덱의 전체 카드 (사용 전 + 사용 후)
+    //모든 모험가 덱의 전체 카드 (사용 전 + 사용 후, 모험가 순서대로)
     public static List<Card> DeckCards
     {
-        get { return GameManager.Instance.Dummy.Before.Concat(GameManager.Instance.Dummy.After).ToList(); }
+        get { return GameManager.Instance.Dummy.Cards; }
     }
 
-    //최소 덱 수를 남기고 낼 수 있는 카드들로 가치 합 price 이상을 만들 수 있는지
+    //모험가마다 최소 덱 수를 남기고 낼 수 있는 카드들로 가치 합 price 이상을 만들 수 있는지
     public static bool CanPay(int price)
     {
-        List<Card> deck = DeckCards;
-        int sum = deck.Select(c => c.Worth).Where(w => w > 0).OrderByDescending(w => w).Take(deck.Count - MinDeck).Sum();
+        int sum = 0;
+        foreach (CharacterDeck deck in GameManager.Instance.Dummy.Decks)
+        {
+            List<Card> cards = deck.Cards;
+            sum += cards.Select(c => c.Worth).Where(w => w > 0).OrderByDescending(w => w).Take(cards.Count - MinDeck).Sum();
+        }
         return sum >= price;
     }
 
     //선택한 카드들의 가치 합
     private int SelectedWorth { get { return selected.Sum(c => c.Worth); } }
-    //최소 덱 수를 남기고 고를 수 있는 최대 장수
-    private int MaxSelect { get { return cards.Count - MinDeck; } }
+    //이 카드의 덱에서 더 고를 수 있는지 (그 모험가의 덱에 최소 덱 수는 남아야 함)
+    private bool CanSelect(Card card)
+    {
+        int deckCount = cards.Count(c => c.Deck == card.Deck);
+        int selectedCount = selected.Count(c => c.Deck == card.Deck);
+        return selectedCount < deckCount - MinDeck;
+    }
 
     //창 열기
     public static void Open(int price, Action onPaid)
@@ -85,6 +94,16 @@ public class CardPayment : MonoBehaviour
             card.gameObject.SetActive(true);
             card.Raycast = true;
             card.State = new PaymentState_Card(card, this);
+
+            //어느 모험가의 카드인지 표시
+            TextMeshProUGUI owner = RuntimeUI.CreateText(cell.transform, "Owner", 24);
+            RectTransform ownerRect = owner.rectTransform;
+            ownerRect.anchorMin = new Vector2(0.5f, 1);
+            ownerRect.anchorMax = new Vector2(0.5f, 1);
+            ownerRect.pivot = new Vector2(0.5f, 0);
+            ownerRect.sizeDelta = new Vector2(cellSize.x, 28);
+            ownerRect.anchoredPosition = new Vector2(0, 2);
+            owner.text = card.Deck != null && card.Deck.Owner != null ? card.Deck.Owner.JobName : "";
         }
 
         //다른 UI보다 위에, 카드 확대(Zoom)보다는 아래에 보이도록
@@ -102,7 +121,7 @@ public class CardPayment : MonoBehaviour
             Refresh();
             return false;
         }
-        if (selected.Count >= MaxSelect)
+        if (!CanSelect(card))
             return false;
         selected.Add(card);
         Refresh();
@@ -111,7 +130,7 @@ public class CardPayment : MonoBehaviour
 
     private void Refresh()
     {
-        title.text = $"비용으로 낼 카드를 선택하세요 (가치 {SelectedWorth}/{price})\n<size=26>덱에 최소 {MinDeck}장은 남아야 하고, 넘친 가치는 돌려받지 못함</size>";
+        title.text = $"비용으로 낼 카드를 선택하세요 (가치 {SelectedWorth}/{price})\n<size=26>모험가마다 덱에 최소 {MinDeck}장은 남아야 하고, 넘친 가치는 돌려받지 못함</size>";
         confirm.interactable = SelectedWorth >= price;
     }
 
@@ -120,8 +139,7 @@ public class CardPayment : MonoBehaviour
         //선택한 카드들은 덱에서 제거
         for (int i = 0; i < selected.Count; i++)
         {
-            GameManager.Instance.Dummy.Before.Remove(selected[i]);
-            GameManager.Instance.Dummy.After.Remove(selected[i]);
+            GameManager.Instance.Dummy.Remove(selected[i]);
             cards.Remove(selected[i]);
             Destroy(selected[i].gameObject);
         }
@@ -172,8 +190,8 @@ public class CardPayment : MonoBehaviour
         contentRect.sizeDelta = Vector2.zero;
         GridLayoutGroup grid = content.GetComponent<GridLayoutGroup>();
         grid.cellSize = cellSize;
-        grid.spacing = new Vector2(20, 20);
-        grid.padding = new RectOffset(20, 20, 20, 20);
+        grid.spacing = new Vector2(20, 40);
+        grid.padding = new RectOffset(20, 20, 40, 20);
         grid.childAlignment = TextAnchor.UpperCenter;
         content.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         payment.content = contentRect;

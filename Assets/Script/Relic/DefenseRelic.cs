@@ -3,24 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//모든 모험가가 주는 쉴드량 증가
+//장착한 모험가가 주는 쉴드량 증가
 public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     //상점 가격 (카드 가치의 합)
     public override int Price => 4;
 
-    public override void RelicCreate()
-    {                                                               
-        DefenseRelic relic = Instantiate(Resources.Load<DefenseRelic>("DefenceRelic"), GameManager.Instance.Relic.transform);
-        GameManager.Instance.PCB.Add(relic);
-        GameManager.Instance.Relic.Add(relic.transform);
-    }
-
-    public override void RelicDestroy()
+    public override void RelicCreate(Character owner)
     {
-        GameManager.Instance.PCB.Remove(this);
-        GameManager.Instance.Relic.Remove(transform);
-        Destroy(gameObject);
+        DefenseRelic relic = Instantiate(Resources.Load<DefenseRelic>("DefenceRelic"), owner.StatusEffect.transform);
+        relic.Equip(owner);
     }
 
     public override void Attack(PL_AttackNHit pl) { }
@@ -30,24 +22,19 @@ public class DefenseRelic : Relic, IPointerEnterHandler, IPointerExitHandler, IP
     {
         for (int i = 0; i < pl.Victims.Count; i++)
         {
-            if (GameManager.Instance.Adventurer.Contains(pl.Perpetrator))
+            //장착한 모험가의 콜백이라 보호막을 주는 캐릭터는 항상 owner
+            if (pl.Victims[i].Shield > 0)
             {
-                if(pl.Victims[i].Shield > 0)
-                {
-                    pl.Victims[i].Shield += 1;
-                }
+                pl.Victims[i].Shield += 1;
             }
         }
     }
-    public override void Draw() { }
     public override void Function() { }
     public override void Hit(PL_AttackNHit pl) { }
-    public override void TurnEnd() { }
-    public override void TurnStart() { }
 
     public override string Instruction()
     {
-        return new string($"모든 모험가가 보호막을 생성할때 1보호막 추가");
+        return new string($"장착한 모험가가 보호막을 생성할때 1보호막 추가");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

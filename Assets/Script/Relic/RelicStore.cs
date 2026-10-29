@@ -20,7 +20,7 @@ public class RelicStore : IRelicState, IInstruction
     {
         string price = $"가격 : 카드 가치 {relic.Price}\n";
         if (!CardPayment.CanPay(relic.Price))
-            price += $"<color=#C54646>덱에 최소 {CardPayment.MinDeck}장을 남기고 낼 수 있는 가치가 부족함</color>\n";
+            price += $"<color=#C54646>모험가마다 덱에 최소 {CardPayment.MinDeck}장을 남기고 낼 수 있는 가치가 부족함</color>\n";
         return price + instruction.Instruction();
     }
 
@@ -32,9 +32,13 @@ public class RelicStore : IRelicState, IInstruction
         Zoom.Insatnce.InstructionOff();
         CardPayment.Open(relic.Price, () =>
         {
-            relic.RelicCreate();
-            Object.Destroy(relic.Transform.gameObject);
             SoundManager.Instance.Play(SoundManager.Instance.Coin);
+            //비용을 냈다면 장착할 모험가 고르기
+            CharacterPick.Open("렐릭을 장착할 모험가를 고르세요", owner =>
+            {
+                relic.RelicCreate(owner);
+                Object.Destroy(relic.Transform.gameObject);
+            });
         });
     }
 

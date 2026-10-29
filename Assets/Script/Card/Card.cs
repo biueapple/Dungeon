@@ -17,14 +17,33 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, I
     protected bool friendly;
     public bool Friendly { get {  return friendly; } }
 
-    protected bool volatility = false;
-    public bool Volatility { get { return volatility; } }
+    //휘발성 카드인지 (사용하면 사용한 덱으로 가지 않고 사라짐)
+    public virtual bool Volatility { get { return false; } }
 
     //카드의 가치 (상점에서 비용으로 낼 때 사용) -1, 1, 2, 3 중 하나, 0이면 가치 없음
     public virtual int Worth { get { return 0; } }
+    //인스펙터에서 카드의 가치를 확인하기 위한 값 (실제 가치는 각 카드의 Worth에서 정해짐)
+    [SerializeField, ReadOnly]
+    private int worth;
+
+    private void OnValidate()
+    {
+        worth = Worth;
+    }
 
     //아무 효과가 없는 카드인지 (손패에 남아있어도 턴을 넘길 수 있고 턴이 끝나면 사용한 덱으로)
     public virtual bool NoEffect { get { return false; } }
+
+    //전용 카드라면 그 직업 (예: typeof(Warrior)), null이면 모든 직업이 가질 수 있는 공용 카드
+    public virtual System.Type Job { get { return null; } }
+    //이 캐릭터의 덱에 들어갈 수 있는 카드인지
+    public bool CanBelongTo(Character character)
+    {
+        return Job == null || Job.IsInstanceOfType(character);
+    }
+
+    //이 카드가 속한 캐릭터의 덱 (사용하면 이 덱으로 돌아감)
+    public CharacterDeck Deck { get; set; }
 
     //카드 아래쪽에 박혀있는 가치를 나타내는 보석
     private Image gem;

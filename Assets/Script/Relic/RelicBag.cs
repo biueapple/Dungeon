@@ -5,6 +5,11 @@ public class RelicBag : IRelicState
 {
     private readonly IInstruction instruction;
 
+    public RelicBag(IInstruction instruction)
+    {
+        this.instruction = instruction;
+    }
+
     public string Instruction()
     {
         return instruction.Instruction();

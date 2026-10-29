@@ -1,0 +1,32 @@
+//강화 포션 : 모험가의 수치(키워드) 하나를 1 증가 (휘발성)
+public class PowerPotion : Card
+{
+    //휘발성 카드 (사용하면 사라짐)
+    public override bool Volatility { get { return true; } }
+    //카드의 가치
+    public override int Worth { get { return 1; } }
+
+    private void Start()
+    {
+        value = 1;
+        friendly = true;
+        Description = "강화 포션\n모험가의 수치 하나를 1 증가시킨다.\n휘발성";
+    }
+
+    public override void UpPlate(Plate plate)
+    {
+        //추가
+        if (plate.InputKeyword(this))
+        {
+            GameManager.Instance.Hand.RemoveCard(this);
+            //성공했다면 state를 변경해야 함
+            State = new PlateInState_Card(this, plate, GameManager.Instance.Hand);
+            Zoom.Insatnce.Active = true;
+            return;
+        }
+        else
+        {
+            UpEmpty();
+        }
+    }
+}
